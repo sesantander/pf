@@ -9,17 +9,17 @@ const navConfig = [
   {
     title: 'Home',
     path: '/dashboard/home',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('ant-design:home-filled'),
   },
   {
     title: 'Create Contract',
     path: '/dashboard/create-contract',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('clarity:contract-solid'),
   },
   {
     title: 'Compliance Documents',
     path: '/dashboard/compliance-documents',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    icon: getIcon('fa-solid:file-contract'),
   },
   {
     title: 'Invoices',
@@ -29,7 +29,7 @@ const navConfig = [
   {
     title: 'Transactions',
     path: '/dashboard/transactions',
-    icon: getIcon('eva:people-fill'),
+    icon: getIcon('ant-design:transaction-outlined'),
   },
 ];
 

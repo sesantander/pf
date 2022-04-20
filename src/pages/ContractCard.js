@@ -29,19 +29,19 @@ export default function ContractCard({ type }) {
   const { title, image, description } = type;
 
   return (
-    <Card style={{ width: '20vw' }}>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
-        <ProductImgStyle alt={title} src={image} />
-      </Box>
+    <Card sx={{ mt: '10px' }} style={{ width: '20vw', minWidth: '350px', maxWidth: '350px' }}>
+      <Link to="#" color="inherit" underline="hover" component={RouterLink}>
+        <Box sx={{ pt: '100%', position: 'relative' }}>
+          <ProductImgStyle alt={title} src={image} />
+        </Box>
 
-      <Stack spacing={2} sx={{ p: 3 }}>
-        <Link to="#" color="inherit" underline="hover" component={RouterLink}>
+        <Stack spacing={2} sx={{ p: 3 }}>
           <Typography variant="subtitle2" noWrap>
             {title}
           </Typography>
-        </Link>
-        {description}
-      </Stack>
+          {description}
+        </Stack>
+      </Link>
     </Card>
   );
 }

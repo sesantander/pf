@@ -1,45 +1,88 @@
-import { Link as RouterLink } from 'react-router-dom';
-// material
-import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { faker } from '@faker-js/faker';
+// @mui
+import { useTheme } from '@mui/material/styles';
+import { Grid, Container, Typography, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
-import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
-// mock
-import POSTS from '../_mock/blog';
-
-// ----------------------------------------------------------------------
-
-const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'popular', label: 'Popular' },
-  { value: 'oldest', label: 'Oldest' },
-];
+// sections
+import {
+  AppTasks,
+  AppNewsUpdate,
+  AppOrderTimeline,
+  AppCurrentVisits,
+  AppWebsiteVisits,
+  AppTrafficBySite,
+  AppWidgetSummary,
+  AppCurrentSubject,
+  AppConversionRates,
+} from '../sections/@dashboard/app';
 
 // ----------------------------------------------------------------------
 
 export default function Home() {
-  return (
-    <Page title="Dashboard: Blog">
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Blog
-          </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Post
-          </Button>
-        </Stack>
+  const theme = useTheme();
 
-        <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <BlogPostsSearch posts={POSTS} />
-          <BlogPostsSort options={SORT_OPTIONS} />
-        </Stack>
+  return (
+    <Page title="Dashboard">
+      <Container maxWidth="xl">
+        <Typography variant="h4" sx={{ mb: 5 }}>
+          Hi, Welcome back
+        </Typography>
 
         <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
-          ))}
+          <Grid item xs={12} sm={6} md={3}>
+            <AppWidgetSummary title="Balance" total={71400} icon={'ic:baseline-account-balance'} />
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <Button sx={{mt:5,px:5,py:2}}variant="contained">Witddraw</Button>
+            </div>
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={6}>
+            <AppWebsiteVisits
+              title="Movement"
+              subheader="Jan-Oct"
+              chartLabels={[
+                '01/01/2021',
+                '02/01/2021',
+                '03/01/2021',
+                '04/01/2021',
+                '05/01/2021',
+                '06/01/2021',
+                '07/01/2021',
+                '08/01/2021',
+                '09/01/2021',
+                '10/01/2021',
+                '11/01/2021',
+              ]}
+              chartData={[
+                {
+                  name: 'Movement',
+                  type: 'column',
+                  fill: 'solid',
+                  data: [2300, 1100, 2200, 2700, 1300, 2200, 3700, 2100, 4400, 2200, 3000],
+                },
+              ]}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6} lg={2}>
+            <AppOrderTimeline
+              title="Order Timeline"
+              list={[...Array(5)].map((_, index) => ({
+                id: faker.datatype.uuid(),
+                title: [
+                  '1983, orders, $4220',
+                  '12 Invoices have been paid',
+                  'Order #37745 from September',
+                  'New order placed #XF-2356',
+                  'New order placed #XF-2346',
+                ][index],
+                type: `order${index + 1}`,
+                time: faker.date.past(),
+              }))}
+            />
+          </Grid>
         </Grid>
       </Container>
     </Page>

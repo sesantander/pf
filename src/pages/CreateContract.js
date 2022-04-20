@@ -14,17 +14,17 @@ export default function CreateContract() {
     {
       title: 'Fixed Rate',
       description: 'For contracts that have a fixed rate on every payment cycle.',
-      image: '/static/mock-images/products/product_1.jpg',
+      image: '/static/mock-images/contracs/Screenshot_2.png',
     },
     {
-      title: 'Fixed Rate',
-      description: 'For contracts that.',
-      image: '/static/mock-images/products/product_1.jpg',
+      title: 'Pay As You Go',
+      description: 'For contracts with time sheets or submitted work every oayment cycle.',
+      image: '/static/mock-images/contracs/Screenshot_3.png',
     },
     {
-      title: 'Fixed Rate',
-      description: 'For contracts that have a fixed rate on every payment cycle.',
-      image: '/static/mock-images/products/product_1.jpg',
+      title: 'Milestone',
+      description: 'For contracts with milestones that are paid as they get completed.',
+      image: '/static/mock-images/contracs/Screenshot_4.png',
     },
   ];
 
@@ -32,9 +32,9 @@ export default function CreateContract() {
     <Page title="Dashboard: Products">
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
+          Contracts
         </Typography>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around',flexWrap:"wrap" }}>
           <ContractCard type={contractop[0]}>FIXED</ContractCard>
           <ContractCard type={contractop[1]}>FIXED</ContractCard>
           <ContractCard type={contractop[2]}>FIXED</ContractCard>
