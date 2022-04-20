@@ -68,7 +68,7 @@ export default function Home() {
 
           <Grid item xs={12} md={6} lg={2}>
             <AppOrderTimeline
-              title="Order Timeline"
+              title="Transaction Timeline"
               list={[...Array(5)].map((_, index) => ({
                 id: faker.datatype.uuid(),
                 title: [
