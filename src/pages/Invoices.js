@@ -138,7 +138,7 @@ export default function Invoices() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Transactions
+            Invoices
           </Typography>
           <Button variant="contained" component={RouterLink} to="#">
             Download all as CSV
@@ -146,7 +146,6 @@ export default function Invoices() {
         </Stack>
 
         <Card>
-          {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} /> */}
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
