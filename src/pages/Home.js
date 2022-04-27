@@ -34,7 +34,7 @@ export default function Home() {
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="Balance" total={71400} icon={'ic:baseline-account-balance'} />
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-              <Button sx={{mt:5,px:5,py:2}}variant="contained">Witddraw</Button>
+              <Button sx={{mt:5,px:5,py:2}}variant="contained">Withdraw</Button>
             </div>
           </Grid>
 

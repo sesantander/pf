@@ -1,45 +1,36 @@
-import { Link as RouterLink } from 'react-router-dom';
+
 // material
-import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { Grid, Container, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
-import Iconify from '../components/Iconify';
-import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
-// mock
-import POSTS from '../_mock/blog';
+
+import { ComplianceDocumentsCard, ComplianceDocumentsSelfEmploy } from '../sections/@dashboard/complianceDocuments';
 
 // ----------------------------------------------------------------------
 
-const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'popular', label: 'Popular' },
-  { value: 'oldest', label: 'Oldest' },
-];
 
 // ----------------------------------------------------------------------
 
 export default function ComplianceDocuments() {
   return (
-    <Page title="Dashboard: Blog">
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Blog
-          </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Post
-          </Button>
-        </Stack>
+    <Page title="Dashboard">
+      <Container maxWidth="xl">
+        <Typography variant="h4" sx={{ mb: 5 }}>
+          Compliance Documents
+        </Typography>
 
-        <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <BlogPostsSearch posts={POSTS} />
-          <BlogPostsSort options={SORT_OPTIONS} />
-        </Stack>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6} md={6}>
+            <ComplianceDocumentsCard title="Passport or National ID" total={71400} icon={'ic:baseline-account-balance'} />
+            <ComplianceDocumentsCard title="Proof of registration with social security authorities" total={71400} icon={'ic:baseline-account-balance'} />
+            <ComplianceDocumentsCard title="Proof of registration with tax authorities" total={71400} icon={'ic:baseline-account-balance'} />
+            <ComplianceDocumentsCard title="Relevant sector specific licenses and/or permits(Optional)" total={71400} icon={'ic:baseline-account-balance'} />
+            <ComplianceDocumentsCard title="Any additional relevant documents(Optional)" total={71400} icon={'ic:baseline-account-balance'} />
+          </Grid>
 
-        <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
-          ))}
+          <Grid item xs={12} md={6} lg={6}>
+            <ComplianceDocumentsSelfEmploy title="Register as self-employed (optional)" total={71400} icon={'ic:baseline-account-balance'} />
+          </Grid>
         </Grid>
       </Container>
     </Page>
