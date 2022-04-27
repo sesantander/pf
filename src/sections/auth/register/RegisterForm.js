@@ -3,15 +3,19 @@ import { useState } from 'react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // material
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
+import { userActions } from '../../../store/reducers/userSlice';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,8 +34,9 @@ export default function RegisterForm() {
       password: '',
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: (values) => {
+      dispatch(userActions.setUser(values));
+      navigate('/dashboard/home', { replace: true });
     },
   });
 

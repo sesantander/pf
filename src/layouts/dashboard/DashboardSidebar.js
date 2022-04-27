@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
@@ -44,12 +45,15 @@ DashboardSidebar.propTypes = {
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
 
+  const { user, id, photoURL } = useSelector((state) => state.user);
+
   const isDesktop = useResponsive('up', 'lg');
 
   useEffect(() => {
     if (isOpenSidebar) {
       onCloseSidebar();
     }
+    console.log(user);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -70,10 +74,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ my: 2.5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {user}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {account.role}

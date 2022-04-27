@@ -18,12 +18,18 @@ import CreateContract from './pages/CreateContract';
 // ----------------------------------------------------------------------
 
 export default function Router() {
+
+
+
+
+
+
   return useRoutes([
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: <DashboardLayout/>,
       children: [
-        { path: 'app', element: <Home /> },
+        { path: 'app', element:  <Navigate to="/home" /> },
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
@@ -32,13 +38,14 @@ export default function Router() {
         { path: 'compliance-documents', element: <ComplianceDocuments /> },
         { path: 'invoices', element: <Invoices /> },
         { path: 'transactions', element: <Transactions /> },
+
       ],
     },
     {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
+        { path: '/', element: <Navigate to="/login" /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },

@@ -3,17 +3,26 @@ import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 // material
+
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+// ---------------------------------------
 // component
 import Iconify from '../../../components/Iconify';
-
-// ----------------------------------------------------------------------
+import accounts from '../../../_mock/accounts';
+import { userActions } from '../../../store/reducers/userSlice';
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setisSubmitting] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -28,18 +37,40 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+      setisSubmitting(true);
+      const result = accounts.find((elem) => {
+        return elem.email === values.email;
+      });
+      if (result) {
+        dispatch(userActions.setUser(result));
+        navigate('/dashboard/home', { replace: true });
+      } else {
+        setOpen(true);
+        setisSubmitting(false);
+      }
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <FormikProvider value={formik}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Login Error
+        </Alert>
+      </Snackbar>{' '}
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <TextField

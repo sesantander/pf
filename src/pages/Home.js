@@ -65,24 +65,6 @@ export default function Home() {
               ]}
             />
           </Grid>
-
-          <Grid item xs={12} md={6} lg={2}>
-            <AppOrderTimeline
-              title="Transaction Timeline"
-              list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: [
-                  '1983, orders, $4220',
-                  '12 Invoices have been paid',
-                  'Order #37745 from September',
-                  'New order placed #XF-2356',
-                  'New order placed #XF-2346',
-                ][index],
-                type: `order${index + 1}`,
-                time: faker.date.past(),
-              }))}
-            />
-          </Grid>
         </Grid>
       </Container>
     </Page>
