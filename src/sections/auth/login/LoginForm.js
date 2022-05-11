@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { ethers } from 'ethers';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
@@ -19,11 +20,16 @@ import { userActions } from '../../../store/reducers/userSlice';
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
 
+  const [open, setOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [defaultAccount, setDefaultAccount] = useState(null);
+  const [userBalance, setUserBalance] = useState(null);
+  const [connButtonText, setConnButtonText] = useState('Connect Wallet');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setisSubmitting] = useState(false);
-
+  const [isWeb3Connect, setisWeb3Connect] = useState(false);
+  const [isWalletConnecting, setisWalletConnecting] = useState(false);
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
@@ -36,13 +42,19 @@ export default function LoginForm() {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
+    onSubmit: async () => {
       setisSubmitting(true);
       const result = accounts.find((elem) => {
         return elem.email === values.email;
       });
       if (result) {
-        dispatch(userActions.setUser(result));
+        await connectWalletHandler();
+        const user = {
+          ...result,
+          balance: userBalance,
+        };
+        console.log('user', user);
+        dispatch(userActions.setUser(user));
         navigate('/dashboard/home', { replace: true });
       } else {
         setOpen(true);
@@ -56,6 +68,9 @@ export default function LoginForm() {
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };
+  const handleShowConnectWeb3 = () => {
+    setisWeb3Connect(true);
+  };
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -63,6 +78,54 @@ export default function LoginForm() {
 
     setOpen(false);
   };
+
+  const connectWalletHandler = async () => {
+    setisWalletConnecting(true);
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      console.log('MetaMask Here!');
+
+      window.ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then((result) => {
+          accountChangedHandler(result[0]);
+          setConnButtonText('Wallet Connected');
+          getAccountBalance(result[0]);
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
+      setisWalletConnecting(false);
+    } else {
+      console.log('Need to install MetaMask');
+      setErrorMessage('Please install MetaMask browser extension to interact');
+      setisWalletConnecting(false);
+    }
+  };
+  const accountChangedHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+    getAccountBalance(newAccount.toString());
+  };
+
+  const getAccountBalance = (account) => {
+    window.ethereum
+      .request({ method: 'eth_getBalance', params: [account, 'latest'] })
+      .then((balance) => {
+        console.log('ethers.utils.formatEther(balance)', ethers.utils.formatEther(balance));
+        setUserBalance(ethers.utils.formatEther(balance));
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
+  };
+
+  const chainChangedHandler = () => {
+    window.location.reload();
+  };
+
+  // listen for account changes
+  window.ethereum.on('accountsChanged', accountChangedHandler);
+
+  window.ethereum.on('chainChanged', chainChangedHandler);
 
   return (
     <FormikProvider value={formik}>
@@ -72,51 +135,63 @@ export default function LoginForm() {
         </Alert>
       </Snackbar>{' '}
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack spacing={3}>
-          <TextField
-            fullWidth
-            autoComplete="username"
-            type="email"
-            label="Email address"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-          />
+        {!isWeb3Connect ? (
+          <div>
+            <Stack spacing={3}>
+              <TextField
+                fullWidth
+                autoComplete="username"
+                type="email"
+                label="Email address"
+                {...getFieldProps('email')}
+                error={Boolean(touched.email && errors.email)}
+                helperText={touched.email && errors.email}
+              />
 
-          <TextField
-            fullWidth
-            autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            {...getFieldProps('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-          />
-        </Stack>
+              <TextField
+                fullWidth
+                autoComplete="current-password"
+                type={showPassword ? 'text' : 'password'}
+                label="Password"
+                {...getFieldProps('password')}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleShowPassword} edge="end">
+                        <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                error={Boolean(touched.password && errors.password)}
+                helperText={touched.password && errors.password}
+              />
+            </Stack>
+            <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+              <FormControlLabel
+                control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+                label="Remember me"
+              />
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-          <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-            label="Remember me"
-          />
-
-          <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
-            Forgot password?
-          </Link>
-        </Stack>
-
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-          Login
-        </LoadingButton>
+              <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
+                Forgot password?
+              </Link>
+            </Stack>
+            <LoadingButton
+              fullWidth
+              size="large"
+              onClick={handleShowConnectWeb3}
+              variant="contained"
+              loading={isSubmitting}
+            >
+              Login
+            </LoadingButton>{' '}
+          </div>
+        ) : (
+          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+            {isWalletConnecting ? 'Loading..' : 'Connect'}
+          </LoadingButton>
+        )}
       </Form>
     </FormikProvider>
   );

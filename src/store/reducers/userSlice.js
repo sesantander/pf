@@ -5,6 +5,7 @@ const initialState = {
   id: null,
   isAuth: false,
   photoURL: null,
+  balance: null
 };
 
 export const userSlice = createSlice({
@@ -16,6 +17,7 @@ export const userSlice = createSlice({
       state.id = action.payload.id;
       state.isAuth = true;
       state.photoURL=action.payload.photoURL;
+      state.balance=action.payload.balance;
     },
   },
 });

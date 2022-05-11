@@ -2,6 +2,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Card, Link, Container, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -56,7 +57,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Login() {
+export default function Web3Login() {
   const smUp = useResponsive('up', 'sm');
 
   const mdUp = useResponsive('up', 'md');
@@ -89,12 +90,14 @@ export default function Login() {
         <Container maxWidth="sm">
           <ContentStyle>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
+              Sign in with your wallet!
             </Typography>
 
             <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
 
-            <LoginForm />
+            <LoadingButton fullWidth size="large" type="submit" variant="contained">
+              Connect
+            </LoadingButton>
 
             {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
