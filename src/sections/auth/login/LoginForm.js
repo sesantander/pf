@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
-import { ethers } from 'ethers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 // material
 
 import { useSelector, useDispatch } from 'react-redux';
+
 
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -25,11 +25,25 @@ export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
-  const [connButtonText, setConnButtonText] = useState('Connect Wallet');
+  const [userData, setUserData] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setisSubmitting] = useState(false);
   const [isWeb3Connect, setisWeb3Connect] = useState(false);
   const [isWalletConnecting, setisWalletConnecting] = useState(false);
+
+  useEffect(() => {
+    if(userData && userBalance){
+      const user = {
+        ...userData,
+        balance: userBalance,
+        address: defaultAccount,
+      };
+      console.log('user', user);
+      dispatch(userActions.setUser(user));
+      navigate('/dashboard/home', { replace: true });
+    }
+  }, [userBalance]);
+
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
@@ -48,14 +62,8 @@ export default function LoginForm() {
         return elem.email === values.email;
       });
       if (result) {
+        setUserData(result)
         await connectWalletHandler();
-        const user = {
-          ...result,
-          balance: userBalance,
-        };
-        console.log('user', user);
-        dispatch(userActions.setUser(user));
-        navigate('/dashboard/home', { replace: true });
       } else {
         setOpen(true);
         setisSubmitting(false);
@@ -81,15 +89,13 @@ export default function LoginForm() {
 
   const connectWalletHandler = async () => {
     setisWalletConnecting(true);
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      console.log('MetaMask Here!');
-
-      window.ethereum
+    const provider = window.ethereum;
+    if (provider && provider.isMetaMask) {
+      await provider
         .request({ method: 'eth_requestAccounts' })
-        .then((result) => {
-          accountChangedHandler(result[0]);
-          setConnButtonText('Wallet Connected');
-          getAccountBalance(result[0]);
+        .then(async (result) => {
+          await accountChangedHandler(result[0]);
+          await getAccountBalance(result[0]);
         })
         .catch((error) => {
           setErrorMessage(error.message);
@@ -101,16 +107,15 @@ export default function LoginForm() {
       setisWalletConnecting(false);
     }
   };
-  const accountChangedHandler = (newAccount) => {
+  const accountChangedHandler = async (newAccount) => {
     setDefaultAccount(newAccount);
     getAccountBalance(newAccount.toString());
   };
 
-  const getAccountBalance = (account) => {
-    window.ethereum
+  const getAccountBalance = async (account) => {
+    await window.ethereum
       .request({ method: 'eth_getBalance', params: [account, 'latest'] })
       .then((balance) => {
-        console.log('ethers.utils.formatEther(balance)', ethers.utils.formatEther(balance));
         setUserBalance(ethers.utils.formatEther(balance));
       })
       .catch((error) => {

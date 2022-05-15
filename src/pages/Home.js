@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { connect } from "react-redux";
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Button } from '@mui/material';
@@ -20,9 +21,9 @@ import {
 
 // ----------------------------------------------------------------------
 
-export default function Home() {
+function Home(props) {
   const theme = useTheme();
-
+  console.log("props", props)
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
@@ -32,7 +33,7 @@ export default function Home() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Balance" total={71400} icon={'ic:baseline-account-balance'} />
+            <AppWidgetSummary title="ETH Balance" total={Number(props.user.balance)} icon={'ic:baseline-account-balance'} />
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
               <Button sx={{mt:5,px:5,py:2}}variant="contained">Withdraw</Button>
             </div>
@@ -70,3 +71,10 @@ export default function Home() {
     </Page>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+export default connect(mapStateToProps)(Home);
