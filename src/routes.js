@@ -6,7 +6,6 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import Blog from './pages/Blog';
 import User from './pages/User';
 import Login from './pages/Login';
-import Web3Login from './pages/Web3Login';
 import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
@@ -48,7 +47,6 @@ export default function Router() {
       children: [
         { path: '/', element: <Navigate to="/login" /> },
         { path: 'login', element: <Login /> },
-        { path: 'web3login', element: <Web3Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },

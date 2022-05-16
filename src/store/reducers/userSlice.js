@@ -18,6 +18,7 @@ export const userSlice = createSlice({
       state.isAuth = true;
       state.photoURL=action.payload.photoURL;
       state.balance=action.payload.balance;
+      state.address=action.payload.address;
     },
   },
 });

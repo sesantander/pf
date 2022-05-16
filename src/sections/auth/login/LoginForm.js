@@ -1,16 +1,21 @@
 import * as Yup from 'yup';
+import { ethers } from 'ethers';
+import Web3 from 'web3/dist/web3.min';
 import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
+
 // material
 
 import { useSelector, useDispatch } from 'react-redux';
-
 
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+
+import ProposalContract from '../../../utils/contracts/ProposalSC.json';
+import ContractSC from '../../../utils/contracts/ContractSC.json';
 // ---------------------------------------
 // component
 import Iconify from '../../../components/Iconify';
@@ -32,13 +37,13 @@ export default function LoginForm() {
   const [isWalletConnecting, setisWalletConnecting] = useState(false);
 
   useEffect(() => {
-    if(userData && userBalance){
+    if (userData && userBalance) {
       const user = {
         ...userData,
         balance: userBalance,
         address: defaultAccount,
       };
-      console.log('user', user);
+      // methodTest();
       dispatch(userActions.setUser(user));
       navigate('/dashboard/home', { replace: true });
     }
@@ -62,7 +67,7 @@ export default function LoginForm() {
         return elem.email === values.email;
       });
       if (result) {
-        setUserData(result)
+        setUserData(result);
         await connectWalletHandler();
       } else {
         setOpen(true);
@@ -85,6 +90,37 @@ export default function LoginForm() {
     }
 
     setOpen(false);
+  };
+
+  const methodTest = async () => {
+    const provider = window.ethereum;
+    const web3 = new Web3(provider);
+
+    const networkId = await web3.eth.net.getId();
+
+    const contractSC = new web3.eth.Contract(ContractSC.abi, ContractSC.networks[networkId].address);
+    console.log(contractSC.methods);
+    await contractSC.methods
+      .createContract(
+        'Prestacion de servicio',
+        'Test_react',
+        'freelnace',
+        'active',
+        'scope test',
+        '15/05/2022',
+        '15/06/2022',
+        'USD',
+        15,
+        'MONTHLY',
+        '15/06/2022',
+        1001,
+        1002,
+        2001
+      )
+      .call({ from: defaultAccount })
+      .then((tx) => {
+        console.log('tx', tx);
+      });
   };
 
   const connectWalletHandler = async () => {
