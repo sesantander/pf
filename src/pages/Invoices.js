@@ -26,17 +26,20 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
+import ContractDetailModal from '../components/ContractDetailModal';
+
 // mock
 import INVOICELIST from '../_mock/invoice';
+import CONTRACTS from '../_mock/contract';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'invoice', label: 'Invoice', alignRight: false },
-  { id: 'contractor', label: 'Contractor', alignRight: false },
-  { id: 'payment', label: 'Payment', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: 'download', label: 'Download', alignRight: false },
+  { id: 'contract_type', label: 'Contract Type', alignRight: false },
+  { id: 'start_date', label: 'Start Date', alignRight: false },
+  { id: 'end_date', label: 'End Date', alignRight: false },
+  { id: 'payment_rate', label: 'Payment Rate', alignRight: false },
+  { id: 'currency', label: 'Currency', alignRight: false },
   { id: '' },
 ];
 
@@ -84,6 +87,8 @@ export default function Invoices() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [toggleModal, setToggleModal] = useState(false);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -92,7 +97,7 @@ export default function Invoices() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = INVOICELIST.map((n) => n.invoice);
+      const newSelecteds = CONTRACTS.map((n) => n.contract_type);
       setSelected(newSelecteds);
       return;
     }
@@ -126,16 +131,21 @@ export default function Invoices() {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
+  const contractDetailToggler = () => {
+    setToggleModal(!toggleModal);
+    document.body.style.overflow = 'hidden';
+  };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - INVOICELIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - CONTRACTS.length) : 0;
 
-  const filteredInvoices = applySortFilter(INVOICELIST, getComparator(order, orderBy), filterName);
-
+  const filteredInvoices = applySortFilter(CONTRACTS, getComparator(order, orderBy), filterName);
+  console.log('jkk', filteredInvoices);
   const isUserNotFound = filteredInvoices.length === 0;
 
   return (
     <Page title="User">
       <Container>
+        {toggleModal && <ContractDetailModal addProductToggler={contractDetailToggler} />}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Invoices
@@ -146,7 +156,6 @@ export default function Invoices() {
         </Stack>
 
         <Card>
-
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -159,10 +168,11 @@ export default function Invoices() {
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
+
                 <TableBody>
                   {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, invoice, contractor, payment, status, avatarUrl, download } = row;
-                    const isItemSelected = selected.indexOf(invoice) !== -1;
+                    const { id,contract_type, currency, payment_rate,start_date,end_date } = row;
+                    const isItemSelected = selected.indexOf(contract_type) !== -1;
 
                     return (
                       <TableRow
@@ -172,39 +182,23 @@ export default function Invoices() {
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
+                        onClick={contractDetailToggler}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, invoice)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, contract_type)} />
                         </TableCell>
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
                             <Typography variant="subtitle2" noWrap>
-                              {invoice}
+                              {contract_type}
                             </Typography>
                           </Stack>
                         </TableCell>
-                        <TableCell align="left">{contractor}</TableCell>
-                        <TableCell align="left">{payment}</TableCell>
-                        <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'Awaiting payment' && 'error') || 'success'}>
-                            {sentenceCase(status)}
-                          </Label>
-                        </TableCell>
-                        <TableCell align="left">
-                          {download === 'Download' ? (
-                            <IconButton>
-                              <Iconify icon="eva:download-fill" sx={{ width: 32, height: 32 }} />
-                            </IconButton>
-                          ) : (
-                            <IconButton>
-                              <Iconify icon="eva:close-circle-fill" sx={{ width: 32, height: 32 }} />
-                            </IconButton>
-                          )}
-                        </TableCell>
+                        <TableCell align="left">{start_date.toDateString()}</TableCell>
+                        <TableCell align="left">{end_date.toDateString()}</TableCell>
+                        <TableCell align="left">{payment_rate}</TableCell>
+                        <TableCell align="left">{currency}</TableCell>
 
-                        <TableCell align="right">
-                          <UserMoreMenu />
-                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -231,7 +225,7 @@ export default function Invoices() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={INVOICELIST.length}
+            count={CONTRACTS.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
