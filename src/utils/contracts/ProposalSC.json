@@ -197,14 +197,14 @@
     "absolutePath": "/C/Users/USER/Documents/2022PrimerSemestre/pf/SmartDeal/contracts/Proposal.sol",
     "exportedSymbols": {
       "ProposalSC": [
-        863
+        982
       ]
     },
-    "id": 864,
+    "id": 983,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 692,
+        "id": 811,
         "literals": [
           "solidity",
           ">=",
@@ -223,19 +223,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 863,
+        "id": 982,
         "linearizedBaseContracts": [
-          863
+          982
         ],
         "name": "ProposalSC",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 695,
+            "id": 814,
             "name": "proposalCount",
             "nodeType": "VariableDeclaration",
-            "scope": 863,
+            "scope": 982,
             "src": "96:32:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -244,7 +244,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 693,
+              "id": 812,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "96:7:3",
@@ -256,7 +256,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30",
-              "id": 694,
+              "id": 813,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -275,14 +275,14 @@
           },
           {
             "canonicalName": "ProposalSC.Proposal",
-            "id": 714,
+            "id": 833,
             "members": [
               {
                 "constant": false,
-                "id": 697,
+                "id": 816,
                 "name": "proposal_id",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "164:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -291,7 +291,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 696,
+                  "id": 815,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "164:7:3",
@@ -305,10 +305,10 @@
               },
               {
                 "constant": false,
-                "id": 699,
+                "id": 818,
                 "name": "payment_rate",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "194:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -317,7 +317,7 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 698,
+                  "id": 817,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
                   "src": "194:6:3",
@@ -331,10 +331,10 @@
               },
               {
                 "constant": false,
-                "id": 701,
+                "id": 820,
                 "name": "currency",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "224:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -343,7 +343,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 700,
+                  "id": 819,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "224:6:3",
@@ -357,10 +357,10 @@
               },
               {
                 "constant": false,
-                "id": 703,
+                "id": 822,
                 "name": "description",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "250:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -369,7 +369,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 702,
+                  "id": 821,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "250:6:3",
@@ -383,10 +383,10 @@
               },
               {
                 "constant": false,
-                "id": 705,
+                "id": 824,
                 "name": "scope_of_work",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "279:20:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -395,7 +395,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 704,
+                  "id": 823,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "279:6:3",
@@ -409,10 +409,10 @@
               },
               {
                 "constant": false,
-                "id": 707,
+                "id": 826,
                 "name": "payment_frequency",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "310:24:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -421,7 +421,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 706,
+                  "id": 825,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "310:6:3",
@@ -435,10 +435,10 @@
               },
               {
                 "constant": false,
-                "id": 709,
+                "id": 828,
                 "name": "status",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "345:13:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -447,7 +447,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 708,
+                  "id": 827,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "345:6:3",
@@ -461,10 +461,10 @@
               },
               {
                 "constant": false,
-                "id": 711,
+                "id": 830,
                 "name": "employer_id",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "369:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -473,7 +473,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 710,
+                  "id": 829,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "369:7:3",
@@ -487,10 +487,10 @@
               },
               {
                 "constant": false,
-                "id": 713,
+                "id": 832,
                 "name": "contractor_id",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "399:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -499,7 +499,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 712,
+                  "id": 831,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "399:7:3",
@@ -514,27 +514,27 @@
             ],
             "name": "Proposal",
             "nodeType": "StructDefinition",
-            "scope": 863,
+            "scope": 982,
             "src": "137:291:3",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 718,
+            "id": 837,
             "name": "proposals",
             "nodeType": "VariableDeclaration",
-            "scope": 863,
+            "scope": 982,
             "src": "489:45:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$714_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$833_storage_$",
               "typeString": "mapping(uint256 => struct ProposalSC.Proposal)"
             },
             "typeName": {
-              "id": 717,
+              "id": 836,
               "keyType": {
-                "id": 715,
+                "id": 834,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "497:7:3",
@@ -546,18 +546,18 @@
               "nodeType": "Mapping",
               "src": "489:28:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$714_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$833_storage_$",
                 "typeString": "mapping(uint256 => struct ProposalSC.Proposal)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 716,
+                "id": 835,
                 "name": "Proposal",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 714,
+                "referencedDeclaration": 833,
                 "src": "508:8:3",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Proposal_$714_storage_ptr",
+                  "typeIdentifier": "t_struct$_Proposal_$833_storage_ptr",
                   "typeString": "struct ProposalSC.Proposal"
                 }
               }
@@ -568,20 +568,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 738,
+            "id": 857,
             "name": "ProposalCreated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 737,
+              "id": 856,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 720,
+                  "id": 839,
                   "indexed": false,
                   "name": "proposal_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "575:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -590,7 +590,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 719,
+                    "id": 838,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "575:7:3",
@@ -604,11 +604,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 722,
+                  "id": 841,
                   "indexed": false,
                   "name": "payment_rate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "605:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -617,7 +617,7 @@
                     "typeString": "int256"
                   },
                   "typeName": {
-                    "id": 721,
+                    "id": 840,
                     "name": "int256",
                     "nodeType": "ElementaryTypeName",
                     "src": "605:6:3",
@@ -631,11 +631,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 724,
+                  "id": 843,
                   "indexed": false,
                   "name": "currency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "635:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -644,7 +644,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 723,
+                    "id": 842,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "635:6:3",
@@ -658,11 +658,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 726,
+                  "id": 845,
                   "indexed": false,
                   "name": "description",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "661:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -671,7 +671,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 725,
+                    "id": 844,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "661:6:3",
@@ -685,11 +685,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 728,
+                  "id": 847,
                   "indexed": false,
                   "name": "scope_of_work",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "690:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -698,7 +698,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 727,
+                    "id": 846,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "690:6:3",
@@ -712,11 +712,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 730,
+                  "id": 849,
                   "indexed": false,
                   "name": "payment_frequency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "721:24:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -725,7 +725,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 729,
+                    "id": 848,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "721:6:3",
@@ -739,11 +739,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 732,
+                  "id": 851,
                   "indexed": false,
                   "name": "status",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "756:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -752,7 +752,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 731,
+                    "id": 850,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "756:6:3",
@@ -766,11 +766,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 734,
+                  "id": 853,
                   "indexed": false,
                   "name": "employer_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "780:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -779,7 +779,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 733,
+                    "id": 852,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "780:7:3",
@@ -793,11 +793,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 736,
+                  "id": 855,
                   "indexed": false,
                   "name": "contractor_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "810:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -806,7 +806,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 735,
+                    "id": 854,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "810:7:3",
@@ -825,7 +825,7 @@
           },
           {
             "body": {
-              "id": 752,
+              "id": 871,
               "nodeType": "Block",
               "src": "868:228:3",
               "statements": [
@@ -836,7 +836,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "32303030",
-                        "id": 742,
+                        "id": 861,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -854,7 +854,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "555344",
-                        "id": 743,
+                        "id": 862,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -872,7 +872,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "4465736372697074696f6e",
-                        "id": 744,
+                        "id": 863,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -890,7 +890,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "3320656e64706f696e7473",
-                        "id": 745,
+                        "id": 864,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -908,7 +908,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "4d6f6e74686c79",
-                        "id": 746,
+                        "id": 865,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -926,7 +926,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "57616974696e6720726573706f6e7365",
-                        "id": 747,
+                        "id": 866,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -944,7 +944,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "31",
-                        "id": 748,
+                        "id": 867,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -962,7 +962,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "31",
-                        "id": 749,
+                        "id": 868,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1013,18 +1013,18 @@
                           "typeString": "int_const 1"
                         }
                       ],
-                      "id": 741,
+                      "id": 860,
                       "name": "createProposal",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 851,
+                      "referencedDeclaration": 970,
                       "src": "879:14:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_int256_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (int256,string memory,string memory,string memory,string memory,string memory,uint256,uint256)"
                       }
                     },
-                    "id": 750,
+                    "id": 869,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1038,32 +1038,32 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 751,
+                  "id": 870,
                   "nodeType": "ExpressionStatement",
                   "src": "879:209:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 753,
+            "id": 872,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 739,
+              "id": 858,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "858:2:3"
             },
             "returnParameters": {
-              "id": 740,
+              "id": 859,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "868:0:3"
             },
-            "scope": 863,
+            "scope": 982,
             "src": "847:249:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1071,14 +1071,14 @@
           },
           {
             "body": {
-              "id": 850,
+              "id": 969,
               "nodeType": "Block",
               "src": "1414:857:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 773,
+                    "id": 892,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1089,11 +1089,11 @@
                     "src": "1425:15:3",
                     "subExpression": {
                       "argumentTypes": null,
-                      "id": 772,
+                      "id": 891,
                       "name": "proposalCount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 695,
+                      "referencedDeclaration": 814,
                       "src": "1425:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1105,37 +1105,37 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 774,
+                  "id": 893,
                   "nodeType": "ExpressionStatement",
                   "src": "1425:15:3"
                 },
                 {
                   "assignments": [
-                    776
+                    895
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 776,
+                      "id": 895,
                       "name": "proposalInfo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 850,
+                      "scope": 969,
                       "src": "1451:28:3",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                        "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                         "typeString": "struct ProposalSC.Proposal"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 775,
+                        "id": 894,
                         "name": "Proposal",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 714,
+                        "referencedDeclaration": 833,
                         "src": "1451:8:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_storage_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_storage_ptr",
                           "typeString": "struct ProposalSC.Proposal"
                         }
                       },
@@ -1143,7 +1143,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 777,
+                  "id": 896,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
                   "src": "1451:28:3"
@@ -1151,7 +1151,7 @@
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 782,
+                    "id": 901,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1160,25 +1160,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 778,
+                        "id": 897,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1492:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 780,
+                      "id": 899,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "proposal_id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 697,
+                      "referencedDeclaration": 816,
                       "src": "1492:24:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1189,11 +1189,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 781,
+                      "id": 900,
                       "name": "proposalCount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 695,
+                      "referencedDeclaration": 814,
                       "src": "1519:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1206,14 +1206,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 783,
+                  "id": 902,
                   "nodeType": "ExpressionStatement",
                   "src": "1492:40:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 788,
+                    "id": 907,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1222,25 +1222,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 784,
+                        "id": 903,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1543:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 786,
+                      "id": 905,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "payment_rate",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 699,
+                      "referencedDeclaration": 818,
                       "src": "1543:25:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_int256",
@@ -1251,11 +1251,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 787,
+                      "id": 906,
                       "name": "payment_rate",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 755,
+                      "referencedDeclaration": 874,
                       "src": "1571:12:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_int256",
@@ -1268,14 +1268,14 @@
                       "typeString": "int256"
                     }
                   },
-                  "id": 789,
+                  "id": 908,
                   "nodeType": "ExpressionStatement",
                   "src": "1543:40:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 794,
+                    "id": 913,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1284,25 +1284,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 790,
+                        "id": 909,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1594:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 792,
+                      "id": 911,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "currency",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 701,
+                      "referencedDeclaration": 820,
                       "src": "1594:21:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -1313,11 +1313,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 793,
+                      "id": 912,
                       "name": "currency",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 757,
+                      "referencedDeclaration": 876,
                       "src": "1618:8:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -1330,14 +1330,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 795,
+                  "id": 914,
                   "nodeType": "ExpressionStatement",
                   "src": "1594:32:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 800,
+                    "id": 919,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1346,25 +1346,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 796,
+                        "id": 915,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1637:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 798,
+                      "id": 917,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "description",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 703,
+                      "referencedDeclaration": 822,
                       "src": "1637:24:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -1375,11 +1375,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 799,
+                      "id": 918,
                       "name": "description",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 759,
+                      "referencedDeclaration": 878,
                       "src": "1664:11:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -1392,14 +1392,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 801,
+                  "id": 920,
                   "nodeType": "ExpressionStatement",
                   "src": "1637:38:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 806,
+                    "id": 925,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1408,25 +1408,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 802,
+                        "id": 921,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1686:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 804,
+                      "id": 923,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "scope_of_work",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 705,
+                      "referencedDeclaration": 824,
                       "src": "1686:26:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -1437,11 +1437,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 805,
+                      "id": 924,
                       "name": "scope_of_work",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 761,
+                      "referencedDeclaration": 880,
                       "src": "1715:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -1454,14 +1454,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 807,
+                  "id": 926,
                   "nodeType": "ExpressionStatement",
                   "src": "1686:42:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 812,
+                    "id": 931,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1470,25 +1470,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 808,
+                        "id": 927,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1739:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 810,
+                      "id": 929,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "payment_frequency",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 707,
+                      "referencedDeclaration": 826,
                       "src": "1739:30:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -1499,11 +1499,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 811,
+                      "id": 930,
                       "name": "payment_frequency",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 763,
+                      "referencedDeclaration": 882,
                       "src": "1772:17:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -1516,14 +1516,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 813,
+                  "id": 932,
                   "nodeType": "ExpressionStatement",
                   "src": "1739:50:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 818,
+                    "id": 937,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1532,25 +1532,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 814,
+                        "id": 933,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1800:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 816,
+                      "id": 935,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "status",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 709,
+                      "referencedDeclaration": 828,
                       "src": "1800:19:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -1561,11 +1561,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 817,
+                      "id": 936,
                       "name": "status",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 765,
+                      "referencedDeclaration": 884,
                       "src": "1822:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -1578,14 +1578,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 819,
+                  "id": 938,
                   "nodeType": "ExpressionStatement",
                   "src": "1800:28:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 824,
+                    "id": 943,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1594,25 +1594,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 820,
+                        "id": 939,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1839:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 822,
+                      "id": 941,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "employer_id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 711,
+                      "referencedDeclaration": 830,
                       "src": "1839:24:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1623,11 +1623,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 823,
+                      "id": 942,
                       "name": "employer_id",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 767,
+                      "referencedDeclaration": 886,
                       "src": "1866:11:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1640,14 +1640,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 825,
+                  "id": 944,
                   "nodeType": "ExpressionStatement",
                   "src": "1839:38:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 830,
+                    "id": 949,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1656,25 +1656,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 826,
+                        "id": 945,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1888:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 828,
+                      "id": 947,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "contractor_id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 713,
+                      "referencedDeclaration": 832,
                       "src": "1888:26:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1685,11 +1685,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 829,
+                      "id": 948,
                       "name": "contractor_id",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 769,
+                      "referencedDeclaration": 888,
                       "src": "1917:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1702,14 +1702,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 831,
+                  "id": 950,
                   "nodeType": "ExpressionStatement",
                   "src": "1888:42:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 836,
+                    "id": 955,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1718,25 +1718,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 832,
+                        "id": 951,
                         "name": "proposals",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 718,
+                        "referencedDeclaration": 837,
                         "src": "1943:9:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$714_storage_$",
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$833_storage_$",
                           "typeString": "mapping(uint256 => struct ProposalSC.Proposal storage ref)"
                         }
                       },
-                      "id": 834,
+                      "id": 953,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 833,
+                        "id": 952,
                         "name": "proposalCount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 695,
+                        "referencedDeclaration": 814,
                         "src": "1953:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1750,7 +1750,7 @@
                       "nodeType": "IndexAccess",
                       "src": "1943:24:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Proposal_$714_storage",
+                        "typeIdentifier": "t_struct$_Proposal_$833_storage",
                         "typeString": "struct ProposalSC.Proposal storage ref"
                       }
                     },
@@ -1758,24 +1758,24 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 835,
+                      "id": 954,
                       "name": "proposalInfo",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 776,
+                      "referencedDeclaration": 895,
                       "src": "1970:12:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                        "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                         "typeString": "struct ProposalSC.Proposal memory"
                       }
                     },
                     "src": "1943:39:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Proposal_$714_storage",
+                      "typeIdentifier": "t_struct$_Proposal_$833_storage",
                       "typeString": "struct ProposalSC.Proposal storage ref"
                     }
                   },
-                  "id": 837,
+                  "id": 956,
                   "nodeType": "ExpressionStatement",
                   "src": "1943:39:3"
                 },
@@ -1785,11 +1785,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 839,
+                        "id": 958,
                         "name": "proposalCount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 695,
+                        "referencedDeclaration": 814,
                         "src": "2028:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1798,11 +1798,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 840,
+                        "id": 959,
                         "name": "payment_rate",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 755,
+                        "referencedDeclaration": 874,
                         "src": "2056:12:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_int256",
@@ -1811,11 +1811,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 841,
+                        "id": 960,
                         "name": "currency",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 757,
+                        "referencedDeclaration": 876,
                         "src": "2083:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -1824,11 +1824,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 842,
+                        "id": 961,
                         "name": "description",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 759,
+                        "referencedDeclaration": 878,
                         "src": "2106:11:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -1837,11 +1837,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 843,
+                        "id": 962,
                         "name": "scope_of_work",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 761,
+                        "referencedDeclaration": 880,
                         "src": "2132:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -1850,11 +1850,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 844,
+                        "id": 963,
                         "name": "payment_frequency",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 763,
+                        "referencedDeclaration": 882,
                         "src": "2160:17:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -1863,11 +1863,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 845,
+                        "id": 964,
                         "name": "status",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 765,
+                        "referencedDeclaration": 884,
                         "src": "2192:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -1876,11 +1876,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 846,
+                        "id": 965,
                         "name": "employer_id",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 767,
+                        "referencedDeclaration": 886,
                         "src": "2213:11:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1889,11 +1889,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 847,
+                        "id": 966,
                         "name": "contractor_id",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 769,
+                        "referencedDeclaration": 888,
                         "src": "2239:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1940,18 +1940,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 838,
+                      "id": 957,
                       "name": "ProposalCreated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 738,
+                      "referencedDeclaration": 857,
                       "src": "1998:15:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_int256_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,int256,string memory,string memory,string memory,string memory,string memory,uint256,uint256)"
                       }
                     },
-                    "id": 848,
+                    "id": 967,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1965,29 +1965,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 849,
+                  "id": 968,
                   "nodeType": "EmitStatement",
                   "src": "1993:270:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 851,
+            "id": 970,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "createProposal",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 770,
+              "id": 889,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 755,
+                  "id": 874,
                   "name": "payment_rate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1138:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1996,7 +1996,7 @@
                     "typeString": "int256"
                   },
                   "typeName": {
-                    "id": 754,
+                    "id": 873,
                     "name": "int256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1138:6:3",
@@ -2010,10 +2010,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 757,
+                  "id": 876,
                   "name": "currency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1168:22:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2022,7 +2022,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 756,
+                    "id": 875,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1168:6:3",
@@ -2036,10 +2036,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 759,
+                  "id": 878,
                   "name": "description",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1201:25:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2048,7 +2048,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 758,
+                    "id": 877,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1201:6:3",
@@ -2062,10 +2062,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 761,
+                  "id": 880,
                   "name": "scope_of_work",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1237:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2074,7 +2074,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 760,
+                    "id": 879,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1237:6:3",
@@ -2088,10 +2088,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 763,
+                  "id": 882,
                   "name": "payment_frequency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1275:31:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2100,7 +2100,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 762,
+                    "id": 881,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1275:6:3",
@@ -2114,10 +2114,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 765,
+                  "id": 884,
                   "name": "status",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1317:20:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -2126,7 +2126,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 764,
+                    "id": 883,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1317:6:3",
@@ -2140,10 +2140,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 767,
+                  "id": 886,
                   "name": "employer_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1348:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2152,7 +2152,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 766,
+                    "id": 885,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1348:7:3",
@@ -2166,10 +2166,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 769,
+                  "id": 888,
                   "name": "contractor_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1378:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2178,7 +2178,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 768,
+                    "id": 887,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1378:7:3",
@@ -2194,12 +2194,12 @@
               "src": "1127:279:3"
             },
             "returnParameters": {
-              "id": 771,
+              "id": 890,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1414:0:3"
             },
-            "scope": 863,
+            "scope": 982,
             "src": "1104:1167:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2207,7 +2207,7 @@
           },
           {
             "body": {
-              "id": 861,
+              "id": 980,
               "nodeType": "Block",
               "src": "2334:47:3",
               "statements": [
@@ -2219,14 +2219,14 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 857,
+                          "id": 976,
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1042,
+                          "referencedDeclaration": 1161,
                           "src": "2360:4:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_ProposalSC_$863",
+                            "typeIdentifier": "t_contract$_ProposalSC_$982",
                             "typeString": "contract ProposalSC"
                           }
                         }
@@ -2234,11 +2234,11 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_ProposalSC_$863",
+                            "typeIdentifier": "t_contract$_ProposalSC_$982",
                             "typeString": "contract ProposalSC"
                           }
                         ],
-                        "id": 856,
+                        "id": 975,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2251,7 +2251,7 @@
                         },
                         "typeName": "address"
                       },
-                      "id": 858,
+                      "id": 977,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2265,7 +2265,7 @@
                         "typeString": "address"
                       }
                     },
-                    "id": 859,
+                    "id": 978,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2279,36 +2279,36 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 855,
-                  "id": 860,
+                  "functionReturnParameters": 974,
+                  "id": 979,
                   "nodeType": "Return",
                   "src": "2345:28:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 862,
+            "id": 981,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "showBalance",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 852,
+              "id": 971,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2299:2:3"
             },
             "returnParameters": {
-              "id": 855,
+              "id": 974,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 854,
+                  "id": 973,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 862,
+                  "scope": 981,
                   "src": "2325:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2317,7 +2317,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 853,
+                    "id": 972,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2325:7:3",
@@ -2332,14 +2332,14 @@
               ],
               "src": "2324:9:3"
             },
-            "scope": 863,
+            "scope": 982,
             "src": "2279:102:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 864,
+        "scope": 983,
         "src": "69:2315:3"
       }
     ],
@@ -2349,14 +2349,14 @@
     "absolutePath": "/C/Users/USER/Documents/2022PrimerSemestre/pf/SmartDeal/contracts/Proposal.sol",
     "exportedSymbols": {
       "ProposalSC": [
-        863
+        982
       ]
     },
-    "id": 864,
+    "id": 983,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 692,
+        "id": 811,
         "literals": [
           "solidity",
           ">=",
@@ -2375,19 +2375,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 863,
+        "id": 982,
         "linearizedBaseContracts": [
-          863
+          982
         ],
         "name": "ProposalSC",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 695,
+            "id": 814,
             "name": "proposalCount",
             "nodeType": "VariableDeclaration",
-            "scope": 863,
+            "scope": 982,
             "src": "96:32:3",
             "stateVariable": true,
             "storageLocation": "default",
@@ -2396,7 +2396,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 693,
+              "id": 812,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "96:7:3",
@@ -2408,7 +2408,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30",
-              "id": 694,
+              "id": 813,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -2427,14 +2427,14 @@
           },
           {
             "canonicalName": "ProposalSC.Proposal",
-            "id": 714,
+            "id": 833,
             "members": [
               {
                 "constant": false,
-                "id": 697,
+                "id": 816,
                 "name": "proposal_id",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "164:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2443,7 +2443,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 696,
+                  "id": 815,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "164:7:3",
@@ -2457,10 +2457,10 @@
               },
               {
                 "constant": false,
-                "id": 699,
+                "id": 818,
                 "name": "payment_rate",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "194:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2469,7 +2469,7 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 698,
+                  "id": 817,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
                   "src": "194:6:3",
@@ -2483,10 +2483,10 @@
               },
               {
                 "constant": false,
-                "id": 701,
+                "id": 820,
                 "name": "currency",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "224:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2495,7 +2495,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 700,
+                  "id": 819,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "224:6:3",
@@ -2509,10 +2509,10 @@
               },
               {
                 "constant": false,
-                "id": 703,
+                "id": 822,
                 "name": "description",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "250:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2521,7 +2521,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 702,
+                  "id": 821,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "250:6:3",
@@ -2535,10 +2535,10 @@
               },
               {
                 "constant": false,
-                "id": 705,
+                "id": 824,
                 "name": "scope_of_work",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "279:20:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2547,7 +2547,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 704,
+                  "id": 823,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "279:6:3",
@@ -2561,10 +2561,10 @@
               },
               {
                 "constant": false,
-                "id": 707,
+                "id": 826,
                 "name": "payment_frequency",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "310:24:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2573,7 +2573,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 706,
+                  "id": 825,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "310:6:3",
@@ -2587,10 +2587,10 @@
               },
               {
                 "constant": false,
-                "id": 709,
+                "id": 828,
                 "name": "status",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "345:13:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2599,7 +2599,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 708,
+                  "id": 827,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "345:6:3",
@@ -2613,10 +2613,10 @@
               },
               {
                 "constant": false,
-                "id": 711,
+                "id": 830,
                 "name": "employer_id",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "369:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2625,7 +2625,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 710,
+                  "id": 829,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "369:7:3",
@@ -2639,10 +2639,10 @@
               },
               {
                 "constant": false,
-                "id": 713,
+                "id": 832,
                 "name": "contractor_id",
                 "nodeType": "VariableDeclaration",
-                "scope": 714,
+                "scope": 833,
                 "src": "399:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2651,7 +2651,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 712,
+                  "id": 831,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "399:7:3",
@@ -2666,27 +2666,27 @@
             ],
             "name": "Proposal",
             "nodeType": "StructDefinition",
-            "scope": 863,
+            "scope": 982,
             "src": "137:291:3",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 718,
+            "id": 837,
             "name": "proposals",
             "nodeType": "VariableDeclaration",
-            "scope": 863,
+            "scope": 982,
             "src": "489:45:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$714_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$833_storage_$",
               "typeString": "mapping(uint256 => struct ProposalSC.Proposal)"
             },
             "typeName": {
-              "id": 717,
+              "id": 836,
               "keyType": {
-                "id": 715,
+                "id": 834,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "497:7:3",
@@ -2698,18 +2698,18 @@
               "nodeType": "Mapping",
               "src": "489:28:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$714_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$833_storage_$",
                 "typeString": "mapping(uint256 => struct ProposalSC.Proposal)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 716,
+                "id": 835,
                 "name": "Proposal",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 714,
+                "referencedDeclaration": 833,
                 "src": "508:8:3",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Proposal_$714_storage_ptr",
+                  "typeIdentifier": "t_struct$_Proposal_$833_storage_ptr",
                   "typeString": "struct ProposalSC.Proposal"
                 }
               }
@@ -2720,20 +2720,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 738,
+            "id": 857,
             "name": "ProposalCreated",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 737,
+              "id": 856,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 720,
+                  "id": 839,
                   "indexed": false,
                   "name": "proposal_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "575:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2742,7 +2742,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 719,
+                    "id": 838,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "575:7:3",
@@ -2756,11 +2756,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 722,
+                  "id": 841,
                   "indexed": false,
                   "name": "payment_rate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "605:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2769,7 +2769,7 @@
                     "typeString": "int256"
                   },
                   "typeName": {
-                    "id": 721,
+                    "id": 840,
                     "name": "int256",
                     "nodeType": "ElementaryTypeName",
                     "src": "605:6:3",
@@ -2783,11 +2783,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 724,
+                  "id": 843,
                   "indexed": false,
                   "name": "currency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "635:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2796,7 +2796,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 723,
+                    "id": 842,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "635:6:3",
@@ -2810,11 +2810,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 726,
+                  "id": 845,
                   "indexed": false,
                   "name": "description",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "661:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2823,7 +2823,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 725,
+                    "id": 844,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "661:6:3",
@@ -2837,11 +2837,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 728,
+                  "id": 847,
                   "indexed": false,
                   "name": "scope_of_work",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "690:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2850,7 +2850,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 727,
+                    "id": 846,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "690:6:3",
@@ -2864,11 +2864,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 730,
+                  "id": 849,
                   "indexed": false,
                   "name": "payment_frequency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "721:24:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2877,7 +2877,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 729,
+                    "id": 848,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "721:6:3",
@@ -2891,11 +2891,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 732,
+                  "id": 851,
                   "indexed": false,
                   "name": "status",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "756:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2904,7 +2904,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 731,
+                    "id": 850,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "756:6:3",
@@ -2918,11 +2918,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 734,
+                  "id": 853,
                   "indexed": false,
                   "name": "employer_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "780:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2931,7 +2931,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 733,
+                    "id": 852,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "780:7:3",
@@ -2945,11 +2945,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 736,
+                  "id": 855,
                   "indexed": false,
                   "name": "contractor_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 738,
+                  "scope": 857,
                   "src": "810:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2958,7 +2958,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 735,
+                    "id": 854,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "810:7:3",
@@ -2977,7 +2977,7 @@
           },
           {
             "body": {
-              "id": 752,
+              "id": 871,
               "nodeType": "Block",
               "src": "868:228:3",
               "statements": [
@@ -2988,7 +2988,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "32303030",
-                        "id": 742,
+                        "id": 861,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3006,7 +3006,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "555344",
-                        "id": 743,
+                        "id": 862,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3024,7 +3024,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "4465736372697074696f6e",
-                        "id": 744,
+                        "id": 863,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3042,7 +3042,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "3320656e64706f696e7473",
-                        "id": 745,
+                        "id": 864,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3060,7 +3060,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "4d6f6e74686c79",
-                        "id": 746,
+                        "id": 865,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3078,7 +3078,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "57616974696e6720726573706f6e7365",
-                        "id": 747,
+                        "id": 866,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3096,7 +3096,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "31",
-                        "id": 748,
+                        "id": 867,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3114,7 +3114,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "31",
-                        "id": 749,
+                        "id": 868,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -3165,18 +3165,18 @@
                           "typeString": "int_const 1"
                         }
                       ],
-                      "id": 741,
+                      "id": 860,
                       "name": "createProposal",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 851,
+                      "referencedDeclaration": 970,
                       "src": "879:14:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_int256_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (int256,string memory,string memory,string memory,string memory,string memory,uint256,uint256)"
                       }
                     },
-                    "id": 750,
+                    "id": 869,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3190,32 +3190,32 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 751,
+                  "id": 870,
                   "nodeType": "ExpressionStatement",
                   "src": "879:209:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 753,
+            "id": 872,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 739,
+              "id": 858,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "858:2:3"
             },
             "returnParameters": {
-              "id": 740,
+              "id": 859,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "868:0:3"
             },
-            "scope": 863,
+            "scope": 982,
             "src": "847:249:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -3223,14 +3223,14 @@
           },
           {
             "body": {
-              "id": 850,
+              "id": 969,
               "nodeType": "Block",
               "src": "1414:857:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 773,
+                    "id": 892,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3241,11 +3241,11 @@
                     "src": "1425:15:3",
                     "subExpression": {
                       "argumentTypes": null,
-                      "id": 772,
+                      "id": 891,
                       "name": "proposalCount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 695,
+                      "referencedDeclaration": 814,
                       "src": "1425:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3257,37 +3257,37 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 774,
+                  "id": 893,
                   "nodeType": "ExpressionStatement",
                   "src": "1425:15:3"
                 },
                 {
                   "assignments": [
-                    776
+                    895
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 776,
+                      "id": 895,
                       "name": "proposalInfo",
                       "nodeType": "VariableDeclaration",
-                      "scope": 850,
+                      "scope": 969,
                       "src": "1451:28:3",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                        "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                         "typeString": "struct ProposalSC.Proposal"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 775,
+                        "id": 894,
                         "name": "Proposal",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 714,
+                        "referencedDeclaration": 833,
                         "src": "1451:8:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_storage_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_storage_ptr",
                           "typeString": "struct ProposalSC.Proposal"
                         }
                       },
@@ -3295,7 +3295,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 777,
+                  "id": 896,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
                   "src": "1451:28:3"
@@ -3303,7 +3303,7 @@
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 782,
+                    "id": 901,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3312,25 +3312,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 778,
+                        "id": 897,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1492:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 780,
+                      "id": 899,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "proposal_id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 697,
+                      "referencedDeclaration": 816,
                       "src": "1492:24:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3341,11 +3341,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 781,
+                      "id": 900,
                       "name": "proposalCount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 695,
+                      "referencedDeclaration": 814,
                       "src": "1519:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3358,14 +3358,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 783,
+                  "id": 902,
                   "nodeType": "ExpressionStatement",
                   "src": "1492:40:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 788,
+                    "id": 907,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3374,25 +3374,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 784,
+                        "id": 903,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1543:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 786,
+                      "id": 905,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "payment_rate",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 699,
+                      "referencedDeclaration": 818,
                       "src": "1543:25:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_int256",
@@ -3403,11 +3403,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 787,
+                      "id": 906,
                       "name": "payment_rate",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 755,
+                      "referencedDeclaration": 874,
                       "src": "1571:12:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_int256",
@@ -3420,14 +3420,14 @@
                       "typeString": "int256"
                     }
                   },
-                  "id": 789,
+                  "id": 908,
                   "nodeType": "ExpressionStatement",
                   "src": "1543:40:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 794,
+                    "id": 913,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3436,25 +3436,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 790,
+                        "id": 909,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1594:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 792,
+                      "id": 911,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "currency",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 701,
+                      "referencedDeclaration": 820,
                       "src": "1594:21:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -3465,11 +3465,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 793,
+                      "id": 912,
                       "name": "currency",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 757,
+                      "referencedDeclaration": 876,
                       "src": "1618:8:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -3482,14 +3482,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 795,
+                  "id": 914,
                   "nodeType": "ExpressionStatement",
                   "src": "1594:32:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 800,
+                    "id": 919,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3498,25 +3498,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 796,
+                        "id": 915,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1637:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 798,
+                      "id": 917,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "description",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 703,
+                      "referencedDeclaration": 822,
                       "src": "1637:24:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -3527,11 +3527,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 799,
+                      "id": 918,
                       "name": "description",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 759,
+                      "referencedDeclaration": 878,
                       "src": "1664:11:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -3544,14 +3544,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 801,
+                  "id": 920,
                   "nodeType": "ExpressionStatement",
                   "src": "1637:38:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 806,
+                    "id": 925,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3560,25 +3560,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 802,
+                        "id": 921,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1686:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 804,
+                      "id": 923,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "scope_of_work",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 705,
+                      "referencedDeclaration": 824,
                       "src": "1686:26:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -3589,11 +3589,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 805,
+                      "id": 924,
                       "name": "scope_of_work",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 761,
+                      "referencedDeclaration": 880,
                       "src": "1715:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -3606,14 +3606,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 807,
+                  "id": 926,
                   "nodeType": "ExpressionStatement",
                   "src": "1686:42:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 812,
+                    "id": 931,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3622,25 +3622,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 808,
+                        "id": 927,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1739:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 810,
+                      "id": 929,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "payment_frequency",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 707,
+                      "referencedDeclaration": 826,
                       "src": "1739:30:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -3651,11 +3651,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 811,
+                      "id": 930,
                       "name": "payment_frequency",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 763,
+                      "referencedDeclaration": 882,
                       "src": "1772:17:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -3668,14 +3668,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 813,
+                  "id": 932,
                   "nodeType": "ExpressionStatement",
                   "src": "1739:50:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 818,
+                    "id": 937,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3684,25 +3684,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 814,
+                        "id": 933,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1800:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 816,
+                      "id": 935,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "status",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 709,
+                      "referencedDeclaration": 828,
                       "src": "1800:19:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory",
@@ -3713,11 +3713,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 817,
+                      "id": 936,
                       "name": "status",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 765,
+                      "referencedDeclaration": 884,
                       "src": "1822:6:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -3730,14 +3730,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 819,
+                  "id": 938,
                   "nodeType": "ExpressionStatement",
                   "src": "1800:28:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 824,
+                    "id": 943,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3746,25 +3746,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 820,
+                        "id": 939,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1839:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 822,
+                      "id": 941,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "employer_id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 711,
+                      "referencedDeclaration": 830,
                       "src": "1839:24:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3775,11 +3775,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 823,
+                      "id": 942,
                       "name": "employer_id",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 767,
+                      "referencedDeclaration": 886,
                       "src": "1866:11:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3792,14 +3792,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 825,
+                  "id": 944,
                   "nodeType": "ExpressionStatement",
                   "src": "1839:38:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 830,
+                    "id": 949,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3808,25 +3808,25 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 826,
+                        "id": 945,
                         "name": "proposalInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 776,
+                        "referencedDeclaration": 895,
                         "src": "1888:12:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                          "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                           "typeString": "struct ProposalSC.Proposal memory"
                         }
                       },
-                      "id": 828,
+                      "id": 947,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
                       "memberName": "contractor_id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 713,
+                      "referencedDeclaration": 832,
                       "src": "1888:26:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3837,11 +3837,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 829,
+                      "id": 948,
                       "name": "contractor_id",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 769,
+                      "referencedDeclaration": 888,
                       "src": "1917:13:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -3854,14 +3854,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 831,
+                  "id": 950,
                   "nodeType": "ExpressionStatement",
                   "src": "1888:42:3"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 836,
+                    "id": 955,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3870,25 +3870,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 832,
+                        "id": 951,
                         "name": "proposals",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 718,
+                        "referencedDeclaration": 837,
                         "src": "1943:9:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$714_storage_$",
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Proposal_$833_storage_$",
                           "typeString": "mapping(uint256 => struct ProposalSC.Proposal storage ref)"
                         }
                       },
-                      "id": 834,
+                      "id": 953,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 833,
+                        "id": 952,
                         "name": "proposalCount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 695,
+                        "referencedDeclaration": 814,
                         "src": "1953:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3902,7 +3902,7 @@
                       "nodeType": "IndexAccess",
                       "src": "1943:24:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Proposal_$714_storage",
+                        "typeIdentifier": "t_struct$_Proposal_$833_storage",
                         "typeString": "struct ProposalSC.Proposal storage ref"
                       }
                     },
@@ -3910,24 +3910,24 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 835,
+                      "id": 954,
                       "name": "proposalInfo",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 776,
+                      "referencedDeclaration": 895,
                       "src": "1970:12:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Proposal_$714_memory_ptr",
+                        "typeIdentifier": "t_struct$_Proposal_$833_memory_ptr",
                         "typeString": "struct ProposalSC.Proposal memory"
                       }
                     },
                     "src": "1943:39:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Proposal_$714_storage",
+                      "typeIdentifier": "t_struct$_Proposal_$833_storage",
                       "typeString": "struct ProposalSC.Proposal storage ref"
                     }
                   },
-                  "id": 837,
+                  "id": 956,
                   "nodeType": "ExpressionStatement",
                   "src": "1943:39:3"
                 },
@@ -3937,11 +3937,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 839,
+                        "id": 958,
                         "name": "proposalCount",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 695,
+                        "referencedDeclaration": 814,
                         "src": "2028:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -3950,11 +3950,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 840,
+                        "id": 959,
                         "name": "payment_rate",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 755,
+                        "referencedDeclaration": 874,
                         "src": "2056:12:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_int256",
@@ -3963,11 +3963,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 841,
+                        "id": 960,
                         "name": "currency",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 757,
+                        "referencedDeclaration": 876,
                         "src": "2083:8:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -3976,11 +3976,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 842,
+                        "id": 961,
                         "name": "description",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 759,
+                        "referencedDeclaration": 878,
                         "src": "2106:11:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -3989,11 +3989,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 843,
+                        "id": 962,
                         "name": "scope_of_work",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 761,
+                        "referencedDeclaration": 880,
                         "src": "2132:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -4002,11 +4002,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 844,
+                        "id": 963,
                         "name": "payment_frequency",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 763,
+                        "referencedDeclaration": 882,
                         "src": "2160:17:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -4015,11 +4015,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 845,
+                        "id": 964,
                         "name": "status",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 765,
+                        "referencedDeclaration": 884,
                         "src": "2192:6:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -4028,11 +4028,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 846,
+                        "id": 965,
                         "name": "employer_id",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 767,
+                        "referencedDeclaration": 886,
                         "src": "2213:11:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -4041,11 +4041,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 847,
+                        "id": 966,
                         "name": "contractor_id",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 769,
+                        "referencedDeclaration": 888,
                         "src": "2239:13:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -4092,18 +4092,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 838,
+                      "id": 957,
                       "name": "ProposalCreated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 738,
+                      "referencedDeclaration": 857,
                       "src": "1998:15:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_int256_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_uint256_$_t_uint256_$returns$__$",
                         "typeString": "function (uint256,int256,string memory,string memory,string memory,string memory,string memory,uint256,uint256)"
                       }
                     },
-                    "id": 848,
+                    "id": 967,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4117,29 +4117,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 849,
+                  "id": 968,
                   "nodeType": "EmitStatement",
                   "src": "1993:270:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 851,
+            "id": 970,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "createProposal",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 770,
+              "id": 889,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 755,
+                  "id": 874,
                   "name": "payment_rate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1138:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4148,7 +4148,7 @@
                     "typeString": "int256"
                   },
                   "typeName": {
-                    "id": 754,
+                    "id": 873,
                     "name": "int256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1138:6:3",
@@ -4162,10 +4162,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 757,
+                  "id": 876,
                   "name": "currency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1168:22:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -4174,7 +4174,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 756,
+                    "id": 875,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1168:6:3",
@@ -4188,10 +4188,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 759,
+                  "id": 878,
                   "name": "description",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1201:25:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -4200,7 +4200,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 758,
+                    "id": 877,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1201:6:3",
@@ -4214,10 +4214,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 761,
+                  "id": 880,
                   "name": "scope_of_work",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1237:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -4226,7 +4226,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 760,
+                    "id": 879,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1237:6:3",
@@ -4240,10 +4240,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 763,
+                  "id": 882,
                   "name": "payment_frequency",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1275:31:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -4252,7 +4252,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 762,
+                    "id": 881,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1275:6:3",
@@ -4266,10 +4266,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 765,
+                  "id": 884,
                   "name": "status",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1317:20:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -4278,7 +4278,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 764,
+                    "id": 883,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1317:6:3",
@@ -4292,10 +4292,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 767,
+                  "id": 886,
                   "name": "employer_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1348:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4304,7 +4304,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 766,
+                    "id": 885,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1348:7:3",
@@ -4318,10 +4318,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 769,
+                  "id": 888,
                   "name": "contractor_id",
                   "nodeType": "VariableDeclaration",
-                  "scope": 851,
+                  "scope": 970,
                   "src": "1378:21:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4330,7 +4330,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 768,
+                    "id": 887,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1378:7:3",
@@ -4346,12 +4346,12 @@
               "src": "1127:279:3"
             },
             "returnParameters": {
-              "id": 771,
+              "id": 890,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1414:0:3"
             },
-            "scope": 863,
+            "scope": 982,
             "src": "1104:1167:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -4359,7 +4359,7 @@
           },
           {
             "body": {
-              "id": 861,
+              "id": 980,
               "nodeType": "Block",
               "src": "2334:47:3",
               "statements": [
@@ -4371,14 +4371,14 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 857,
+                          "id": 976,
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1042,
+                          "referencedDeclaration": 1161,
                           "src": "2360:4:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_ProposalSC_$863",
+                            "typeIdentifier": "t_contract$_ProposalSC_$982",
                             "typeString": "contract ProposalSC"
                           }
                         }
@@ -4386,11 +4386,11 @@
                       "expression": {
                         "argumentTypes": [
                           {
-                            "typeIdentifier": "t_contract$_ProposalSC_$863",
+                            "typeIdentifier": "t_contract$_ProposalSC_$982",
                             "typeString": "contract ProposalSC"
                           }
                         ],
-                        "id": 856,
+                        "id": 975,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -4403,7 +4403,7 @@
                         },
                         "typeName": "address"
                       },
-                      "id": 858,
+                      "id": 977,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -4417,7 +4417,7 @@
                         "typeString": "address"
                       }
                     },
-                    "id": 859,
+                    "id": 978,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -4431,36 +4431,36 @@
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 855,
-                  "id": 860,
+                  "functionReturnParameters": 974,
+                  "id": 979,
                   "nodeType": "Return",
                   "src": "2345:28:3"
                 }
               ]
             },
             "documentation": null,
-            "id": 862,
+            "id": 981,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "showBalance",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 852,
+              "id": 971,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2299:2:3"
             },
             "returnParameters": {
-              "id": 855,
+              "id": 974,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 854,
+                  "id": 973,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 862,
+                  "scope": 981,
                   "src": "2325:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4469,7 +4469,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 853,
+                    "id": 972,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2325:7:3",
@@ -4484,14 +4484,14 @@
               ],
               "src": "2324:9:3"
             },
-            "scope": 863,
+            "scope": 982,
             "src": "2279:102:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 864,
+        "scope": 983,
         "src": "69:2315:3"
       }
     ],
@@ -4559,12 +4559,12 @@
         }
       },
       "links": {},
-      "address": "0x57A1834F581Ac311ac11BD8F3e16DfCED67cC1D1",
-      "transactionHash": "0x2e6a68c3486890fc1dc035cb36e3228b36db62e4c23715f17f6a1911b7bef2ac"
+      "address": "0x92C626a71A8EA581EfA359F45e0F4FbAE8b0803C",
+      "transactionHash": "0x752d459d80c26f960e855c3864311fa14f30a33b40555c54e223e89fee4502a1"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2022-05-15T21:53:57.342Z",
+  "updatedAt": "2022-05-18T00:58:18.537Z",
   "devdoc": {
     "methods": {}
   },

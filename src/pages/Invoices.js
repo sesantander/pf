@@ -89,6 +89,8 @@ export default function Invoices() {
 
   const [toggleModal, setToggleModal] = useState(false);
 
+  const [rowSelected, setRowSelected] = useState(null);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -131,7 +133,9 @@ export default function Invoices() {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
-  const contractDetailToggler = () => {
+  const contractDetailToggler = (event, row) => {
+    setRowSelected(row);
+    console.log('LOG : contractDetailToggler -> rowSelected', rowSelected);
     setToggleModal(!toggleModal);
     document.body.style.overflow = 'hidden';
   };
@@ -139,13 +143,12 @@ export default function Invoices() {
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - CONTRACTS.length) : 0;
 
   const filteredInvoices = applySortFilter(CONTRACTS, getComparator(order, orderBy), filterName);
-  console.log('jkk', filteredInvoices);
   const isUserNotFound = filteredInvoices.length === 0;
 
   return (
     <Page title="User">
       <Container>
-        {toggleModal && <ContractDetailModal addProductToggler={contractDetailToggler} />}
+        {toggleModal && <ContractDetailModal row={rowSelected} addProductToggler={contractDetailToggler} />}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Invoices
@@ -171,7 +174,7 @@ export default function Invoices() {
 
                 <TableBody>
                   {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,contract_type, currency, payment_rate,start_date,end_date } = row;
+                    const { id, contract_type, currency, payment_rate, start_date, end_date } = row;
                     const isItemSelected = selected.indexOf(contract_type) !== -1;
 
                     return (
@@ -182,7 +185,7 @@ export default function Invoices() {
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
-                        onClick={contractDetailToggler}
+                        onClick={(event) => contractDetailToggler(event, row)}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, contract_type)} />
@@ -198,7 +201,6 @@ export default function Invoices() {
                         <TableCell align="left">{end_date.toDateString()}</TableCell>
                         <TableCell align="left">{payment_rate}</TableCell>
                         <TableCell align="left">{currency}</TableCell>
-
                       </TableRow>
                     );
                   })}

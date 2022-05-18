@@ -2,73 +2,96 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import InputAdornment from '@mui/material/InputAdornment';
+import { ContractStatus } from './../utils/constants/contract.constants';
+import { CreateProposal } from '../hooks/useProposalMethod';
 
 import { Input } from './Input';
 import classes from './addProductModal.module.css';
 // import { itemsActions } from "../../store/reducers/itemSlicer";
 
 export const ContractDetailForm = (props) => {
-
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const [categoryValid, setcategoryValid] = useState(false);
-  const [categoryInput, setCategoryInput] = useState('');
+  const [contractTypeValid, setContractTypeValid] = useState(false);
+  const [contractTypeInput, setContractTypeInput] = useState('');
 
-  const [productValid, setproductValid] = useState(false);
-  const [productInput, setProductInput] = useState('');
+  const [startDateValid, setStartDateValid] = useState(false);
+  const [startDateInput, setStartDateInput] = useState('');
 
-  const [priceValid, setpriceValid] = useState(false);
-  const [priceInput, setPriceInput] = useState('');
+  const [endDateValid, setEndDateValid] = useState(false);
+  const [endDateInput, setEndDateInput] = useState('');
 
-  const [descriptionValid, setdescriptionValid] = useState(false);
-  const [descriptionInput, setDescriptionInput] = useState('');
+  const [paymentRateValid, setPaymentRateValid] = useState(false);
+  const [paymentRateInput, setPaymentRateInput] = useState('');
+
+  const [paymentFreqValid, setPaymentFreqValid] = useState(false);
+  const [paymentFreqInput, setPaymentFreqInput] = useState('');
+
+  const [scopeValid, setScopeValid] = useState(false);
+  const [scopeInput, setScopeInput] = useState('');
 
   useEffect(() => {
-    return setIsFormValid(categoryValid && productValid && priceValid && descriptionValid);
-  }, [categoryValid, productValid, priceValid, descriptionValid]);
+    return setIsFormValid(
+      contractTypeValid && startDateValid && endDateValid && paymentRateValid && paymentFreqValid && scopeValid
+    );
+  }, [contractTypeValid, startDateValid, endDateValid, paymentRateValid, paymentFreqValid, scopeValid]);
 
   const validateCategory = (inputValue) => {
     return inputValue !== '';
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newProduct = {
-      category: categoryInput,
-      name: productInput,
-      price: '$' + priceInput,
-      description: descriptionInput,
+    const newProposal = {
+      contract_type: contractTypeInput,
+      start_date: startDateInput,
+      end_date: endDateInput,
+      payment_rate: paymentRateInput,
+      currency: 'ETH',
+      payment_frequency: paymentFreqInput,
+      description: scopeInput,
+      scope_of_work: scopeInput,
+      status: ContractStatus.WAITING_CONTRACTOR_RESPONSE,
+      employer_id: 1,
+      contractor_id: 2,
     };
-    // dispatch(itemsActions.addItems({ newProduct: newProduct }));
+    console.log('user: ', props.user);
+    createProposal(newProposal, props.user.address);
     props.handleClose();
   };
+  const createProposal = async (newProposal, account) => {
+    console.log("LOG : createProposal -> account", account)
+    const proposalCreated = await CreateProposal(account, newProposal);
+    console.log("LOG : createProposal -> proposalCreated", proposalCreated)
+  };
+  // console.log(' HOLA ', props.row.contract_type);
   return (
     <form onSubmit={handleSubmit}>
       <Input
         id="contract_type"
         label="Contract Type"
         validate={validateCategory}
-        inputValid={setcategoryValid}
-        value={categoryInput}
-        setValue={setCategoryInput}
+        inputValid={setContractTypeValid}
+        value={props.row.contract_type}
+        setValue={setContractTypeInput}
       />
       <Input
         id="start_date"
         label="Start Date"
         type="date"
         validate={validateCategory}
-        inputValid={setproductValid}
-        value={productInput}
-        setValue={setProductInput}
+        inputValid={setStartDateValid}
+        value={startDateInput}
+        setValue={setStartDateInput}
       />
-      
+
       <Input
         id="end_date"
         label="End Date"
         type="date"
         validate={validateCategory}
-        inputValid={setproductValid}
-        value={productInput}
-        setValue={setProductInput}
+        inputValid={setEndDateValid}
+        value={endDateInput}
+        setValue={setEndDateInput}
       />
       <Input
         id="payment_rate"
@@ -78,9 +101,17 @@ export const ContractDetailForm = (props) => {
           startAdornment: <InputAdornment position="start">$</InputAdornment>,
         }}
         validate={validateCategory}
-        inputValid={setpriceValid}
-        value={priceInput}
-        setValue={setPriceInput}
+        inputValid={setPaymentRateValid}
+        value={paymentRateInput}
+        setValue={setPaymentRateInput}
+      />
+      <Input
+        id="payment_frequency"
+        label="Payment Frequency"
+        validate={validateCategory}
+        inputValid={setPaymentFreqValid}
+        value={paymentFreqInput}
+        setValue={setPaymentFreqInput}
       />
       <Input
         id="scope_of_work"
@@ -89,9 +120,9 @@ export const ContractDetailForm = (props) => {
         multiline
         rows={4}
         validate={validateCategory}
-        inputValid={setdescriptionValid}
-        value={descriptionInput}
-        setValue={setDescriptionInput}
+        inputValid={setScopeValid}
+        value={scopeInput}
+        setValue={setScopeInput}
       />
       <div className={classes.buttons}>
         <Button type="sumbit" disabled={!isFormValid} name="submit">

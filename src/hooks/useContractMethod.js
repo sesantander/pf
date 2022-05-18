@@ -1,4 +1,3 @@
-// components
 import Web3 from 'web3/dist/web3.min';
 import ContractSC from '../utils/contracts/ContractSC.json';
 
@@ -105,4 +104,5 @@ export const ContractList = async (contractsCount) => {
       });
     /* eslint-enable no-await-in-loop */
   }
+  return response;
 };
