@@ -4,17 +4,14 @@ import ProposalSC from '../utils/contracts/ProposalSC.json';
 export const CreateProposal = async (account, proposalInfo) => {
   console.log('LOG : CreateProposal -> account', account);
   const {
-    //type,
-    status,
-    scope_of_work,
-    description,
-    //start_date,
-    //end_date,
-    currency,
     payment_rate,
+    scope_of_work,
     payment_frequency,
     employer_id,
     contractor_id,
+    start_date,
+    end_date,
+    contract_type,
   } = proposalInfo;
 
   const provider = window.ethereum;
@@ -29,13 +26,13 @@ export const CreateProposal = async (account, proposalInfo) => {
   await proposalSC.methods
     .createProposal(
       payment_rate,
-      currency,
-      description,
       scope_of_work,
       payment_frequency,
-      status,
       employer_id,
-      contractor_id
+      contractor_id,
+      start_date,
+      end_date,
+      contract_type
     )
     .send({ from: account })
     .then((res) => {

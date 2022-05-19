@@ -46,16 +46,16 @@ export const ContractDetailForm = (props) => {
       start_date: startDateInput,
       end_date: endDateInput,
       payment_rate: paymentRateInput,
-      currency: 'ETH',
       payment_frequency: paymentFreqInput,
-      description: scopeInput,
       scope_of_work: scopeInput,
-      status: ContractStatus.WAITING_CONTRACTOR_RESPONSE,
+      //status: ContractStatus.WAITING_CONTRACTOR_RESPONSE,
       employer_id: 1,
       contractor_id: 2,
     };
     console.log('user: ', props.user);
     createProposal(newProposal, props.user.address);
+    // Change contract status to ContractStatus.WAITING_CONTRACTOR_RESPONSE
+    
     props.handleClose();
   };
   const createProposal = async (newProposal, account) => {
@@ -93,6 +93,7 @@ export const ContractDetailForm = (props) => {
         value={endDateInput}
         setValue={setEndDateInput}
       />
+      
       <Input
         id="payment_rate"
         label="Payment Rate"
