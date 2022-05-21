@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import Box from '@mui/material/Box';
 
 import { ContractDetailForm } from './ContractDetailForm';
+import { ContractDetail } from './ContractDetail';
+
 import classes from './addProductModal.module.css';
 
 const AddProductBackdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.handleClose} />;
 };
 const AddProductOverlay = (props) => {
+  const [showForm, setShowForm] = useState(false);
+  const showDetail = () => {
+    setShowForm(true);
+    console.log('gola')
+  };
   return (
     <Box className={classes.modal}>
       <div className={classes.header}>
         <h2>Contract Detail</h2>
       </div>
       <div className={classes.body}>
-        <ContractDetailForm user={props.user} row={props.row} handleClose={props.handleClose} />
+        {showForm ? (
+          <ContractDetailForm user={props.user} row={props.row} handleClose={props.handleClose} />
+        ) : (
+          <ContractDetail showDetail={showDetail} user={props.user} row={props.row} handleClose={props.handleClose} />
+        )}
       </div>
     </Box>
   );

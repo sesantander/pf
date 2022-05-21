@@ -28,7 +28,7 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
 
   return (
     <>
-      <h3 style={{ margin: "0px" }}>{props.label}</h3>
+      <h3 style={{ margin: "0px" }}>{props.title}</h3>
       <TextField
         error={error}
         onChange={handleChange}
@@ -37,6 +37,7 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
         onBlur={HandleBlur}
         helperText={helperText}
         size="small"
+        label=""
         {...props}
       />
     </>

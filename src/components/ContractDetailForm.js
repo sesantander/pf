@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { useDispatch } from 'react-redux';
 import InputAdornment from '@mui/material/InputAdornment';
-import { ContractStatus } from './../utils/constants/contract.constants';
 import { CreateProposal } from '../hooks/useProposalMethod';
-
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import { Input } from './Input';
 import classes from './addProductModal.module.css';
 // import { itemsActions } from "../../store/reducers/itemSlicer";
@@ -12,29 +11,43 @@ import classes from './addProductModal.module.css';
 export const ContractDetailForm = (props) => {
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const [contractTypeValid, setContractTypeValid] = useState(false);
-  const [contractTypeInput, setContractTypeInput] = useState('');
+  const [contractTypeInput, setContractTypeInput] = useState(props.row.contract_type);
 
   const [startDateValid, setStartDateValid] = useState(false);
-  const [startDateInput, setStartDateInput] = useState('');
+  const [startDateInput, setStartDateInput] = useState(props.row.start_date);
 
   const [endDateValid, setEndDateValid] = useState(false);
-  const [endDateInput, setEndDateInput] = useState('');
+  const [endDateInput, setEndDateInput] = useState(props.row.end_date);
 
   const [paymentRateValid, setPaymentRateValid] = useState(false);
-  const [paymentRateInput, setPaymentRateInput] = useState('');
+  const [paymentRateInput, setPaymentRateInput] = useState(props.row.payment_rate);
 
   const [paymentFreqValid, setPaymentFreqValid] = useState(false);
-  const [paymentFreqInput, setPaymentFreqInput] = useState('');
+  const [paymentFreqInput, setPaymentFreqInput] = useState(props.row.payment_frequency);
 
   const [scopeValid, setScopeValid] = useState(false);
-  const [scopeInput, setScopeInput] = useState('');
+  const [scopeInput, setScopeInput] = useState(props.row.scope_of_work);
+
+  const contractTypes = [
+    {
+      value: 'Fixed Rate',
+      label: 'FixedRate',
+    },
+    {
+      value: 'Milestone',
+      label: 'Milestone',
+    },
+    {
+      value: 'Monthly',
+      label: 'Monthly',
+    },
+  ];
 
   useEffect(() => {
     return setIsFormValid(
-      contractTypeValid && startDateValid && endDateValid && paymentRateValid && paymentFreqValid && scopeValid
+       startDateValid && endDateValid && paymentRateValid && paymentFreqValid && scopeValid
     );
-  }, [contractTypeValid, startDateValid, endDateValid, paymentRateValid, paymentFreqValid, scopeValid]);
+  }, [ startDateValid, endDateValid, paymentRateValid, paymentFreqValid, scopeValid]);
 
   const validateCategory = (inputValue) => {
     return inputValue !== '';
@@ -55,48 +68,71 @@ export const ContractDetailForm = (props) => {
     console.log('user: ', props.user);
     createProposal(newProposal, props.user.address);
     // Change contract status to ContractStatus.WAITING_CONTRACTOR_RESPONSE
-    
+
     props.handleClose();
   };
+
+  const handleChange = (event) => {
+    setContractTypeInput(event.target.value);
+  };
+
   const createProposal = async (newProposal, account) => {
-    console.log("LOG : createProposal -> account", account)
+    console.log('LOG : createProposal -> account', account);
     const proposalCreated = await CreateProposal(account, newProposal);
-    console.log("LOG : createProposal -> proposalCreated", proposalCreated)
+    console.log('LOG : createProposal -> proposalCreated', proposalCreated);
   };
   // console.log(' HOLA ', props.row.contract_type);
   return (
     <form onSubmit={handleSubmit}>
-      <Input
+      {/* <Input
         id="contract_type"
-        label="Contract Type"
+        title="Contract Type"
         validate={validateCategory}
         inputValid={setContractTypeValid}
-        value={props.row.contract_type}
+        value={contractTypeInput}
         setValue={setContractTypeInput}
-      />
+        defaultValue={contractTypeInput}
+      /> */}
+      <TextField
+        id="outlined-select-contract_type"
+        select
+        label="Select"
+        value={contractTypeInput}
+        onChange={handleChange}
+        helperText="Please select your contract type"
+        defaultValue=""
+      >
+        {contractTypes.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
       <Input
         id="start_date"
-        label="Start Date"
+        title="Start Date"
         type="date"
         validate={validateCategory}
         inputValid={setStartDateValid}
         value={startDateInput}
         setValue={setStartDateInput}
+        defaultValue={startDateInput.toISOString().split('T')[0]}
       />
 
       <Input
         id="end_date"
-        label="End Date"
+        title="End Date"
         type="date"
         validate={validateCategory}
         inputValid={setEndDateValid}
         value={endDateInput}
+        defaultValue={endDateInput.toISOString().split('T')[0]}
         setValue={setEndDateInput}
       />
-      
+
       <Input
         id="payment_rate"
-        label="Payment Rate"
+        title="Payment Rate"
         type="number"
         InputProps={{
           startAdornment: <InputAdornment position="start">$</InputAdornment>,
@@ -104,32 +140,35 @@ export const ContractDetailForm = (props) => {
         validate={validateCategory}
         inputValid={setPaymentRateValid}
         value={paymentRateInput}
+        defaultValue={paymentRateInput.replace(/\D/g, '')}
         setValue={setPaymentRateInput}
       />
       <Input
         id="payment_frequency"
-        label="Payment Frequency"
+        title="Payment Frequency"
         validate={validateCategory}
         inputValid={setPaymentFreqValid}
         value={paymentFreqInput}
+        defaultValue={paymentFreqInput}
         setValue={setPaymentFreqInput}
       />
       <Input
         id="scope_of_work"
-        label="Scope of work"
+        title="Scope of work"
         type="text"
         multiline
         rows={4}
         validate={validateCategory}
         inputValid={setScopeValid}
         value={scopeInput}
+        defaultValue={scopeInput}
         setValue={setScopeInput}
       />
       <div className={classes.buttons}>
         <Button type="sumbit" disabled={!isFormValid} name="submit">
-          Accept
+          Send New Proposal
         </Button>
-        <Button onClick={props.handleClose}>Reject</Button>
+        <Button onClick={props.handleClose}>Cancel</Button>
       </div>
     </form>
   );
