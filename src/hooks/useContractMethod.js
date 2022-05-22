@@ -113,6 +113,7 @@ export const ContractList = async (contractsCount) => {
     response.push(contract);
     /* eslint-enable no-await-in-loop */
   }
+  console.log('LOG : ContractList -> response', response);
   return response;
 };
 
@@ -137,6 +138,28 @@ export const ContractUpdate = async (account, contractInfo) => {
     .send({ from: account })
     .then((res) => {
       console.log('LOG : ContractUpdate -> res', res);
+      response = res;
+    })
+    .catch((e) => {
+      console.log('error', e);
+    });
+
+  return response;
+};
+
+export const UpdateContractStatus = async (account, contract_id, status) => {
+  const provider = window.ethereum;
+  const web3 = new Web3(provider);
+
+  const networkId = await web3.eth.net.getId();
+  const smartContractAddress = ContractSC.networks[networkId].address;
+  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+
+  let response;
+  await contractSC.methods
+    .setContractStatus(contract_id, status)
+    .send({ from: account })
+    .then((res) => {
       response = res;
     })
     .catch((e) => {

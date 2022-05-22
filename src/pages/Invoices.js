@@ -98,8 +98,6 @@ export default function Invoices() {
     async function fetchContracts() {
       try {
         const response = await getContracts();
-        console.log('LOG : fetchContracts -> response', response);
-        console.log('LOG : fetchContracts -> response', response[0].job_title);
         setContratcs(response);
       } catch (e) {
         console.error(e);
@@ -166,7 +164,6 @@ export default function Invoices() {
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - contracts.length) : 0;
 
   const filteredInvoices = applySortFilter(contracts, getComparator(order, orderBy), filterName);
-  console.log("LOG : Invoices -> filteredInvoices", filteredInvoices)
   const isUserNotFound = filteredInvoices.length === 0;
 
   return (

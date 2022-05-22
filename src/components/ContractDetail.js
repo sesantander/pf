@@ -24,7 +24,7 @@ export const ContractDetail = (props) => {
 
   useEffect(() => {
     const infoListMap = Object.keys(props.row).map(function (key, index) {
-      if (key !== 'avatarUrl') {
+      if (key !== 'employer_id' && key !== 'contractor_id' && key !== 'proposal_id' && key !== '0'&& key !== '1'&& key !== '2'&& key !== '3'&& key !== '4'&& key !== '5'&& key !== '6'&& key !== '7') {
         return <InfoCard key={index} title={key} value={props.row[key]} />;
       }
     });
