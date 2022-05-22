@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import classes from './addProductModal.module.css';
 import { Stack } from '@mui/material';
+import { ContractStatus } from '../utils/constants/contract.constants'
+import { ContractUpdate } from '../hooks/useContractMethod';
 // import { itemsActions } from "../../store/reducers/itemSlicer";
 
 export const ContractDetail = (props) => {
-  // console.log(' HOLA ', props.row.contract_type);
-
   const [infoList, setInfoList] = useState([]);
   const InfoCard = (props) => {
     return (
@@ -15,6 +15,11 @@ export const ContractDetail = (props) => {
         <p>{props.value.toString()}</p>
       </>
     );
+  };
+
+  const updateContract = async (account) => {
+    props.row.status = ContractStatus.ACCEPTED;
+    await ContractUpdate(account, props.row);
   };
 
   useEffect(() => {
@@ -29,7 +34,13 @@ export const ContractDetail = (props) => {
     <>
       {infoList}
       <div className={classes.buttons}>
-        <Button>Accept Contract</Button>
+        <Button
+          onClick={async () => {
+            await updateContract(props.user.address);
+          }}
+        >
+          Accept Contract
+        </Button>
         <Button onClick={props.showDetail}>New Proposal</Button>
       </div>
     </>

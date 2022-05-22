@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -27,10 +27,11 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 import ContractDetailModal from '../components/ContractDetailModal';
+import { ContractCount, ContractList } from '../hooks/useContractMethod';
 
 // mock
 import INVOICELIST from '../_mock/invoice';
-import CONTRACTS from '../_mock/contract';
+// import contracts from '../_mock/contract';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +40,7 @@ const TABLE_HEAD = [
   { id: 'start_date', label: 'Start Date', alignRight: false },
   { id: 'end_date', label: 'End Date', alignRight: false },
   { id: 'payment_rate', label: 'Payment Rate', alignRight: false },
-  { id: 'currency', label: 'Currency', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
   { id: '' },
 ];
 
@@ -91,6 +92,27 @@ export default function Invoices() {
 
   const [rowSelected, setRowSelected] = useState(null);
 
+  const [contracts, setContratcs] = useState([]);
+
+  useEffect(() => {
+    async function fetchContracts() {
+      try {
+        const response = await getContracts();
+        console.log('LOG : fetchContracts -> response', response);
+        console.log('LOG : fetchContracts -> response', response[0].job_title);
+        setContratcs(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchContracts();
+  }, []);
+
+  const getContracts = async (account) => {
+    const contractCount = await ContractCount();
+    return await ContractList(contractCount);
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -99,7 +121,7 @@ export default function Invoices() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = CONTRACTS.map((n) => n.contract_type);
+      const newSelecteds = contracts.map((n) => n.contract_type);
       setSelected(newSelecteds);
       return;
     }
@@ -140,9 +162,11 @@ export default function Invoices() {
     document.body.style.overflow = 'hidden';
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - CONTRACTS.length) : 0;
+  
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - contracts.length) : 0;
 
-  const filteredInvoices = applySortFilter(CONTRACTS, getComparator(order, orderBy), filterName);
+  const filteredInvoices = applySortFilter(contracts, getComparator(order, orderBy), filterName);
+  console.log("LOG : Invoices -> filteredInvoices", filteredInvoices)
   const isUserNotFound = filteredInvoices.length === 0;
 
   return (
@@ -173,37 +197,41 @@ export default function Invoices() {
                 />
 
                 <TableBody>
-                  {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, contract_type, currency, payment_rate, start_date, end_date } = row;
-                    const isItemSelected = selected.indexOf(contract_type) !== -1;
+                  {filteredInvoices &&
+                    filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                      const { id, contract_type, status, payment_rate, start_date, end_date } = row;
+                      const isItemSelected = selected.indexOf(contract_type) !== -1;
 
-                    return (
-                      <TableRow
-                        hover
-                        key={id}
-                        tabIndex={-1}
-                        role="checkbox"
-                        selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                        onClick={(event) => contractDetailToggler(event, row)}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, contract_type)} />
-                        </TableCell>
-                        <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <Typography variant="subtitle2" noWrap>
-                              {contract_type}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell align="left">{start_date.toDateString()}</TableCell>
-                        <TableCell align="left">{end_date.toDateString()}</TableCell>
-                        <TableCell align="left">{payment_rate}</TableCell>
-                        <TableCell align="left">{currency}</TableCell>
-                      </TableRow>
-                    );
-                  })}
+                      return (
+                        <TableRow
+                          hover
+                          key={id}
+                          tabIndex={-1}
+                          role="checkbox"
+                          selected={isItemSelected}
+                          aria-checked={isItemSelected}
+                          onClick={(event) => contractDetailToggler(event, row)}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              checked={isItemSelected}
+                              onChange={(event) => handleClick(event, contract_type)}
+                            />
+                          </TableCell>
+                          <TableCell component="th" scope="row" padding="none">
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                              <Typography variant="subtitle2" noWrap>
+                                {contract_type}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
+                          <TableCell align="left">{start_date}</TableCell>
+                          <TableCell align="left">{end_date}</TableCell>
+                          <TableCell align="left">{payment_rate}</TableCell>
+                          <TableCell align="left">{status}</TableCell>
+                        </TableRow>
+                      );
+                    })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -227,7 +255,7 @@ export default function Invoices() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={CONTRACTS.length}
+            count={contracts.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -1,10 +1,10 @@
 import Web3 from 'web3/dist/web3.min';
 import ContractSC from '../utils/contracts/ContractSC.json';
 
-export const CreateContract = async (account, contractInfo) => {
+export const createContract = async (account, contractInfo) => {
   const {
-    type,
-    name,
+    contract_type,
+    contract_name,
     job_title,
     status,
     scope_of_work,
@@ -30,8 +30,8 @@ export const CreateContract = async (account, contractInfo) => {
 
   await contractSC.methods
     .createContract(
-      type,
-      name,
+      contract_type,
+      contract_name,
       job_title,
       status,
       scope_of_work,
@@ -47,7 +47,8 @@ export const CreateContract = async (account, contractInfo) => {
     )
     .send({ from: account })
     .then((res) => {
-      resultado = res;
+      response = res;
+      console.log('LOG : createContract -> response', response);
     })
     .catch((e) => {
       console.log('error', e);
@@ -71,7 +72,6 @@ export const ContractCount = async () => {
     .call()
     .then((res) => {
       response = res;
-      console.log('res contracts: ', res);
     })
     .catch((e) => {
       console.log('error', e);
@@ -89,20 +89,59 @@ export const ContractList = async (contractsCount) => {
   const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
 
   let response = [];
-
+  console.log('LOG : ContractList -> contractSC.methods', contractSC.methods);
   for (let i = 1; i < parseInt(contractsCount) + 1; i += 1) {
     /* eslint-disable no-await-in-loop */
+    let contract = {};
     await contractSC.methods
       .contracts(i)
       .call()
-      .then((res) => {
-        response.push(res);
-        console.log('res contract: ', res);
+      .then(async (res) => {
+        await contractSC.methods
+          .contracts_details(i)
+          .call()
+          .then((res2) => {
+            contract = { ...res, ...res2 };
+          })
+          .catch((e) => {
+            console.log('error', e);
+          });
       })
       .catch((e) => {
         console.log('error', e);
       });
+    response.push(contract);
     /* eslint-enable no-await-in-loop */
   }
+  return response;
+};
+
+export const ContractUpdate = async (account, contractInfo) => {
+  console.log('LOG : ContractUpdate -> contractInfo', contractInfo);
+  const { contract_id, status, contract_type, scope_of_work, start_date, end_date, currency, payment_rate } =
+    contractInfo;
+
+  const provider = window.ethereum;
+  const web3 = new Web3(provider);
+
+  const networkId = await web3.eth.net.getId();
+  const smartContractAddress = ContractSC.networks[networkId].address;
+  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+
+  console.log('test ', { ...contractInfo });
+
+  let response;
+  console.log('LOG : ContractUpdate -> contractSC.methods', contractSC.methods);
+  await contractSC.methods
+    .updateContract(contract_id, status, contract_type, scope_of_work, start_date, end_date, currency, payment_rate)
+    .send({ from: account })
+    .then((res) => {
+      console.log('LOG : ContractUpdate -> res', res);
+      response = res;
+    })
+    .catch((e) => {
+      console.log('error', e);
+    });
+
   return response;
 };
