@@ -11,12 +11,14 @@ export const ContractDetail = (props) => {
   const InfoCard = (props) => {
     return (
       <>
-        <h2>{props.title}</h2>
+        <h2>{titleCase(props.title)}</h2>
         <p>{props.value.toString()}</p>
       </>
     );
   };
-
+  function titleCase(str) {
+    return str.toLowerCase().replace(/(^|\s)\S/g, L => L.toUpperCase());
+  }
   const updateContract = async (account) => {
     props.row.status = ContractStatus.ACCEPTED;
     await ContractUpdate(account, props.row);
