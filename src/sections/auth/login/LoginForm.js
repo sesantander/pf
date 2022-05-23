@@ -14,8 +14,7 @@ import { LoadingButton } from '@mui/lab';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-import ProposalContract from '../../../utils/contracts/ProposalSC.json';
-import ContractSC from '../../../utils/contracts/ContractSC.json';
+import { LoginUser } from '../../../hooks/useUserHandler';
 // ---------------------------------------
 // component
 import Iconify from '../../../components/Iconify';
@@ -62,14 +61,17 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: async () => {
+
       setisSubmitting(true);
-      const result = accounts.find((elem) => {
-        return elem.email === values.email;
-      });
-      if (result) {
-        setUserData(result);
+
+      const result = await LoginUser({ username: values.email, password: values.password });
+      const parseResult = JSON.parse(result);
+
+      if (parseResult.token) {
+        setUserData(parseResult);
         await connectWalletHandler();
       } else {
+        navigate('/login', { replace: true });
         setOpen(true);
         setisSubmitting(false);
       }
@@ -91,8 +93,6 @@ export default function LoginForm() {
 
     setOpen(false);
   };
-
-
 
   const connectWalletHandler = async () => {
     setisWalletConnecting(true);

@@ -5,7 +5,9 @@ const initialState = {
   id: null,
   isAuth: false,
   photoURL: null,
-  balance: null
+  balance: null,
+  role: null,
+  token: null,
 };
 
 export const userSlice = createSlice({
@@ -13,12 +15,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload.email;
+      state.user = action.payload.username;
       state.id = action.payload.id;
       state.isAuth = true;
-      state.photoURL=action.payload.photoURL;
-      state.balance=action.payload.balance;
-      state.address=action.payload.address;
+      state.photoURL = action.payload.photoURL;
+      state.balance = action.payload.balance;
+      state.address = action.payload.address;
+      state.role = action.payload.role;
+      state.token = action.payload.token;
     },
   },
 });
