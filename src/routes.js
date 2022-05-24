@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import Home from './pages/Home';
 import ComplianceDocuments from './pages/ComplianceDocuments';
-import Invoices from './pages/Invoices';
+import Contracts from './pages/Contracts';
 import Transactions from './pages/Transactions';
 import CreateContract from './pages/CreateContract';
 
@@ -36,7 +36,7 @@ export default function Router() {
         { path: 'home', element: <Home /> },
         { path: 'create-contract', element: <CreateContract /> },
         { path: 'compliance-documents', element: <ComplianceDocuments /> },
-        { path: 'invoices', element: <Invoices /> },
+        { path: 'contracts', element: <Contracts /> },
         { path: 'transactions', element: <Transactions /> },
 
       ],

@@ -15,20 +15,29 @@ const AddProductOverlay = (props) => {
   const [showForm, setShowForm] = useState(false);
   const showDetail = () => {
     setShowForm(true);
-    console.log('gola')
+    console.log('gola');
   };
   return (
     <Box className={classes.modal}>
-      <div className={classes.header}>
-        <h2>Contract Detail</h2>
-      </div>
-      <div className={classes.body}>
-        {showForm ? (
-          <ContractDetailForm user={props.user} row={props.row} handleClose={props.handleClose} />
-        ) : (
-          <ContractDetail showDetail={showDetail} user={props.user} row={props.row} handleClose={props.handleClose} />
-        )}
-      </div>
+      {showForm ? (
+        <>
+          <div className={classes.header}>
+            <h2>Contract Detail</h2>
+          </div>
+          <div className={classes.body}>
+            <ContractDetailForm user={props.user} row={props.row} handleClose={props.handleClose} />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={classes.header}>
+            <h2>New Contract Proposal</h2>
+          </div>
+          <div className={classes.body}>
+            <ContractDetail showDetail={showDetail} user={props.user} row={props.row} handleClose={props.handleClose} />
+          </div>
+        </>
+      )}
     </Box>
   );
 };

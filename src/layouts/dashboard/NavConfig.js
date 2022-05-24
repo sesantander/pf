@@ -22,8 +22,8 @@ const navConfig = [
     icon: getIcon('fa-solid:file-contract'),
   },
   {
-    title: 'Invoices',
-    path: '/dashboard/invoices',
+    title: 'Contracts',
+    path: '/dashboard/contracts',
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {

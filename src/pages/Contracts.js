@@ -74,7 +74,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Invoices() {
+export default function Contracts() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -133,6 +133,9 @@ export default function Invoices() {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
+  const handlePay = () => {
+    //boton de pagar
+  };
   const contractDetailToggler = (event, row) => {
     setRowSelected(row);
     console.log('LOG : contractDetailToggler -> rowSelected', rowSelected);
@@ -151,11 +154,8 @@ export default function Invoices() {
         {toggleModal && <ContractDetailModal row={rowSelected} addProductToggler={contractDetailToggler} />}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Invoices
+            Contracts
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#">
-            Download all as CSV
-          </Button>
         </Stack>
 
         <Card>
@@ -174,7 +174,7 @@ export default function Invoices() {
 
                 <TableBody>
                   {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, contract_type, currency, payment_rate, start_date, end_date } = row;
+                    const { id, contract_type, currency, payment_rate, start_date, end_date, status } = row;
                     const isItemSelected = selected.indexOf(contract_type) !== -1;
 
                     return (
@@ -201,6 +201,16 @@ export default function Invoices() {
                         <TableCell align="left">{end_date.toDateString()}</TableCell>
                         <TableCell align="left">{payment_rate}</TableCell>
                         <TableCell align="left">{currency}</TableCell>
+                        {contract_type === 'Monthly' ? (
+                          <TableCell align="left">
+                            {' '}
+                            <Button size="large" onClick={() => handlePay()} variant="contained">
+                              Pay
+                            </Button>
+                          </TableCell>
+                        ) : (
+                          ''
+                        )}
                       </TableRow>
                     );
                   })}

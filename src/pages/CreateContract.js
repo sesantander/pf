@@ -29,11 +29,6 @@ function CreateContract(props) {
       image: '/static/mock-images/contracs/Screenshot_2.png',
     },
     {
-      title: 'Pay As You Go',
-      description: 'For contracts with time sheets or submitted work every oayment cycle.',
-      image: '/static/mock-images/contracs/Screenshot_3.png',
-    },
-    {
       title: 'Milestone',
       description: 'For contracts with milestones that are paid as they get completed.',
       image: '/static/mock-images/contracs/Screenshot_4.png',
