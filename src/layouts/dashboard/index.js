@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { Outlet,Navigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { ethers } from 'ethers';
 
 import { useSelector, useDispatch } from 'react-redux';
 // material
@@ -7,6 +9,8 @@ import { styled } from '@mui/material/styles';
 
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+
+import { userActions } from '../../store/reducers/userSlice';
 
 // ----------------------------------------------------------------------
 
@@ -34,9 +38,45 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout() {
+function DashboardLayout(props) {
+  console.log('props', props);
+
+  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const [walletChanged, setWalletChanged] = useState(null);
+  const isAuth = useSelector((state) => state.user.isAuth); //localStorage.getItem('isAuth')
+
+  const accountChangedHandler = async (newAccount) => {
+    getAccountBalance(newAccount.toString());
+  };
+
+  const getAccountBalance = async (account) => {
+    await window.ethereum
+      .request({ method: 'eth_getBalance', params: [account, 'latest'] })
+      .then((balance) => {
+        const user = {
+          username: props.user.user,
+          ...props.user,
+          address: account,
+          balance: ethers.utils.formatEther(balance),
+        };
+        setWalletChanged(user);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
+
+  // listen for account changes
+  window.ethereum.on('accountsChanged', accountChangedHandler);
+
+  useEffect(() => {
+    if (walletChanged) {
+      dispatch(userActions.setUser(walletChanged));
+    }
+  }, [walletChanged]);
+
   return (
     <>
       {isAuth ? (
@@ -52,3 +92,9 @@ export default function DashboardLayout() {
     </>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(DashboardLayout);

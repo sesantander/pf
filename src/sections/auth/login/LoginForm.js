@@ -42,7 +42,11 @@ export default function LoginForm() {
         balance: userBalance,
         address: defaultAccount,
       };
-      // methodTest();
+
+      localStorage.setItem('isAuth', true);
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('role', user.role);
+
       dispatch(userActions.setUser(user));
       navigate('/dashboard/home', { replace: true });
     }
@@ -61,7 +65,6 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: async () => {
-
       setisSubmitting(true);
 
       const result = await LoginUser({ username: values.email, password: values.password });
