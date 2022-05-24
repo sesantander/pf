@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -27,10 +27,11 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 import ContractDetailModal from '../components/ContractDetailModal';
+import { ContractCount, ContractList } from '../hooks/useContractMethod';
 
 // mock
 import INVOICELIST from '../_mock/invoice';
-import CONTRACTS from '../_mock/contract';
+// import contracts from '../_mock/contract';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +40,7 @@ const TABLE_HEAD = [
   { id: 'start_date', label: 'Start Date', alignRight: false },
   { id: 'end_date', label: 'End Date', alignRight: false },
   { id: 'payment_rate', label: 'Payment Rate', alignRight: false },
-  { id: 'currency', label: 'Currency', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
   { id: '' },
 ];
 
@@ -91,6 +92,25 @@ export default function Contracts() {
 
   const [rowSelected, setRowSelected] = useState(null);
 
+  const [contracts, setContratcs] = useState([]);
+
+  useEffect(() => {
+    async function fetchContracts() {
+      try {
+        const response = await getContracts();
+        setContratcs(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchContracts();
+  }, []);
+
+  const getContracts = async (account) => {
+    const contractCount = await ContractCount();
+    return await ContractList(contractCount);
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -99,7 +119,7 @@ export default function Contracts() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = CONTRACTS.map((n) => n.contract_type);
+      const newSelecteds = contracts.map((n) => n.contract_type);
       setSelected(newSelecteds);
       return;
     }
@@ -143,9 +163,10 @@ export default function Contracts() {
     document.body.style.overflow = 'hidden';
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - CONTRACTS.length) : 0;
+  
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - contracts.length) : 0;
 
-  const filteredInvoices = applySortFilter(CONTRACTS, getComparator(order, orderBy), filterName);
+  const filteredInvoices = applySortFilter(contracts, getComparator(order, orderBy), filterName);
   const isUserNotFound = filteredInvoices.length === 0;
 
   return (
@@ -201,7 +222,7 @@ export default function Contracts() {
                         <TableCell align="left">{end_date.toDateString()}</TableCell>
                         <TableCell align="left">{payment_rate}</TableCell>
                         <TableCell align="left">{currency}</TableCell>
-                        {contract_type === 'Monthly' ? (
+                        {status === 'ACCEPTED' ? (
                           <TableCell align="left">
                             {' '}
                             <Button size="large" onClick={() => handlePay()} variant="contained">
@@ -237,7 +258,7 @@ export default function Contracts() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={CONTRACTS.length}
+            count={contracts.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

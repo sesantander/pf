@@ -5,21 +5,34 @@ import { Container, Stack, Typography, Box, Button } from '@mui/material';
 // components
 import Web3 from 'web3/dist/web3.min';
 import Page from '../components/Page';
-import { ContractCount, ContractList } from '../hooks/useContractMethod';
+import { ContractCount, ContractList, createContract } from '../hooks/useContractMethod';
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
+import { ContractStatus } from '../utils/constants/contract.constants';
 // mock
 import ContractCard from './ContractCard';
 
-import ProposalContract from '../utils/contracts/ProposalSC.json';
-import ContractSC from '../utils/contracts/ContractSC.json';
-
 // ----------------------------------------------------------------------
 const methodTest = async (account) => {
+  await createContract(account, {
+    contract_type: 'Fixed Rate',
+    contract_name: 'Backend Project Develop',
+    job_title: 'Backend Developer',
+    status: ContractStatus.WAITING_EMPLOYER_RESPONSE,
+    scope_of_work: 'Integrate email API',
+    start_date: '20/02/2022',
+    end_date: '20/02/2023',
+    currency: 'ETH',
+    payment_rate: '4500',
+    payment_frequency: 'Monthly',
+    payment_due: '20/03/2022',
+    employer_id: 1,
+    contractor_id: 1,
+    proposal_id: 1,
+  });
   const contractCount = await ContractCount();
-  console.log("contractCount", contractCount)
+  console.log('contractCount', contractCount);
   ContractList(contractCount);
 };
-
 
 function CreateContract(props) {
   const contractop = [
@@ -38,20 +51,20 @@ function CreateContract(props) {
   return (
     <Page title="Dashboard: Products">
       <Container>
+        <Button
+          sx={{ mt: 5, px: 5, py: 2 }}
+          variant="contained"
+          onClick={async () => {
+            await methodTest(props.user.address);
+          }}
+        >
+          Create
+        </Button>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Contracts
         </Typography>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap' }}>
           <ContractCard type={contractop[0]}>FIXED</ContractCard>
-          <Button
-            sx={{ mt: 5, px: 5, py: 2 }}
-            variant="contained"
-            onClick={async () => {
-              await methodTest(props.user.address);
-            }}
-          >
-            Withdraw
-          </Button>
           <ContractCard type={contractop[1]}>FIXED</ContractCard>
           <ContractCard type={contractop[2]}>FIXED</ContractCard>
         </div>

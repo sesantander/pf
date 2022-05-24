@@ -12,6 +12,8 @@ import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import { flexbox } from '@mui/system';
+import { ContractStatus } from '../utils/constants/contract.constants'
+import { ContractUpdate } from '../hooks/useContractMethod';
 // import { itemsActions } from "../../store/reducers/itemSlicer";
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -42,8 +44,6 @@ function SimpleDialog(props) {
 }
 
 export const ContractDetail = (props) => {
-  // console.log(' HOLA ', props.row.contract_type);
-
   const [infoList, setInfoList] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
@@ -52,7 +52,9 @@ export const ContractDetail = (props) => {
   });
   const acceptContract = () => {
     //logica de accept contract
-    setAcceptFunction(() => () => console.log('se acepto el contracto'));
+    setAcceptFunction(() => async () => {
+      await updateContract(props.user.address);
+    });
     setOpen(true);
   };
   const rejectContract = () => {
@@ -85,9 +87,15 @@ export const ContractDetail = (props) => {
       .join(' ')
       .replace(/_/g, ' ');
   }
+  
+  const updateContract = async (account) => {
+    props.row.status = ContractStatus.ACCEPTED;
+    await ContractUpdate(account, props.row);
+  };
+
   useEffect(() => {
     const infoListMap = Object.keys(props.row).map(function (key, index) {
-      if (key !== 'avatarUrl') {
+      if (key !== 'employer_id' && key !== 'contractor_id' && key !== 'proposal_id' && key !== '0'&& key !== '1'&& key !== '2'&& key !== '3'&& key !== '4'&& key !== '5'&& key !== '6'&& key !== '7') {
         return <InfoCard key={index} title={key} value={props.row[key]} />;
       }
     });

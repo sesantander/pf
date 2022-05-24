@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import { CreateProposal } from '../hooks/useProposalMethod';
+import { UpdateContractStatus } from '../hooks/useContractMethod';
+import { ContractStatus } from '../utils/constants/contract.constants'
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Input } from './Input';
@@ -61,7 +63,6 @@ export const ContractDetailForm = (props) => {
       payment_rate: paymentRateInput,
       payment_frequency: paymentFreqInput,
       scope_of_work: scopeInput,
-      //status: ContractStatus.WAITING_CONTRACTOR_RESPONSE,
       employer_id: 1,
       contractor_id: 2,
     };
@@ -77,9 +78,9 @@ export const ContractDetailForm = (props) => {
   };
 
   const createProposal = async (newProposal, account) => {
-    console.log('LOG : createProposal -> account', account);
     const proposalCreated = await CreateProposal(account, newProposal);
-    console.log('LOG : createProposal -> proposalCreated', proposalCreated);
+    const updateContractRes = await UpdateContractStatus(account, props.row.contract_id, ContractStatus.WAITING_CONTRACTOR_RESPONSE)
+    console.log("LOG : createProposal -> updateContractRes", updateContractRes)
   };
   // console.log(' HOLA ', props.row.contract_type);
   return (
@@ -116,7 +117,7 @@ export const ContractDetailForm = (props) => {
         inputValid={setStartDateValid}
         value={startDateInput}
         setValue={setStartDateInput}
-        defaultValue={startDateInput.toISOString().split('T')[0]}
+        defaultValue={startDateInput}
       />
 
       <Input
@@ -126,7 +127,7 @@ export const ContractDetailForm = (props) => {
         validate={validateCategory}
         inputValid={setEndDateValid}
         value={endDateInput}
-        defaultValue={endDateInput.toISOString().split('T')[0]}
+        defaultValue={endDateInput}
         setValue={setEndDateInput}
       />
 

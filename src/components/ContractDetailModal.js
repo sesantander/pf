@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 
 import { ContractDetailForm } from './ContractDetailForm';
 import { ContractDetail } from './ContractDetail';
-
 import classes from './addProductModal.module.css';
 
 const AddProductBackdrop = (props) => {
