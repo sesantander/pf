@@ -75,7 +75,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Invoices() {
+export default function Contracts() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -153,6 +153,9 @@ export default function Invoices() {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
+  const handlePay = () => {
+    //boton de pagar
+  };
   const contractDetailToggler = (event, row) => {
     setRowSelected(row);
     console.log('LOG : contractDetailToggler -> rowSelected', rowSelected);
@@ -172,11 +175,8 @@ export default function Invoices() {
         {toggleModal && <ContractDetailModal row={rowSelected} addProductToggler={contractDetailToggler} />}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Invoices
+            Contracts
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#">
-            Download all as CSV
-          </Button>
         </Stack>
 
         <Card>
@@ -194,41 +194,47 @@ export default function Invoices() {
                 />
 
                 <TableBody>
-                  {filteredInvoices &&
-                    filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                      const { id, contract_type, status, payment_rate, start_date, end_date } = row;
-                      const isItemSelected = selected.indexOf(contract_type) !== -1;
+                  {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const { id, contract_type, currency, payment_rate, start_date, end_date, status } = row;
+                    const isItemSelected = selected.indexOf(contract_type) !== -1;
 
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                          onClick={(event) => contractDetailToggler(event, row)}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              onChange={(event) => handleClick(event, contract_type)}
-                            />
+                    return (
+                      <TableRow
+                        hover
+                        key={id}
+                        tabIndex={-1}
+                        role="checkbox"
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
+                        onClick={(event) => contractDetailToggler(event, row)}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, contract_type)} />
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="none">
+                          <Stack direction="row" alignItems="center" spacing={2}>
+                            <Typography variant="subtitle2" noWrap>
+                              {contract_type}
+                            </Typography>
+                          </Stack>
+                        </TableCell>
+                        <TableCell align="left">{start_date.toDateString()}</TableCell>
+                        <TableCell align="left">{end_date.toDateString()}</TableCell>
+                        <TableCell align="left">{payment_rate}</TableCell>
+                        <TableCell align="left">{currency}</TableCell>
+                        {status === 'ACCEPTED' ? (
+                          <TableCell align="left">
+                            {' '}
+                            <Button size="large" onClick={() => handlePay()} variant="contained">
+                              Pay
+                            </Button>
                           </TableCell>
-                          <TableCell component="th" scope="row" padding="none">
-                            <Stack direction="row" alignItems="center" spacing={2}>
-                              <Typography variant="subtitle2" noWrap>
-                                {contract_type}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell align="left">{start_date}</TableCell>
-                          <TableCell align="left">{end_date}</TableCell>
-                          <TableCell align="left">{payment_rate}</TableCell>
-                          <TableCell align="left">{status}</TableCell>
-                        </TableRow>
-                      );
-                    })}
+                        ) : (
+                          ''
+                        )}
+                      </TableRow>
+                    );
+                  })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
