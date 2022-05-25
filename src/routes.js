@@ -14,6 +14,8 @@ import ComplianceDocuments from './pages/ComplianceDocuments';
 import Contracts from './pages/Contracts';
 import Transactions from './pages/Transactions';
 import CreateContract from './pages/CreateContract';
+import CreateContractHome from './pages/CreateContractHome';
+import CreateContractForm from './pages/CreateContractForm';
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +36,11 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'home', element: <Home /> },
-        { path: 'create-contract', element: <CreateContract /> },
+        { path: 'create-contract', element: <CreateContract /> ,children: [
+          { path: '', element: <CreateContractHome /> },
+          { path: 'fixed-rate', element: <CreateContractForm type="fiexed-rate"/> },
+          { path: 'monthly', element: <CreateContractForm type="monthly" /> },
+        ],},
         { path: 'compliance-documents', element: <ComplianceDocuments /> },
         { path: 'contracts', element: <Contracts /> },
         { path: 'transactions', element: <Transactions /> },

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import { Outlet, Link as RouterLink } from 'react-router-dom';
+
 // material
-import { Container, Stack, Typography, Box, Button } from '@mui/material';
+import { Container, Stack, Typography, Box, Button, Link } from '@mui/material';
 // components
 import Web3 from 'web3/dist/web3.min';
 import Page from '../components/Page';
@@ -60,14 +62,7 @@ function CreateContract(props) {
         >
           Create
         </Button>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Contracts
-        </Typography>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-          <ContractCard type={contractop[0]}>FIXED</ContractCard>
-          <ContractCard type={contractop[1]}>FIXED</ContractCard>
-          <ContractCard type={contractop[2]}>FIXED</ContractCard>
-        </div>
+          <Outlet></Outlet>
       </Container>
     </Page>
   );

@@ -12,7 +12,7 @@ import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import { flexbox } from '@mui/system';
-import { ContractStatus } from '../utils/constants/contract.constants'
+import { ContractStatus } from '../utils/constants/contract.constants';
 import { ContractUpdate } from '../hooks/useContractMethod';
 // import { itemsActions } from "../../store/reducers/itemSlicer";
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -87,7 +87,7 @@ export const ContractDetail = (props) => {
       .join(' ')
       .replace(/_/g, ' ');
   }
-  
+
   const updateContract = async (account) => {
     props.row.status = ContractStatus.ACCEPTED;
     await ContractUpdate(account, props.row);
@@ -95,7 +95,19 @@ export const ContractDetail = (props) => {
 
   useEffect(() => {
     const infoListMap = Object.keys(props.row).map(function (key, index) {
-      if (key !== 'employer_id' && key !== 'contractor_id' && key !== 'proposal_id' && key !== '0'&& key !== '1'&& key !== '2'&& key !== '3'&& key !== '4'&& key !== '5'&& key !== '6'&& key !== '7') {
+      if (
+        key !== 'employer_id' &&
+        key !== 'contractor_id' &&
+        key !== 'proposal_id' &&
+        key !== '0' &&
+        key !== '1' &&
+        key !== '2' &&
+        key !== '3' &&
+        key !== '4' &&
+        key !== '5' &&
+        key !== '6' &&
+        key !== '7'
+      ) {
         return <InfoCard key={index} title={key} value={props.row[key]} />;
       }
     });
@@ -104,17 +116,22 @@ export const ContractDetail = (props) => {
   return (
     <>
       {infoList}
-      <div className={classes.buttons} style={{ marginTop: '10px' }}>
-        <Button size="large" onClick={() => acceptContract()} variant="contained" color="success">
-          Accept Contract
-        </Button>
-        <Button size="large" onClick={() => rejectContract()} variant="contained" color="error">
-          Reject Contract
-        </Button>
-        <Button size="large" onClick={() => handleClickOpen()} variant="contained">
-          New Proposal
-        </Button>
-      </div>
+      {props.status.status === 'WAITING_CONTRACTOR_RESPONSE' || 'WAITING_EMPLOYER_RESPONSE' ? (
+        <div className={classes.buttons} style={{ marginTop: '10px' }}>
+          <Button size="large" onClick={() => acceptContract()} variant="contained" color="success">
+            Accept Contract
+          </Button>
+          <Button size="large" onClick={() => rejectContract()} variant="contained" color="error">
+            Reject Contract
+          </Button>
+          <Button size="large" onClick={() => handleClickOpen()} variant="contained">
+            New Proposal
+          </Button>
+        </div>
+      ) : (
+        ''
+      )}
+
       <SimpleDialog acceptFunction={acceptFunction} selectedValue={selectedValue} open={open} onClose={handleClose} />
     </>
   );
