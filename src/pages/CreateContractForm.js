@@ -245,7 +245,7 @@ function CreateContractForm(props) {
       />
       <div className={classes.buttons}>
         <Button size="large" variant="contained" type="sumbit" disabled={!isFormValid} name="submit">
-          Send New Proposal
+        Create contract
         </Button>
       </div>
     </form>

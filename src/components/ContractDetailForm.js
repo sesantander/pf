@@ -170,7 +170,7 @@ export const ContractDetailForm = (props) => {
       />
       <div className={classes.buttons}>
         <Button type="sumbit" disabled={!isFormValid} name="submit">
-          Create contract
+          Send New Proposal
         </Button>
         <Button onClick={props.handleClose}>Cancel</Button>
       </div>
