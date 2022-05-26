@@ -25,7 +25,6 @@ import {
 
 function Home(props) {
   const theme = useTheme();
-  console.log("props", props)
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
