@@ -117,7 +117,7 @@ export const ContractDetail = (props) => {
   return (
     <>
       {infoList}
-      {props.row.status === 'WAITING_CONTRACTOR_RESPONSE' || props.row.status === 'WAITING_EMPLOYER_RESPONSE' ? (
+      {props.row.status === 'WAITING_CONTRACTOR_RESPONSE' || props.row.status === 'WAITING_EMPLOYER_RESPONSE' || props.row.status === 'PENDING' ? (
         <div className={classes.buttons} style={{ marginTop: '10px' }}>
           <Button size="large" onClick={() => acceptContract()} variant="contained" color="success">
             Accept Contract

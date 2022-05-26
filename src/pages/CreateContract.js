@@ -53,15 +53,6 @@ function CreateContract(props) {
   return (
     <Page title="Dashboard: Products">
       <Container>
-        <Button
-          sx={{ mt: 5, px: 5, py: 2 }}
-          variant="contained"
-          onClick={async () => {
-            await methodTest(props.user.address, props.user.web3);
-          }}
-        >
-          Create
-        </Button>
         <div style={{ display: 'flex', width: '100%', justifyContent: 'center',alignItems:'center' }}>
           <Outlet></Outlet>
         </div>

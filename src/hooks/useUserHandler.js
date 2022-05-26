@@ -52,3 +52,23 @@ export const LoginUser = async (data) => {
   const parseResponse = JSON.parse(response);
   return response;
 };
+
+export const GetUser = async (username) => {
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+  };
+
+  const User = async () =>
+    new Promise((res, rej) =>
+      fetch(`${API.URL}user/${username}`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          return res(result);
+        })
+        .catch((error) => console.log('error', error))
+    );
+  const response = await User();
+  const parseResponse = JSON.parse(response);
+  return parseResponse;
+};

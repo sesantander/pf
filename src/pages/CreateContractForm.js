@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import { CreateProposal } from '../hooks/useProposalMethod';
 import { UpdateContractStatus, createContract } from '../hooks/useContractMethod';
+import { GetUser } from '../hooks/useUserHandler';
 import { ContractStatus } from '../utils/constants/contract.constants';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -45,6 +46,9 @@ function CreateContractForm(props) {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [contractData, setContractData] = useState(null);
+
+  const [errorMessage, setErroMessage] = useState(null)
+
   const contractTypes = [
     {
       value: 'Fixed Rate',
@@ -64,8 +68,15 @@ function CreateContractForm(props) {
     if(contractData){
       async function contractCreate() {
         try {
-          await createContract(props.user.address, props.user.web3, contractData)
-          navigate('/dashboard/home', { replace: true });
+          const response = await GetUser(contractData.contractor_id)
+          console.log("LOG : contractCreate -> response", response)
+          if(response.user){
+            contractData.contractor_id = response.user.user_id
+            await createContract(props.user.address, props.user.web3, contractData)
+            navigate('/dashboard/home', { replace: true });
+          }else{
+            setErroMessage('Party user does not exist.')
+          }
         } catch (e) {
           console.error(e);
         }
@@ -99,7 +110,7 @@ function CreateContractForm(props) {
       payment_frequency: paymentFreqInput,
       payment_due: paymentDue,
       employer_id: props.user.id,
-      contractor_id: 2, //Viene del get username
+      contractor_id: partyUsernameInput, //Viene del get username
       proposal_id: 0,
     };
     setContractData(newContract);
@@ -109,30 +120,13 @@ function CreateContractForm(props) {
     setContractTypeInput(event.target.value);
   };
 
-  const createProposal = async (newProposal, account) => {
-    const proposalCreated = await CreateProposal(account, newProposal);
-    const updateContractRes = await UpdateContractStatus(
-      account,
-      props.row.contract_id,
-      ContractStatus.WAITING_CONTRACTOR_RESPONSE
-    );
-    console.log('LOG : createProposal -> updateContractRes', updateContractRes);
-  };
-  // console.log(' HOLA ', props.row.contract_type);
+
   return (
     <form
       onSubmit={handleSubmit}
       style={{ width: '60%' }}
     >
-      {/* <Input
-        id="contract_type"
-        title="Contract Type"
-        validate={validateCategory}
-        inputValid={setContractTypeValid}
-        value={contractTypeInput}
-        setValue={setContractTypeInput}
-        defaultValue={contractTypeInput}
-      /> */}
+
       <TextField
         id="outlined-select-contract_type"
         select
@@ -248,6 +242,8 @@ function CreateContractForm(props) {
           Send New Proposal
         </Button>
       </div>
+      {errorMessage && 
+        <p>{errorMessage}</p>}
     </form>
   );
 }
