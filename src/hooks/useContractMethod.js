@@ -1,7 +1,8 @@
 import Web3 from 'web3/dist/web3.min';
 import ContractSC from '../utils/contracts/ContractSC.json';
+import TransactionSC from '../utils/contracts/TransactionSC.json';
 
-export const createContract = async (account, contractInfo) => {
+export const createContract = async (account, web3Provider, contractInfo) => {
   const {
     contract_type,
     contract_name,
@@ -19,8 +20,7 @@ export const createContract = async (account, contractInfo) => {
     proposal_id,
   } = contractInfo;
 
-  const provider = window.ethereum;
-  const web3 = new Web3(provider);
+  const web3 = web3Provider;
 
   const networkId = await web3.eth.net.getId();
   const smartContractAddress = ContractSC.networks[networkId].address;
@@ -57,9 +57,8 @@ export const createContract = async (account, contractInfo) => {
   return response;
 };
 
-export const ContractCount = async () => {
-  const provider = window.ethereum;
-  const web3 = new Web3(provider);
+export const ContractCount = async (web3Provider) => {
+  const web3 = web3Provider;
 
   const networkId = await web3.eth.net.getId();
   const smartContractAddress = ContractSC.networks[networkId].address;
@@ -80,9 +79,8 @@ export const ContractCount = async () => {
   return response;
 };
 
-export const ContractList = async (contractsCount) => {
-  const provider = window.ethereum;
-  const web3 = new Web3(provider);
+export const ContractList = async (contractsCount, web3Provider) => {
+  const web3 = web3Provider;
 
   const networkId = await web3.eth.net.getId();
   const smartContractAddress = ContractSC.networks[networkId].address;
@@ -117,13 +115,12 @@ export const ContractList = async (contractsCount) => {
   return response;
 };
 
-export const ContractUpdate = async (account, contractInfo) => {
+export const ContractUpdate = async (account, web3Provider, contractInfo) => {
   console.log('LOG : ContractUpdate -> contractInfo', contractInfo);
   const { contract_id, status, contract_type, scope_of_work, start_date, end_date, currency, payment_rate } =
     contractInfo;
 
-  const provider = window.ethereum;
-  const web3 = new Web3(provider);
+  const web3 = web3Provider;
 
   const networkId = await web3.eth.net.getId();
   const smartContractAddress = ContractSC.networks[networkId].address;
@@ -147,9 +144,8 @@ export const ContractUpdate = async (account, contractInfo) => {
   return response;
 };
 
-export const UpdateContractStatus = async (account, contract_id, status) => {
-  const provider = window.ethereum;
-  const web3 = new Web3(provider);
+export const UpdateContractStatus = async (account, web3Provider, contract_id, status) => {
+  const web3 = web3Provider;
 
   const networkId = await web3.eth.net.getId();
   const smartContractAddress = ContractSC.networks[networkId].address;
@@ -167,4 +163,35 @@ export const UpdateContractStatus = async (account, contract_id, status) => {
     });
 
   return response;
+};
+
+export const PayContract = async (account, web3Provider, contractInfo) => {
+  const web3 = web3Provider;
+
+  const networkId = await web3.eth.net.getId();
+
+  const contractSC_ContractAddress = ContractSC.networks[networkId].address;
+  const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+
+  const transactionSC_ContractAddress = TransactionSC.networks[networkId].address;
+  const transactionSC = new web3.eth.Contract(TransactionSC.abi, transactionSC_ContractAddress);
+
+
+  await transactionSC.methods
+    .getAddress()
+    .call()
+    .then(async (res) => {
+      await contractSC.methods
+        .pay(contractInfo.contract_id, res, new Date().toLocaleDateString('en-GB'), new Date().toLocaleDateString('en-GB'))
+        .send({ from: account })
+        .then((res) => {
+          console.log('LOG : PayContract -> res', res);
+        })
+        .catch((e) => {
+          console.log('error', e);
+        });
+    })
+    .catch((e) => {
+      console.log('error', e);
+    });
 };

@@ -35,7 +35,7 @@ export default function ComplianceDocumentsCard({ title, total, icon, color = 'p
     <Card
       sx={{
         py: 5,
-        boxShadow: 0,
+        boxShadow: 1,
         textAlign: 'center',
         marginTop: '15px',
         color: (theme) => theme.palette[color].darker,
@@ -50,6 +50,7 @@ export default function ComplianceDocumentsCard({ title, total, icon, color = 'p
           boxShadow: 0,
           textAlign: 'center',
           borderStyle: 'dotted',
+          borderWidth: '2px',
           marginLeft: '10px',
           marginRight: '10px',
           paddingTop: '20px',

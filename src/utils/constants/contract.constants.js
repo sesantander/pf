@@ -5,5 +5,6 @@ export const ContractStatus  = Object.freeze({
     REJECTED: 'REJECTED',
     COMPLETED: 'COMPLETED',
     ACTIVE: 'ACTIVE',
+    PENDING: 'PENDING',
     TERMINATED_BY_BOTH_PARTIES: 'TERMINATED_BY_BOTH_PARTIES'
 });

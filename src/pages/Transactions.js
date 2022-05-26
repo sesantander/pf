@@ -1,6 +1,7 @@
 import { filter } from 'lodash';
+import { connect } from 'react-redux';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -25,16 +26,17 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
+import { TransactionCount, TransactionList } from '../hooks/useTransactionMethod';
 // mock
-import USERLIST from '../_mock/user';
+//import transactions from '../_mock/user';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Value', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
+  { id: 'id', label: 'Id', alignRight: false },
+  { id: 'amount', label: 'Amount', alignRight: false },
+  { id: 'method', label: 'Method', alignRight: false },
+  { id: 'withdrawal_date', label: 'Withdrawal date', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
   { id: '' },
 ];
@@ -70,7 +72,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Transactions() {
+function Transactions(props) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -83,6 +85,19 @@ export default function Transactions() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [transactions, setTransactions] = useState([]);
+  useEffect(() => {
+    async function fetchTransactions() {
+      try {
+        const response = await getTransactions();
+        setTransactions(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchTransactions();
+  }, []);
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -91,7 +106,7 @@ export default function Transactions() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = transactions.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -126,9 +141,15 @@ export default function Transactions() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  const getTransactions = async () => {
+    console.log('props', props);
+    const count = await TransactionCount(props.user.web3);
+    return await TransactionList(count, props.user.web3);
+  };
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - transactions.length) : 0;
+
+  const filteredUsers = applySortFilter(transactions, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
 
@@ -139,14 +160,12 @@ export default function Transactions() {
           <Typography variant="h4" gutterBottom>
             Transactions
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
+          <Button size="large" onClick={async () => getTransactions()} variant="contained">
+            Transactions
           </Button>
         </Stack>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -154,47 +173,31 @@ export default function Transactions() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={transactions.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
+                  showSelectAllCheckbox={false}
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                    const { transaction_id, amount, method, withdrawal_date, status } = row;
+                    const isItemSelected = selected.indexOf(transaction_id) !== -1;
 
                     return (
-                      <TableRow
-                        hover
-                        key={id}
-                        tabIndex={-1}
-                        role="checkbox"
-                        selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
+                      <TableRow hover key={transaction_id} tabIndex={0}>
+                        <TableCell component="th" scope="row">
+                          <Typography variant="subtitle2" noWrap>
+                            {transaction_id}
+                          </Typography>
                         </TableCell>
-                        <TableCell component="th" scope="row" padding="none">
-                          <Stack direction="row" alignItems="center" spacing={2}>
-                            <Avatar alt={name} src={avatarUrl} />
-                            <Typography variant="subtitle2" noWrap>
-                              {name}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="left">{amount}</TableCell>
+                        <TableCell align="left">{method}</TableCell>
+                        <TableCell align="left">{withdrawal_date}</TableCell>
                         <TableCell align="left">
                           <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
                             {sentenceCase(status)}
                           </Label>
-                        </TableCell>
-
-                        <TableCell align="right">
-                          <UserMoreMenu />
                         </TableCell>
                       </TableRow>
                     );
@@ -222,7 +225,7 @@ export default function Transactions() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={transactions.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -233,3 +236,9 @@ export default function Transactions() {
     </Page>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(Transactions);

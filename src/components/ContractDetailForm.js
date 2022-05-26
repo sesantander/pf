@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import { CreateProposal } from '../hooks/useProposalMethod';
 import { UpdateContractStatus } from '../hooks/useContractMethod';
-import { ContractStatus } from '../utils/constants/contract.constants'
+import { ContractStatus } from '../utils/constants/contract.constants';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Input } from './Input';
@@ -46,10 +46,8 @@ export const ContractDetailForm = (props) => {
   ];
 
   useEffect(() => {
-    return setIsFormValid(
-       startDateValid && endDateValid && paymentRateValid && paymentFreqValid && scopeValid
-    );
-  }, [ startDateValid, endDateValid, paymentRateValid, paymentFreqValid, scopeValid]);
+    return setIsFormValid(startDateValid && endDateValid && paymentRateValid && paymentFreqValid && scopeValid);
+  }, [startDateValid, endDateValid, paymentRateValid, paymentFreqValid, scopeValid]);
 
   const validateCategory = (inputValue) => {
     return inputValue !== '';
@@ -78,9 +76,14 @@ export const ContractDetailForm = (props) => {
   };
 
   const createProposal = async (newProposal, account) => {
-    const proposalCreated = await CreateProposal(account, newProposal);
-    const updateContractRes = await UpdateContractStatus(account, props.row.contract_id, ContractStatus.WAITING_CONTRACTOR_RESPONSE)
-    console.log("LOG : createProposal -> updateContractRes", updateContractRes)
+    const proposalCreated = await CreateProposal(account, props.user.web3, newProposal);
+    const updateContractRes = await UpdateContractStatus(
+      account,
+      props.user.web3,
+      props.row.contract_id,
+      ContractStatus.WAITING_CONTRACTOR_RESPONSE
+    );
+    console.log('LOG : createProposal -> updateContractRes', updateContractRes);
   };
   // console.log(' HOLA ', props.row.contract_type);
   return (

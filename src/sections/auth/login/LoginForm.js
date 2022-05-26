@@ -34,14 +34,17 @@ export default function LoginForm() {
   const [isSubmitting, setisSubmitting] = useState(false);
   const [isWeb3Connect, setisWeb3Connect] = useState(false);
   const [isWalletConnecting, setisWalletConnecting] = useState(false);
+  const [web3Environment, setWeb3Environment] = useState(null);
 
   useEffect(() => {
-    if (userData && userBalance) {
+    if (userData && userBalance && web3Environment) {
       const user = {
         ...userData,
         balance: userBalance,
         address: defaultAccount,
+        web3: web3Environment
       };
+      console.log('LOG : LoginForm -> user', user);
 
       localStorage.setItem('isAuth', true);
       localStorage.setItem('token', user.token);
@@ -50,7 +53,7 @@ export default function LoginForm() {
       dispatch(userActions.setUser(user));
       navigate('/dashboard/home', { replace: true });
     }
-  }, [userBalance]);
+  }, [userBalance, web3Environment]);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -71,8 +74,10 @@ export default function LoginForm() {
       const parseResult = JSON.parse(result);
 
       if (parseResult.token) {
+        console.log('LOG : LoginForm -> parseResult', parseResult);
+        const web3provider = await connectWalletHandler();
         setUserData(parseResult);
-        await connectWalletHandler();
+        setWeb3Environment(web3provider);
       } else {
         navigate('/login', { replace: true });
         setOpen(true);
@@ -100,6 +105,7 @@ export default function LoginForm() {
   const connectWalletHandler = async () => {
     setisWalletConnecting(true);
     const provider = window.ethereum;
+    const web3 = new Web3(provider);
     if (provider && provider.isMetaMask) {
       await provider
         .request({ method: 'eth_requestAccounts' })
@@ -116,6 +122,7 @@ export default function LoginForm() {
       setErrorMessage('Please install MetaMask browser extension to interact');
       setisWalletConnecting(false);
     }
+    return web3;
   };
   const accountChangedHandler = async (newAccount) => {
     setDefaultAccount(newAccount);

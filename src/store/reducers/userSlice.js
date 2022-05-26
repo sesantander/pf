@@ -8,6 +8,7 @@ const initialState = {
   balance: null,
   role: null,
   token: null,
+  web3: null,
 };
 
 export const userSlice = createSlice({
@@ -23,6 +24,7 @@ export const userSlice = createSlice({
       state.address = action.payload.address;
       state.role = action.payload.role;
       state.token = action.payload.token;
+      state.web3 = action.payload.web3;
     },
   },
 });

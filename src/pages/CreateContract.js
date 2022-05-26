@@ -12,8 +12,8 @@ import { ContractStatus } from '../utils/constants/contract.constants';
 import ContractCard from './ContractCard';
 
 // ----------------------------------------------------------------------
-const methodTest = async (account) => {
-  await createContract(account, {
+const methodTest = async (account, web3Provider) => {
+  await createContract(account, web3Provider, {
     contract_type: 'Fixed Rate',
     contract_name: 'Backend Project Develop',
     job_title: 'Backend Developer',
@@ -29,9 +29,9 @@ const methodTest = async (account) => {
     contractor_id: 1,
     proposal_id: 1,
   });
-  const contractCount = await ContractCount();
+  const contractCount = await ContractCount(web3Provider);
   console.log('contractCount', contractCount);
-  ContractList(contractCount);
+  ContractList(contractCount, web3Provider);
 };
 
 function CreateContract(props) {
@@ -55,7 +55,7 @@ function CreateContract(props) {
           sx={{ mt: 5, px: 5, py: 2 }}
           variant="contained"
           onClick={async () => {
-            await methodTest(props.user.address);
+            await methodTest(props.user.address, props.user.web3);
           }}
         >
           Create
@@ -66,7 +66,6 @@ function CreateContract(props) {
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap' }}>
           <ContractCard type={contractop[0]}>FIXED</ContractCard>
           <ContractCard type={contractop[1]}>FIXED</ContractCard>
-          <ContractCard type={contractop[2]}>FIXED</ContractCard>
         </div>
       </Container>
     </Page>

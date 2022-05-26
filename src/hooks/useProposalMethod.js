@@ -1,7 +1,7 @@
 import Web3 from 'web3/dist/web3.min';
 import ProposalSC from '../utils/contracts/ProposalSC.json';
 
-export const CreateProposal = async (account, proposalInfo) => {
+export const CreateProposal = async (account, web3provider, proposalInfo) => {
   console.log('LOG : CreateProposal -> account', account);
   const {
     payment_rate,
@@ -13,9 +13,8 @@ export const CreateProposal = async (account, proposalInfo) => {
     end_date,
     contract_type,
   } = proposalInfo;
-
-  const provider = window.ethereum;
-  const web3 = new Web3(provider);
+  
+  const web3 = web3provider
 
   const networkId = await web3.eth.net.getId();
   const smartContractAddress = ProposalSC.networks[networkId].address;

@@ -1,4 +1,5 @@
 import { filter } from 'lodash';
+import { connect } from 'react-redux';
 import { sentenceCase } from 'change-case';
 import { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -27,7 +28,9 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 import ContractDetailModal from '../components/ContractDetailModal';
-import { ContractCount, ContractList } from '../hooks/useContractMethod';
+import { ContractCount, ContractList, PayContract } from '../hooks/useContractMethod';
+import { TransactionCount, TransactionList } from '../hooks/useTransactionMethod';
+import { ContractStatus } from '../utils/constants/contract.constants';
 
 // mock
 import INVOICELIST from '../_mock/invoice';
@@ -41,7 +44,7 @@ const TABLE_HEAD = [
   { id: 'end_date', label: 'End Date', alignRight: false },
   { id: 'payment_rate', label: 'Payment Rate', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
-  { id: '' },
+  { id: 'pay', label: 'Pay', alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -75,7 +78,15 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Contracts() {
+const RED_STATUS = [ContractStatus.REJECTED, ContractStatus.PENDING];
+const GREEN_STATUS = [ContractStatus.ACCEPTED, ContractStatus.ACTIVE, ContractStatus.COMPLETED];
+
+const BLUE_STATUS = [
+  ContractStatus.WAITING_CONTRACTOR_RESPONSE,
+  ContractStatus.WAITING_EMPLOYER_RESPONSE,
+  ContractStatus.TERMINATED_BY_BOTH_PARTIES,
+];
+function Contracts(props) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -107,8 +118,8 @@ export default function Contracts() {
   }, []);
 
   const getContracts = async (account) => {
-    const contractCount = await ContractCount();
-    return await ContractList(contractCount);
+    const contractCount = await ContractCount(props.user.web3);
+    return await ContractList(contractCount, props.user.web3);
   };
 
   const handleRequestSort = (event, property) => {
@@ -153,8 +164,13 @@ export default function Contracts() {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
-  const handlePay = () => {
-    //boton de pagar
+  const handlePay = async (row) => {
+    await PayContract(props.user.address, props.user.web3, row);
+  };
+
+  const transactionList = async () => {
+    const count = await TransactionCount(props.user.web3);
+    await TransactionList(count, props.user.web3);
   };
   const contractDetailToggler = (event, row) => {
     setRowSelected(row);
@@ -163,7 +179,16 @@ export default function Contracts() {
     document.body.style.overflow = 'hidden';
   };
 
-  
+  const labelColor = (status) => {
+    if (RED_STATUS.includes(status) && 'error') {
+      return 'error';
+    } else if (GREEN_STATUS.includes(status)) {
+      return 'success';
+    } else if (BLUE_STATUS.includes(status)) {
+      return 'info';
+    }
+    return 'info';
+  };
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - contracts.length) : 0;
 
   const filteredInvoices = applySortFilter(contracts, getComparator(order, orderBy), filterName);
@@ -177,6 +202,9 @@ export default function Contracts() {
           <Typography variant="h4" gutterBottom>
             Contracts
           </Typography>
+          <Button size="large" onClick={async () => transactionList()} variant="contained">
+            Transactions
+          </Button>
         </Stack>
 
         <Card>
@@ -195,13 +223,13 @@ export default function Contracts() {
 
                 <TableBody>
                   {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, contract_type, currency, payment_rate, start_date, end_date, status } = row;
+                    const { contract_id, contract_type, currency, payment_rate, start_date, end_date, status } = row;
                     const isItemSelected = selected.indexOf(contract_type) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={contract_id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
@@ -218,20 +246,24 @@ export default function Contracts() {
                             </Typography>
                           </Stack>
                         </TableCell>
-                        <TableCell align="left">{start_date.toDateString()}</TableCell>
-                        <TableCell align="left">{end_date.toDateString()}</TableCell>
+                        <TableCell align="left">{start_date}</TableCell>
+                        <TableCell align="left">{end_date}</TableCell>
                         <TableCell align="left">{payment_rate}</TableCell>
-                        <TableCell align="left">{currency}</TableCell>
-                        {status === 'ACCEPTED' ? (
-                          <TableCell align="left">
-                            {' '}
-                            <Button size="large" onClick={() => handlePay()} variant="contained">
-                              Pay
-                            </Button>
-                          </TableCell>
-                        ) : (
-                          ''
-                        )}
+                        <TableCell align="left">
+                          <Label variant="ghost" color={labelColor(status)}>
+                            {sentenceCase(status)}
+                          </Label>
+                        </TableCell>
+                        <TableCell align="left">
+                          <Button
+                            size="large"
+                            onClick={async () => handlePay(row)}
+                            variant="contained"
+                            disabled={status !== 'ACTIVE'}
+                          >
+                            Pay
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -269,3 +301,10 @@ export default function Contracts() {
     </Page>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(Contracts);

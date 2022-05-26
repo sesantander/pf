@@ -18,9 +18,8 @@ export default function ComplianceDocuments() {
         <Typography variant="h4" sx={{ mb: 5 }}>
           Compliance Documents
         </Typography>
-        
 
-        <Grid container spacing={4}>
+        <Grid container>
           <Grid item xs={12} sm={6} md={6}>
             <ComplianceDocumentsCard
               title="Passport or National ID"
@@ -44,14 +43,6 @@ export default function ComplianceDocuments() {
             />
             <ComplianceDocumentsCard
               title="Any additional relevant documents(Optional)"
-              total={71400}
-              icon={'ic:baseline-account-balance'}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={6}>
-            <ComplianceDocumentsSelfEmploy
-              title="Register as self-employed (optional)"
               total={71400}
               icon={'ic:baseline-account-balance'}
             />
