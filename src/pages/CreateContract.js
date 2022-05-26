@@ -62,7 +62,9 @@ function CreateContract(props) {
         >
           Create
         </Button>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'center',alignItems:'center' }}>
           <Outlet></Outlet>
+        </div>
       </Container>
     </Page>
   );

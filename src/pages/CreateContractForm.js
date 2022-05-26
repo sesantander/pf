@@ -16,19 +16,28 @@ export default function CreateContractForm(props) {
   const [contractTypeInput, setContractTypeInput] = useState('');
 
   const [startDateValid, setStartDateValid] = useState(false);
-  const [startDateInput, setStartDateInput] = useState('props.row.start_date');
+  const [startDateInput, setStartDateInput] = useState('');
 
   const [endDateValid, setEndDateValid] = useState(false);
-  const [endDateInput, setEndDateInput] = useState('props.row.end_date');
+  const [endDateInput, setEndDateInput] = useState('');
 
   const [paymentRateValid, setPaymentRateValid] = useState(false);
-  const [paymentRateInput, setPaymentRateInput] = useState('props.row.payment_rate');
+  const [paymentRateInput, setPaymentRateInput] = useState('');
 
   const [paymentFreqValid, setPaymentFreqValid] = useState(false);
-  const [paymentFreqInput, setPaymentFreqInput] = useState('props.row.payment_frequency');
+  const [paymentFreqInput, setPaymentFreqInput] = useState('');
 
   const [scopeValid, setScopeValid] = useState(false);
-  const [scopeInput, setScopeInput] = useState('props.row.scope_of_work');
+  const [scopeInput, setScopeInput] = useState('');
+
+  const [contractNameValid, setContractNameValid] = useState(false);
+  const [contractNameInput, setContractNameInput] = useState('');
+
+  const [jobTitleValid, setJobTitleValid] = useState(false);
+  const [jobTitleInput, setJobTitleInput] = useState('');
+
+  const [partyUsernameValid, setPartyUsernameValid] = useState(false);
+  const [partyUsernameInput, setpartyUsernameInput] = useState('');
 
   const contractTypes = [
     {
@@ -53,6 +62,7 @@ export default function CreateContractForm(props) {
     return inputValue !== '';
   };
   const handleSubmit = (event) => {
+    console.log('submitt')
     event.preventDefault();
     const newProposal = {
       contract_type: contractTypeInput,
@@ -86,7 +96,7 @@ export default function CreateContractForm(props) {
   };
   // console.log(' HOLA ', props.row.contract_type);
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ width: '60%' }} onSubmit={handleSubmit}>
       {/* <Input
         id="contract_type"
         title="Contract Type"
@@ -100,7 +110,8 @@ export default function CreateContractForm(props) {
         id="outlined-select-contract_type"
         select
         label="Select"
-        value={contractTypeInput}
+        value={props.type}
+        disabled
         onChange={handleChange}
         helperText="Please select your contract type"
         defaultValue=""
@@ -112,6 +123,40 @@ export default function CreateContractForm(props) {
         ))}
       </TextField>
       <Input
+        style={{ width: '100%' }}
+        id="contract_name"
+        title="Contract Name"
+        type="text"
+        validate={validateCategory}
+        inputValid={setContractNameValid}
+        value={contractNameInput}
+        defaultValue={contractNameInput}
+        setValue={setContractNameInput}
+      />
+      <Input
+        style={{ width: '100%' }}
+        id="job_title"
+        title="Job Title"
+        type="text"
+        validate={validateCategory}
+        inputValid={setJobTitleValid}
+        value={jobTitleInput}
+        defaultValue={jobTitleInput}
+        setValue={setJobTitleInput}
+      />
+      <Input
+        style={{ width: '100%' }}
+        id="party_username"
+        title="Party Username"
+        type="text"
+        validate={validateCategory}
+        inputValid={setPartyUsernameValid}
+        value={partyUsernameInput}
+        defaultValue={partyUsernameInput}
+        setValue={setpartyUsernameInput}
+      />
+      <Input
+        style={{ width: '100%' }}
         id="start_date"
         title="Start Date"
         type="date"
@@ -123,6 +168,7 @@ export default function CreateContractForm(props) {
       />
 
       <Input
+        style={{ width: '100%' }}
         id="end_date"
         title="End Date"
         type="date"
@@ -134,6 +180,7 @@ export default function CreateContractForm(props) {
       />
 
       <Input
+        style={{ width: '100%' }}
         id="payment_rate"
         title="Payment Rate"
         type="number"
@@ -147,6 +194,7 @@ export default function CreateContractForm(props) {
         setValue={setPaymentRateInput}
       />
       <Input
+        style={{ width: '100%' }}
         id="payment_frequency"
         title="Payment Frequency"
         validate={validateCategory}
@@ -156,6 +204,7 @@ export default function CreateContractForm(props) {
         setValue={setPaymentFreqInput}
       />
       <Input
+        style={{ width: '100%' }}
         id="scope_of_work"
         title="Scope of work"
         type="text"
@@ -168,10 +217,9 @@ export default function CreateContractForm(props) {
         setValue={setScopeInput}
       />
       <div className={classes.buttons}>
-        <Button type="sumbit" disabled={!isFormValid} name="submit">
+        <Button size="large" variant="contained" type="sumbit" disabled={!isFormValid} name="submit">
           Send New Proposal
         </Button>
-        <Button onClick={props.handleClose}>Cancel</Button>
       </div>
     </form>
   );

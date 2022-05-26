@@ -38,8 +38,8 @@ export default function Router() {
         { path: 'home', element: <Home /> },
         { path: 'create-contract', element: <CreateContract /> ,children: [
           { path: '', element: <CreateContractHome /> },
-          { path: 'fixed-rate', element: <CreateContractForm type="fiexed-rate"/> },
-          { path: 'monthly', element: <CreateContractForm type="monthly" /> },
+          { path: 'fixed-rate', element: <CreateContractForm type="Fixed Rate"/> },
+          { path: 'monthly', element: <CreateContractForm type="Monthly" /> },
         ],},
         { path: 'compliance-documents', element: <ComplianceDocuments /> },
         { path: 'contracts', element: <Contracts /> },
