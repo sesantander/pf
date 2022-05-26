@@ -31,6 +31,11 @@ const navConfig = [
     path: '/dashboard/transactions',
     icon: getIcon('ant-design:transaction-outlined'),
   },
+  {
+    title: 'Invoices',
+    path: '/dashboard/invoices',
+    icon: getIcon('fa-solid:file-invoice-dollar'),
+  },
 ];
 
 export default navConfig;

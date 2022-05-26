@@ -55,6 +55,7 @@ export const ContractDetail = (props) => {
       await updateContract(props.user.address, ContractStatus.ACTIVE);
     });
     setOpen(true);
+    handleClose()
   };
   const rejectContract = () => {
     //logica de reject contract
@@ -62,6 +63,8 @@ export const ContractDetail = (props) => {
       await updateContract(props.user.address, ContractStatus.REJECTED);
     });
     setOpen(true);
+    handleClose()
+
   };
   const handleClickOpen = () => {
     //logica new proposal

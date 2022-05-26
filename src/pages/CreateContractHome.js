@@ -11,19 +11,27 @@ function CreateContractHome(props) {
       image: '/static/mock-images/contracs/Screenshot_2.png',
     },
     {
-      title: 'Milestone',
-      description: 'For contracts with milestones that are paid as they get completed.',
+      title: 'Monthly',
+      description: 'Indefinite term contract.',
       image: '/static/mock-images/contracs/Screenshot_4.png',
     },
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
+        width: ' 100%',
+      }}
+    >
       <ContractCard link="fixed-rate" type={contractop[0]}>
-        FIXED
+        Fixed
       </ContractCard>
       <ContractCard link="monthly" type={contractop[1]}>
-        FIXED
+        Monthly
       </ContractCard>
     </div>
   );

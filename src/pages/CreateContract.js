@@ -62,7 +62,7 @@ function CreateContract(props) {
         >
           Create
         </Button>
-        <div style={{ display: 'flex', width: '100%', justifyContent: 'center',alignItems:'center' }}>
+        <div style={{ display: 'flex', width: '100%',alignItems:'center',justifyContent: 'space-around' }}>
           <Outlet></Outlet>
         </div>
       </Container>

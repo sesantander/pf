@@ -140,7 +140,6 @@ function CreateContractForm(props) {
         value={props.type}
         disabled
         onChange={handleChange}
-        helperText="Please select your contract type"
         defaultValue=""
       >
         {contractTypes.map((option) => (

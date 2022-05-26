@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import ComplianceDocuments from './pages/ComplianceDocuments';
 import Contracts from './pages/Contracts';
 import Transactions from './pages/Transactions';
+import Invoices from './pages/Invoices';
 import CreateContract from './pages/CreateContract';
 import CreateContractHome from './pages/CreateContractHome';
 import CreateContractForm from './pages/CreateContractForm';
@@ -43,6 +44,7 @@ export default function Router() {
         ],},
         { path: 'compliance-documents', element: <ComplianceDocuments /> },
         { path: 'contracts', element: <Contracts /> },
+        { path: 'invoices', element: <Invoices /> },
         { path: 'transactions', element: <Transactions /> },
 
       ],

@@ -139,7 +139,7 @@ export const ContractDetailForm = (props) => {
         title="Payment Rate"
         type="number"
         InputProps={{
-          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          startAdornment: <InputAdornment position="start">ETH</InputAdornment>,
         }}
         validate={validateCategory}
         inputValid={setPaymentRateValid}
