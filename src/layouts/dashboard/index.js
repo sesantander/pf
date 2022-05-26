@@ -45,7 +45,7 @@ function DashboardLayout(props) {
 
   const [open, setOpen] = useState(false);
   const [walletChanged, setWalletChanged] = useState(null);
-  const isAuth = useSelector((state) => state.user.isAuth); //localStorage.getItem('isAuth')
+  const isAuth = localStorage.getItem('isAuth')
 
   const accountChangedHandler = async (newAccount) => {
     getAccountBalance(newAccount.toString());

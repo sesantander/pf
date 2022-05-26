@@ -25,12 +25,12 @@ ContractCard.propTypes = {
   type: PropTypes.object,
 };
 
-export default function ContractCard({ type }) {
+export default function ContractCard({ type,link }) {
   const { title, image, description } = type;
 
   return (
     <Card sx={{ mt: '10px' }} style={{ width: '20vw', minWidth: '350px', maxWidth: '350px' }}>
-      <Link to="#" color="inherit" underline="hover" component={RouterLink}>
+      <Link to={link} color="inherit" underline="hover" component={RouterLink}>
         <Box sx={{ pt: '100%', position: 'relative' }}>
           <ProductImgStyle alt={title} src={image} />
         </Box>

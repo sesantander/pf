@@ -40,6 +40,7 @@ export default function LoginForm() {
     if (userData && userBalance && web3Environment) {
       const user = {
         ...userData,
+        id: userData.user_id,
         balance: userBalance,
         address: defaultAccount,
         web3: web3Environment

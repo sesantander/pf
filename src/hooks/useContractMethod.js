@@ -3,6 +3,7 @@ import ContractSC from '../utils/contracts/ContractSC.json';
 import TransactionSC from '../utils/contracts/TransactionSC.json';
 
 export const createContract = async (account, web3Provider, contractInfo) => {
+  console.log("LOG : createContract -> contractInfo", contractInfo)
   const {
     contract_type,
     contract_name,

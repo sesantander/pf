@@ -186,6 +186,9 @@ function Transactions(props) {
 
                     return (
                       <TableRow hover key={transaction_id} tabIndex={0}>
+                        <TableCell padding="checkbox">
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, transaction_id)} />
+                        </TableCell>
                         <TableCell component="th" scope="row">
                           <Typography variant="subtitle2" noWrap>
                             {transaction_id}
