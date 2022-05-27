@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // material
@@ -15,6 +16,7 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 //
 import navConfig from './NavConfig';
+import { Roles } from '../../utils/constants/role.constants';
 
 // ----------------------------------------------------------------------
 
@@ -36,18 +38,27 @@ const AccountStyle = styled('div')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
+const contractorSectionsRestricted = ['Create Contract'];
 
 DashboardSidebar.propTypes = {
   isOpenSidebar: PropTypes.bool,
   onCloseSidebar: PropTypes.func,
 };
 
-export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+function DashboardSidebar(props, { isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
 
   const { user, id, photoURL } = useSelector((state) => state.user);
 
   const isDesktop = useResponsive('up', 'lg');
+  var filteredNavConfig;
+  if (props.user.role == Roles.CONTRACTOR) {
+    filteredNavConfig = navConfig.filter(function (section) {
+      return !contractorSectionsRestricted.includes(section.title);
+    });
+  } else {
+    filteredNavConfig = navConfig;
+  }
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -66,7 +77,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
           <Logo />
         </Box>
-        <NavSection navConfig={navConfig} />
+        <NavSection navConfig={filteredNavConfig} />
       </Scrollbar>
 
       <Box sx={{ my: 2.5, mx: 2.5 }}>
@@ -119,3 +130,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     </RootStyle>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(DashboardSidebar);

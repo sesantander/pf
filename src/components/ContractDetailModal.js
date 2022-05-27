@@ -21,7 +21,7 @@ const AddProductOverlay = (props) => {
       {showForm ? (
         <>
           <div className={classes.header}>
-            <h2>Contract Detail</h2>
+            <h2>New Contract Proposal</h2>
           </div>
           <div className={classes.body}>
             <ContractDetailForm user={props.user} row={props.row} handleClose={props.handleClose} />
@@ -30,7 +30,7 @@ const AddProductOverlay = (props) => {
       ) : (
         <>
           <div className={classes.header}>
-            <h2>New Contract Proposal</h2>
+            <h2>Contract Detail</h2>
           </div>
           <div className={classes.body}>
             <ContractDetail showDetail={showDetail} user={props.user} row={props.row} handleClose={props.handleClose} />

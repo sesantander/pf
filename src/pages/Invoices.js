@@ -1,7 +1,6 @@
 import { filter } from 'lodash';
-import { connect } from 'react-redux';
 import { sentenceCase } from 'change-case';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -27,18 +26,19 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
-import ContractDetailModal from '../components/ContractDetailModal';
-import { ContractCount, ContractList, PayContract } from '../hooks/useContractMethod';
-import { GetUserById } from '../hooks/useUserHandler';
-import { TransactionCount, TransactionList } from '../hooks/useTransactionMethod';
-import { ContractStatus } from '../utils/constants/contract.constants';
-import { Roles } from '../utils/constants/role.constants';
-
 // mock
 import INVOICELIST from '../_mock/invoice';
-// import contracts from '../_mock/contract';
 
 // ----------------------------------------------------------------------
+
+const TABLE_HEAD = [
+  { id: 'invoice', label: 'Invoice', alignRight: false },
+  { id: 'contractor', label: 'Contractor', alignRight: false },
+  { id: 'payment', label: 'Payment', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
+  { id: 'download', label: 'Download', alignRight: false },
+  { id: '' },
+];
 
 // ----------------------------------------------------------------------
 
@@ -71,15 +71,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const RED_STATUS = [ContractStatus.REJECTED, ContractStatus.PENDING];
-const GREEN_STATUS = [ContractStatus.ACCEPTED, ContractStatus.ACTIVE, ContractStatus.COMPLETED];
-
-const BLUE_STATUS = [
-  ContractStatus.WAITING_CONTRACTOR_RESPONSE,
-  ContractStatus.WAITING_EMPLOYER_RESPONSE,
-  ContractStatus.TERMINATED_BY_BOTH_PARTIES,
-];
-function Contracts(props) {
+export default function Invoices() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -92,29 +84,6 @@ function Contracts(props) {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [toggleModal, setToggleModal] = useState(false);
-
-  const [rowSelected, setRowSelected] = useState(null);
-
-  const [contracts, setContratcs] = useState([]);
-
-  useEffect(() => {
-    async function fetchContracts() {
-      try {
-        const response = await getContracts();
-        setContratcs(response);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    fetchContracts();
-  }, []);
-
-  const getContracts = async (account) => {
-    const contractCount = await ContractCount(props.user.web3);
-    return await ContractList(contractCount, props.user.web3);
-  };
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -123,7 +92,7 @@ function Contracts(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = contracts.map((n) => n.contract_type);
+      const newSelecteds = INVOICELIST.map((n) => n.invoice);
       setSelected(newSelecteds);
       return;
     }
@@ -157,86 +126,27 @@ function Contracts(props) {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
-  const handlePay = async (row) => {
-    // // Metodo para enviar ether de una cuenta a otra
-    // const web3 = props.user.web3;
-    // console.log("LOG : handlePay -> props", props)
-    // await web3.eth.sendTransaction(
-    //   {
-    //     from: props.user.address,
-    //     to: '0x80035D0D4c48AfAadC68288a8024800dB1fF45Cb',
-    //     value: web3.utils.toWei('50', 'ether'),
-    //   },
-    //   async function (err, transactionHash) {
-    //     if (err) {
-    //       console.log('Error: ', err);
-    //     } else {
-    //       console.log('Transaction Hash', transactionHash);
-    //     }
-    //   }
-    // );
-    const data = await GetUserById(row.contractor_id)
-    await PayContract(props.user.address, props.user.web3, row, data.user.wallet_address);
-  };
 
-  const transactionList = async () => {
-    const count = await TransactionCount(props.user.web3);
-    await TransactionList(count, props.user.web3);
-  };
-  const contractDetailToggler = (event, row) => {
-    setRowSelected(row);
-    setToggleModal(!toggleModal);
-    document.body.style.overflow = 'hidden';
-  };
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - INVOICELIST.length) : 0;
 
-  const labelColor = (status) => {
-    if (RED_STATUS.includes(status) && 'error') {
-      return 'error';
-    } else if (GREEN_STATUS.includes(status)) {
-      return 'success';
-    } else if (BLUE_STATUS.includes(status)) {
-      return 'info';
-    }
-    return 'info';
-  };
-
-  const TABLE_HEAD = [
-    { id: 'contract_type', label: 'Contract Type', alignRight: false },
-    { id: 'start_date', label: 'Start Date', alignRight: false },
-    { id: 'end_date', label: 'End Date', alignRight: false },
-    { id: 'payment_rate', label: 'Payment Rate', alignRight: false },
-    { id: 'status', label: 'Status', alignRight: false },
-    { id: 'pay', label: 'Pay', alignRight: false },
-  ];
-  //Eliminar columna de Pay para contractors
-  if (props.user.role == Roles.CONTRACTOR) {
-    TABLE_HEAD.pop();
-  }
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - contracts.length) : 0;
-
-  const filteredInvoices = applySortFilter(contracts, getComparator(order, orderBy), filterName);
-
-  const filteredContracts = filteredInvoices.filter(function (contract) {
-    if (props.user.role == Roles.CONTRACTOR) {
-      return contract.contractor_id == props.user.id;
-    } else if (props.user.role == Roles.EMPLOYER) {
-      return contract.employer_id == props.user.id;
-    }
-  });
+  const filteredInvoices = applySortFilter(INVOICELIST, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredInvoices.length === 0;
 
   return (
     <Page title="User">
       <Container>
-        {toggleModal && <ContractDetailModal row={rowSelected} addProductToggler={contractDetailToggler} />}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Contracts
+            Invoices
           </Typography>
+          <Button variant="contained" component={RouterLink} to="#">
+            Download all as CSV
+          </Button>
         </Stack>
 
         <Card>
+
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -249,52 +159,52 @@ function Contracts(props) {
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
-
                 <TableBody>
-                  {filteredContracts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { contract_id, contract_type, currency, payment_rate, start_date, end_date, status } = row;
-                    const isItemSelected = selected.indexOf(contract_type) !== -1;
+                  {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const { id, invoice, contractor, payment, status, avatarUrl, download } = row;
+                    const isItemSelected = selected.indexOf(invoice) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={contract_id}
+                        key={id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
-                        onClick={(event) => contractDetailToggler(event, row)}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, contract_type)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, invoice)} />
                         </TableCell>
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
                             <Typography variant="subtitle2" noWrap>
-                              {contract_type}
+                              {invoice}
                             </Typography>
                           </Stack>
                         </TableCell>
-                        <TableCell align="left">{start_date}</TableCell>
-                        <TableCell align="left">{end_date}</TableCell>
-                        <TableCell align="left">{payment_rate}</TableCell>
+                        <TableCell align="left">{contractor}</TableCell>
+                        <TableCell align="left">{payment}</TableCell>
                         <TableCell align="left">
-                          <Label variant="ghost" color={labelColor(status)}>
+                          <Label variant="ghost" color={(status === 'Awaiting payment' && 'error') || 'success'}>
                             {sentenceCase(status)}
                           </Label>
                         </TableCell>
-                        {props.user.role == Roles.EMPLOYER ? (
-                          <TableCell align="left">
-                            <Button
-                              size="large"
-                              onClick={async () => handlePay(row)}
-                              variant="contained"
-                              disabled={status !== 'ACTIVE'}
-                            >
-                              Pay
-                            </Button>
-                          </TableCell>
-                        ) : null}
+                        <TableCell align="left">
+                          {download === 'Download' ? (
+                            <IconButton>
+                              <Iconify icon="eva:download-fill" sx={{ width: 32, height: 32 }} />
+                            </IconButton>
+                          ) : (
+                            <IconButton>
+                              <Iconify icon="eva:close-circle-fill" sx={{ width: 32, height: 32 }} />
+                            </IconButton>
+                          )}
+                        </TableCell>
+
+                        <TableCell align="right">
+                          <UserMoreMenu />
+                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -321,7 +231,7 @@ function Contracts(props) {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={contracts.length}
+            count={INVOICELIST.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -332,10 +242,3 @@ function Contracts(props) {
     </Page>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
-export default connect(mapStateToProps)(Contracts);

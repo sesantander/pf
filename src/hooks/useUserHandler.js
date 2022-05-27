@@ -72,3 +72,23 @@ export const GetUser = async (username) => {
   const parseResponse = JSON.parse(response);
   return parseResponse;
 };
+
+export const GetUserById = async (user_id) => {
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+  };
+
+  const User = async () =>
+    new Promise((res, rej) =>
+      fetch(`${API.URL}user/getUserById/${user_id}`, requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          return res(result);
+        })
+        .catch((error) => console.log('error', error))
+    );
+  const response = await User();
+  const parseResponse = JSON.parse(response);
+  return parseResponse;
+};

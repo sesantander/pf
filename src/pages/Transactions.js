@@ -160,9 +160,6 @@ function Transactions(props) {
           <Typography variant="h4" gutterBottom>
             Transactions
           </Typography>
-          <Button size="large" onClick={async () => getTransactions()} variant="contained">
-            Transactions
-          </Button>
         </Stack>
 
         <Card>

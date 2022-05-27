@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Input } from './Input';
 import classes from './addProductModal.module.css';
-// import { itemsActions } from "../../store/reducers/itemSlicer";
 
 export const ContractDetailForm = (props) => {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -66,7 +65,6 @@ export const ContractDetailForm = (props) => {
     };
     console.log('user: ', props.user);
     createProposal(newProposal, props.user.address);
-    // Change contract status to ContractStatus.WAITING_CONTRACTOR_RESPONSE
 
     props.handleClose();
   };
@@ -76,27 +74,11 @@ export const ContractDetailForm = (props) => {
   };
 
   const createProposal = async (newProposal, account) => {
-    const proposalCreated = await CreateProposal(account, props.user.web3, newProposal);
-    const updateContractRes = await UpdateContractStatus(
-      account,
-      props.user.web3,
-      props.row.contract_id,
-      ContractStatus.WAITING_CONTRACTOR_RESPONSE
-    );
-    console.log('LOG : createProposal -> updateContractRes', updateContractRes);
+    const proposalCreated = await CreateProposal(account, props.user.web3, newProposal, props.row.contract_id, ContractStatus.WAITING_CONTRACTOR_RESPONSE);
+    console.log("LOG : createProposal -> proposalCreated", proposalCreated) 
   };
-  // console.log(' HOLA ', props.row.contract_type);
   return (
     <form onSubmit={handleSubmit}>
-      {/* <Input
-        id="contract_type"
-        title="Contract Type"
-        validate={validateCategory}
-        inputValid={setContractTypeValid}
-        value={contractTypeInput}
-        setValue={setContractTypeInput}
-        defaultValue={contractTypeInput}
-      /> */}
       <TextField
         id="outlined-select-contract_type"
         select
@@ -139,7 +121,7 @@ export const ContractDetailForm = (props) => {
         title="Payment Rate"
         type="number"
         InputProps={{
-          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          startAdornment: <InputAdornment position="start">ETH</InputAdornment>,
         }}
         validate={validateCategory}
         inputValid={setPaymentRateValid}

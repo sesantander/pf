@@ -3,7 +3,6 @@ import ContractSC from '../utils/contracts/ContractSC.json';
 import TransactionSC from '../utils/contracts/TransactionSC.json';
 
 export const createContract = async (account, web3Provider, contractInfo) => {
-  console.log("LOG : createContract -> contractInfo", contractInfo)
   const {
     contract_type,
     contract_name,
@@ -88,7 +87,7 @@ export const ContractList = async (contractsCount, web3Provider) => {
   const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
 
   let response = [];
-  console.log('LOG : ContractList -> contractSC.methods', contractSC.methods);
+
   for (let i = 1; i < parseInt(contractsCount) + 1; i += 1) {
     /* eslint-disable no-await-in-loop */
     let contract = {};
@@ -112,12 +111,10 @@ export const ContractList = async (contractsCount, web3Provider) => {
     response.push(contract);
     /* eslint-enable no-await-in-loop */
   }
-  console.log('LOG : ContractList -> response', response);
   return response;
 };
 
 export const ContractUpdate = async (account, web3Provider, contractInfo) => {
-  console.log('LOG : ContractUpdate -> contractInfo', contractInfo);
   const { contract_id, status, contract_type, scope_of_work, start_date, end_date, currency, payment_rate } =
     contractInfo;
 
@@ -130,7 +127,6 @@ export const ContractUpdate = async (account, web3Provider, contractInfo) => {
   console.log('test ', { ...contractInfo });
 
   let response;
-  console.log('LOG : ContractUpdate -> contractSC.methods', contractSC.methods);
   await contractSC.methods
     .updateContract(contract_id, status, contract_type, scope_of_work, start_date, end_date, currency, payment_rate)
     .send({ from: account })
@@ -166,7 +162,9 @@ export const UpdateContractStatus = async (account, web3Provider, contract_id, s
   return response;
 };
 
-export const PayContract = async (account, web3Provider, contractInfo) => {
+export const PayContract = async (account, web3Provider, contractInfo, addressToPay) => {
+  console.log('LOG : PayContract -> contractInfo', contractInfo);
+  const { payment_rate } = contractInfo;
   const web3 = web3Provider;
 
   const networkId = await web3.eth.net.getId();
@@ -176,14 +174,22 @@ export const PayContract = async (account, web3Provider, contractInfo) => {
 
   const transactionSC_ContractAddress = TransactionSC.networks[networkId].address;
   const transactionSC = new web3.eth.Contract(TransactionSC.abi, transactionSC_ContractAddress);
+  console.log('LOG : PayContract -> contractSC.methods', contractSC.methods);
 
-
+  const value = web3.utils.toWei(payment_rate, 'ether');
   await transactionSC.methods
     .getAddress()
     .call()
     .then(async (res) => {
       await contractSC.methods
-        .pay(contractInfo.contract_id, res, new Date().toLocaleDateString('en-GB'), new Date().toLocaleDateString('en-GB'))
+        .pay(
+          contractInfo.contract_id,
+          res,
+          new Date().toLocaleDateString('en-GB'),
+          new Date().toLocaleDateString('en-GB'),
+          addressToPay,
+          value
+        )
         .send({ from: account })
         .then((res) => {
           console.log('LOG : PayContract -> res', res);

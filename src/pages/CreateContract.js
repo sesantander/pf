@@ -14,27 +14,6 @@ import { ContractStatus } from '../utils/constants/contract.constants';
 import ContractCard from './ContractCard';
 
 // ----------------------------------------------------------------------
-const methodTest = async (account, web3Provider) => {
-  await createContract(account, web3Provider, {
-    contract_type: 'Fixed Rate',
-    contract_name: 'Backend Project Develop',
-    job_title: 'Backend Developer',
-    status: ContractStatus.WAITING_EMPLOYER_RESPONSE,
-    scope_of_work: 'Integrate email API',
-    start_date: '20/02/2022',
-    end_date: '20/02/2023',
-    currency: 'ETH',
-    payment_rate: '4500',
-    payment_frequency: 'Monthly',
-    payment_due: '20/03/2022',
-    employer_id: 1,
-    contractor_id: 1,
-    proposal_id: 1,
-  });
-  const contractCount = await ContractCount(web3Provider);
-  console.log('contractCount', contractCount);
-  ContractList(contractCount, web3Provider);
-};
 
 function CreateContract(props) {
   const contractop = [

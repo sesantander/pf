@@ -140,8 +140,11 @@ NavSection.propTypes = {
 };
 
 export default function NavSection({ navConfig, ...other }) {
+  const handleSingOut = () => {
+    console.log('somgout');
+  };
   const { pathname } = useLocation();
-
+  const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
   return (
@@ -150,6 +153,17 @@ export default function NavSection({ navConfig, ...other }) {
         {navConfig.map((item) => (
           <NavItem key={item.title} item={item} active={match} />
         ))}
+        <hr></hr>
+        <NavItem
+          key={'Sing Out'}
+          item={{
+            title: 'Sing Out',
+            path: '',
+            icon: getIcon('fluent:sign-out-24-filled'),
+          }}
+          active={match}
+          onClick={()=>handleSingOut()}
+        />
       </List>
     </Box>
   );
