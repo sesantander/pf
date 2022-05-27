@@ -47,15 +47,14 @@ export const ContractDetail = (props) => {
   const [infoList, setInfoList] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-  const [acceptFunction, setAcceptFunction] = React.useState(() => () => {
-  });
+  const [acceptFunction, setAcceptFunction] = React.useState(() => () => {});
   const acceptContract = () => {
     //logica de accept contract
     setAcceptFunction(() => async () => {
       await updateContract(props.user.address, ContractStatus.ACTIVE);
     });
     setOpen(true);
-    handleClose()
+    props.handleClose();
   };
   const rejectContract = () => {
     //logica de reject contract
@@ -63,8 +62,7 @@ export const ContractDetail = (props) => {
       await updateContract(props.user.address, ContractStatus.REJECTED);
     });
     setOpen(true);
-    handleClose()
-
+    props.handleClose();
   };
   const handleClickOpen = () => {
     //logica new proposal
@@ -94,7 +92,7 @@ export const ContractDetail = (props) => {
 
   const updateContract = async (account, status) => {
     //await ContractUpdate(account, props.user.web3, props.row);
-    await UpdateContractStatus(account, props.user.web3, props.row.contract_id,status)
+    await UpdateContractStatus(account, props.user.web3, props.row.contract_id, status);
   };
 
   useEffect(() => {
@@ -140,4 +138,3 @@ export const ContractDetail = (props) => {
     </>
   );
 };
-
