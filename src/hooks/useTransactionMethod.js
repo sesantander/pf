@@ -1,12 +1,14 @@
 import Web3 from 'web3/dist/web3.min';
 import TransactionSC from '../utils/contracts/TransactionSC.json';
+import { ContractAddress } from '../utils/constants/contract_address.constants';
 
 export const TransactionCount = async (web3Provider) => {
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = TransactionSC.networks[networkId].address;
-  const transactionSC = new web3.eth.Contract(TransactionSC.abi, smartContractAddress);
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = TransactionSC.networks[networkId].address;
+  // const transactionSC = new web3.eth.Contract(TransactionSC.abi, transactionSC_ContractAddress);
+  const transactionSC = new web3.eth.Contract(TransactionSC.abi, ContractAddress.TransactionSC);
 
   let response;
 
@@ -26,9 +28,10 @@ export const TransactionCount = async (web3Provider) => {
 export const TransactionList = async (transactionsCount, web3Provider) => {
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = TransactionSC.networks[networkId].address;
-  const transactionSC = new web3.eth.Contract(TransactionSC.abi, smartContractAddress);
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = TransactionSC.networks[networkId].address;
+  // const transactionSC = new web3.eth.Contract(TransactionSC.abi, transactionSC_ContractAddress);
+  const transactionSC = new web3.eth.Contract(TransactionSC.abi, ContractAddress.TransactionSC);
 
   let response = [];
   console.log('LOG : TransactionList -> transactionSC.methods', transactionSC.methods);

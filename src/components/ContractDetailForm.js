@@ -4,6 +4,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { CreateProposal } from '../hooks/useProposalMethod';
 import { UpdateContractStatus } from '../hooks/useContractMethod';
 import { ContractStatus } from '../utils/constants/contract.constants';
+import { Roles } from '../utils/constants/role.constants';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Input } from './Input';
@@ -45,6 +46,7 @@ export const ContractDetailForm = (props) => {
   ];
 
   useEffect(() => {
+    console.log('props', props);
     return setIsFormValid(startDateValid && endDateValid && paymentRateValid && paymentFreqValid && scopeValid);
   }, [startDateValid, endDateValid, paymentRateValid, paymentFreqValid, scopeValid]);
 
@@ -60,12 +62,11 @@ export const ContractDetailForm = (props) => {
       payment_rate: paymentRateInput,
       payment_frequency: paymentFreqInput,
       scope_of_work: scopeInput,
-      employer_id: 1,
-      contractor_id: 2,
+      employer_id: props.row.employer_id,
+      contractor_id: props.row.contractor_id,
     };
-    console.log('user: ', props.user);
-    createProposal(newProposal, props.user.address);
 
+    createProposal(newProposal, props.user.address);
     props.handleClose();
   };
 
@@ -74,8 +75,13 @@ export const ContractDetailForm = (props) => {
   };
 
   const createProposal = async (newProposal, account) => {
-    const proposalCreated = await CreateProposal(account, props.user.web3, newProposal, props.row.contract_id, ContractStatus.WAITING_CONTRACTOR_RESPONSE);
-    console.log("LOG : createProposal -> proposalCreated", proposalCreated) 
+    const status =
+      props.user.role == Roles.CONTRACTOR
+        ? ContractStatus.WAITING_EMPLOYER_RESPONSE
+        : ContractStatus.WAITING_CONTRACTOR_RESPONSE;
+    const proposalCreated = await CreateProposal(account, props.user.web3, newProposal, props.row.contract_id, status);
+    console.log('LOG : createProposal -> proposalCreated', proposalCreated);
+    
   };
   return (
     <form onSubmit={handleSubmit}>

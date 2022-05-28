@@ -1,3 +1,4 @@
+import Web3 from 'web3/dist/web3.min';
 import { useState, useEffect } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -45,8 +46,9 @@ function DashboardLayout(props) {
 
   const [open, setOpen] = useState(false);
   const [walletChanged, setWalletChanged] = useState(null);
-  const isAuth = localStorage.getItem('isAuth')
-
+  const isAuthStorage = localStorage.getItem('isAuth');
+  const isAuth = isAuthStorage === 'true';
+  
   const accountChangedHandler = async (newAccount) => {
     getAccountBalance(newAccount.toString());
   };
@@ -74,6 +76,22 @@ function DashboardLayout(props) {
   useEffect(() => {
     if (walletChanged) {
       dispatch(userActions.setUser(walletChanged));
+    }
+
+    if (isAuth && !props.user.user) {
+      const web3 = new Web3(window.ethereum);
+      const userStorage = {
+        username: localStorage.getItem('user'),
+        id: localStorage.getItem('id'),
+        isAuth: isAuth,
+        balance: localStorage.getItem('balance'),
+        address: localStorage.getItem('address'),
+        role: localStorage.getItem('role'),
+        token: localStorage.getItem('token'),
+        web3: web3,
+      };
+      console.log('LOG : DashboardLayout -> userStorage', userStorage);
+      dispatch(userActions.setUser(userStorage));
     }
   }, [walletChanged]);
 

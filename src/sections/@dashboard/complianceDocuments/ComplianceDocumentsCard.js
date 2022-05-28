@@ -19,7 +19,17 @@ ComplianceDocumentsCard.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function ComplianceDocumentsCard({ title, total, icon, user_id, color = 'primary', sx, ...other }) {
+export default function ComplianceDocumentsCard({
+  title,
+  total,
+  icon,
+  user_id,
+  document_url,
+  color = 'primary',
+  sx,
+  ...other
+}) {
+  console.log('LOG : ComplianceDocumentsCard -> document_url', document_url);
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -74,7 +84,9 @@ export default function ComplianceDocumentsCard({ title, total, icon, user_id, c
           }}
           {...other}
         >
-          {!isFileSaved ? (
+          {document_url ? (
+            <a href={document_url}>Download your document</a>
+          ) : !isFileSaved ? (
             <Typography
               sx={{
                 textDecoration: 'none',
@@ -95,7 +107,7 @@ export default function ComplianceDocumentsCard({ title, total, icon, user_id, c
             </Typography>
           )}
         </Card>
-        {isFileSaved ? null : (
+        {document_url ? null : isFileSaved ? null : (
           <Button
             sx={{
               marginTop: '8px',

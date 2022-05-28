@@ -1,6 +1,8 @@
+import { saveAs } from 'file-saver';
 import { filter } from 'lodash';
+import { connect } from 'react-redux';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -26,15 +28,21 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
+import { TransactionCount, TransactionList } from '../hooks/useTransactionMethod';
+import { ContractCount, ContractList, GetContractById } from '../hooks/useContractMethod';
+import { GetUserById } from '../hooks/useUserHandler';
+import { GetInvoice } from '../hooks/useDocumentHandler';
+import { Roles } from '../utils/constants/role.constants';
 // mock
-import INVOICELIST from '../_mock/invoice';
+// import transactions from '../_mock/invoice';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'invoice', label: 'Invoice', alignRight: false },
-  { id: 'contractor', label: 'Contractor', alignRight: false },
-  { id: 'payment', label: 'Payment', alignRight: false },
+  { id: 'id', label: 'Id', alignRight: false },
+  { id: 'amount', label: 'Amount', alignRight: false },
+  { id: 'method', label: 'Method', alignRight: false },
+  { id: 'withdrawal_date', label: 'Withdrawal date', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
   { id: 'download', label: 'Download', alignRight: false },
   { id: '' },
@@ -71,7 +79,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Invoices() {
+function Invoices(props) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -84,6 +92,52 @@ export default function Invoices() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [transactions, setTransactions] = useState([]);
+
+  const [contracts, setContracts] = useState([]);
+
+  useEffect(() => {
+    async function fetchTransactions() {
+      try {
+        const response = await getTransactions();
+        setTransactions(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    async function fetchContracts() {
+      try {
+        const response = await getContracts();
+        console.log('LOG : fetchContracts -> response', response);
+        setContracts(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchContracts();
+    fetchTransactions();
+  }, []);
+
+  const getTransactions = async () => {
+    const count = await TransactionCount(props.user.web3);
+    return await TransactionList(count, props.user.web3);
+  };
+
+  const getContracts = async (account) => {
+    const contractCount = await ContractCount(props.user.web3);
+    return await ContractList(contractCount, props.user.web3);
+  };
+
+  const downloadInvoice = async (transaction) => {
+    const contract = await GetContractById(transaction.contract_id, props.user.web3);
+
+    const invoice = await GetInvoice(contract.employer_id, contract.contractor_id, transaction);
+
+    let blob = new Blob([invoice], { type: 'application/pdf' });
+
+    saveAs(blob, `invoice_${transaction.transaction_id}_${Date.now()}.pdf`);
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -92,7 +146,7 @@ export default function Invoices() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = INVOICELIST.map((n) => n.invoice);
+      const newSelecteds = transactions.map((n) => n.invoice);
       setSelected(newSelecteds);
       return;
     }
@@ -127,9 +181,26 @@ export default function Invoices() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - INVOICELIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - transactions.length) : 0;
 
-  const filteredInvoices = applySortFilter(INVOICELIST, getComparator(order, orderBy), filterName);
+  const filteredInvoices = applySortFilter(transactions, getComparator(order, orderBy), filterName);
+
+  const filteredContracts = contracts.filter(function (contract) {
+    if (props.user.role === Roles.CONTRACTOR) {
+      return contract.contractor_id === props.user.id.toString();
+    } else if (props.user.role === Roles.EMPLOYER) {
+      return contract.employer_id === props.user.id.toString();
+    }
+  });
+
+  const idContractArray = filteredContracts.map((contract) => contract.contract_id);
+  
+  const filteredTransactions = transactions.filter((transaction) => {
+    if (idContractArray.includes(transaction.contract_id)) {
+      return true;
+    }
+  });
+  console.log('LOG : Invoices -> filteredTransactions', filteredTransactions);
 
   const isUserNotFound = filteredInvoices.length === 0;
 
@@ -140,13 +211,9 @@ export default function Invoices() {
           <Typography variant="h4" gutterBottom>
             Invoices
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#">
-            Download all as CSV
-          </Button>
         </Stack>
 
         <Card>
-
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -154,45 +221,46 @@ export default function Invoices() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={INVOICELIST.length}
+                  rowCount={transactions.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredInvoices.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, invoice, contractor, payment, status, avatarUrl, download } = row;
-                    const isItemSelected = selected.indexOf(invoice) !== -1;
+                  {filteredTransactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const { transaction_id, amount, method, withdrawal_date, status } = row;
+                    const isItemSelected = selected.indexOf(transaction_id) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={transaction_id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, invoice)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, transaction_id)} />
                         </TableCell>
                         <TableCell component="th" scope="row" padding="none">
                           <Stack direction="row" alignItems="center" spacing={2}>
                             <Typography variant="subtitle2" noWrap>
-                              {invoice}
+                              {transaction_id}
                             </Typography>
                           </Stack>
                         </TableCell>
-                        <TableCell align="left">{contractor}</TableCell>
-                        <TableCell align="left">{payment}</TableCell>
+                        <TableCell align="left">{amount}</TableCell>
+                        <TableCell align="left">{method}</TableCell>
+                        <TableCell align="left">{withdrawal_date}</TableCell>
                         <TableCell align="left">
                           <Label variant="ghost" color={(status === 'Awaiting payment' && 'error') || 'success'}>
                             {sentenceCase(status)}
                           </Label>
                         </TableCell>
                         <TableCell align="left">
-                          {download === 'Download' ? (
-                            <IconButton>
+                          {'Download' === 'Download' ? (
+                            <IconButton onClick={async () => downloadInvoice(row)}>
                               <Iconify icon="eva:download-fill" sx={{ width: 32, height: 32 }} />
                             </IconButton>
                           ) : (
@@ -200,10 +268,6 @@ export default function Invoices() {
                               <Iconify icon="eva:close-circle-fill" sx={{ width: 32, height: 32 }} />
                             </IconButton>
                           )}
-                        </TableCell>
-
-                        <TableCell align="right">
-                          <UserMoreMenu />
                         </TableCell>
                       </TableRow>
                     );
@@ -231,7 +295,7 @@ export default function Invoices() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={INVOICELIST.length}
+            count={transactions.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -242,3 +306,9 @@ export default function Invoices() {
     </Page>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(Invoices);

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import { flexbox } from '@mui/system';
 import { ContractStatus } from '../utils/constants/contract.constants';
+import { Roles } from '../utils/constants/role.constants';
 import { ContractUpdate, UpdateContractStatus } from '../hooks/useContractMethod';
 // import { itemsActions } from "../../store/reducers/itemSlicer";
 const emails = ['username@gmail.com', 'user02@gmail.com'];
@@ -45,12 +46,14 @@ function SimpleDialog(props) {
 
 export const ContractDetail = (props) => {
   const [infoList, setInfoList] = useState([]);
+  const [canPropose, setCanPropose] = useState(true);
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [acceptFunction, setAcceptFunction] = React.useState(() => () => {});
   const acceptContract = () => {
     //logica de accept contract
     setAcceptFunction(() => async () => {
+      props.row.status = ContractStatus.ACTIVE;
       await updateContract(props.user.address, ContractStatus.ACTIVE);
     });
     setOpen(true);
@@ -59,11 +62,11 @@ export const ContractDetail = (props) => {
   const rejectContract = () => {
     //logica de reject contract
     setAcceptFunction(() => async () => {
+      props.row.status = ContractStatus.REJECTED;
       await updateContract(props.user.address, ContractStatus.REJECTED);
     });
     setOpen(true);
     // handleClose()
-
   };
   const handleClickOpen = () => {
     //logica new proposal
@@ -92,8 +95,8 @@ export const ContractDetail = (props) => {
   }
 
   const updateContract = async (account, status) => {
-    //await ContractUpdate(account, props.user.web3, props.row);
-    await UpdateContractStatus(account, props.user.web3, props.row.contract_id, status);
+    await ContractUpdate(account, props.user.web3, props.row);
+    //await UpdateContractStatus(account, props.user.web3, props.row.contract_id, status);
   };
 
   useEffect(() => {
@@ -115,21 +118,47 @@ export const ContractDetail = (props) => {
       }
     });
     setInfoList(infoListMap);
+    console.log('LOG : ContractDetail -> props.user.role', props.user.role);
+    console.log('LOG : ContractDetail -> props.row.status', props.row.status);
+    if (props.row.status === ContractStatus.WAITING_EMPLOYER_RESPONSE && props.user.role === Roles.CONTRACTOR) {
+      setCanPropose(false);
+    }
+    if (
+      (props.row.status === ContractStatus.PENDING ||
+        props.row.status === ContractStatus.WAITING_CONTRACTOR_RESPONSE) &&
+      props.user.role === Roles.EMPLOYER
+    ) {
+      setCanPropose(false);
+    }
   }, []);
+
+  const canAccept = () => {
+    if (props.row.status === ContractStatus.PENDING && props.user.role === Roles.EMPLOYER) {
+      return false;
+    } else {
+      return true;
+    }
+  };
   return (
     <>
       {infoList}
-      {props.row.status === 'WAITING_CONTRACTOR_RESPONSE' || props.row.status === 'WAITING_EMPLOYER_RESPONSE' || props.row.status === 'PENDING' ? (
+      {props.row.status === 'WAITING_CONTRACTOR_RESPONSE' ||
+      props.row.status === 'WAITING_EMPLOYER_RESPONSE' ||
+      props.row.status === 'PENDING' ? (
         <div className={classes.buttons} style={{ marginTop: '10px' }}>
-          <Button size="large" onClick={() => acceptContract()} variant="contained" color="success">
-            Accept Contract
-          </Button>
+          {canAccept() ? (
+            <Button size="large" onClick={() => acceptContract()} variant="contained" color="success">
+              Accept Contract
+            </Button>
+          ) : null}
           <Button size="large" onClick={() => rejectContract()} variant="contained" color="error">
             Reject Contract
           </Button>
-          <Button size="large" onClick={() => handleClickOpen()} variant="contained">
-            New Proposal
-          </Button>
+          {canPropose ? (
+            <Button size="large" onClick={() => handleClickOpen()} variant="contained">
+              New Proposal
+            </Button>
+          ) : null}
         </div>
       ) : (
         ''

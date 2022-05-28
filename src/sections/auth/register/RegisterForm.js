@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import Web3 from 'web3/dist/web3.min';
 import { ethers } from 'ethers';
 import { useState, useEffect } from 'react';
 import { useFormik, Form, FormikProvider } from 'formik';
@@ -37,11 +38,14 @@ export default function RegisterForm() {
           const parsedResult = JSON.parse(result);
           const user = {
             ...userData,
+            id: parsedResult.user_id,
             balance: userBalance,
             address: defaultAccount,
             role: parsedResult.role,
             token: parsedResult.token,
+            web3: new Web3(window.ethereum),
           };
+          setToLocalStorage(user);
           dispatch(userActions.setUser(user));
           navigate('/dashboard/home', { replace: true });
         } catch (e) {
@@ -54,6 +58,16 @@ export default function RegisterForm() {
       navigate('/login', { replace: true });
     }
   }, [userBalance, isRegistered]);
+
+  const setToLocalStorage = (user) => {
+    localStorage.setItem('isAuth', true);
+    localStorage.setItem('token', user.token);
+    localStorage.setItem('role', user.role);
+    localStorage.setItem('user', user.username);
+    localStorage.setItem('address', user.address);
+    localStorage.setItem('balance', user.balance);
+    localStorage.setItem('id', user.id);
+  };
 
   const roles = [
     {

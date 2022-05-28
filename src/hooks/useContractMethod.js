@@ -1,6 +1,7 @@
 import Web3 from 'web3/dist/web3.min';
 import ContractSC from '../utils/contracts/ContractSC.json';
 import TransactionSC from '../utils/contracts/TransactionSC.json';
+import { ContractAddress } from '../utils/constants/contract_address.constants';
 
 export const createContract = async (account, web3Provider, contractInfo) => {
   const {
@@ -22,9 +23,10 @@ export const createContract = async (account, web3Provider, contractInfo) => {
 
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = ContractSC.networks[networkId].address;
-  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
 
   let response;
 
@@ -60,9 +62,10 @@ export const createContract = async (account, web3Provider, contractInfo) => {
 export const ContractCount = async (web3Provider) => {
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = ContractSC.networks[networkId].address;
-  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+  //const networkId = await web3.eth.net.getId();
+  //const smartContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
 
   let response;
 
@@ -82,9 +85,10 @@ export const ContractCount = async (web3Provider) => {
 export const ContractList = async (contractsCount, web3Provider) => {
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = ContractSC.networks[networkId].address;
-  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
 
   let response = [];
 
@@ -114,15 +118,47 @@ export const ContractList = async (contractsCount, web3Provider) => {
   return response;
 };
 
+export const GetContractById = async (id, web3Provider) => {
+  const web3 = web3Provider;
+
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
+
+  let response = {};
+
+  await contractSC.methods
+    .contracts(id)
+    .call()
+    .then(async (res) => {
+      await contractSC.methods
+        .contracts_details(id)
+        .call()
+        .then((res2) => {
+          response = { ...res, ...res2 };
+        })
+        .catch((e) => {
+          console.log('error', e);
+        });
+    })
+    .catch((e) => {
+      console.log('error', e);
+    });
+
+    return response
+};
+
 export const ContractUpdate = async (account, web3Provider, contractInfo) => {
   const { contract_id, status, contract_type, scope_of_work, start_date, end_date, currency, payment_rate } =
     contractInfo;
 
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = ContractSC.networks[networkId].address;
-  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
 
   console.log('test ', { ...contractInfo });
 
@@ -144,9 +180,10 @@ export const ContractUpdate = async (account, web3Provider, contractInfo) => {
 export const UpdateContractStatus = async (account, web3Provider, contract_id, status) => {
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
-  const smartContractAddress = ContractSC.networks[networkId].address;
-  const contractSC = new web3.eth.Contract(ContractSC.abi, smartContractAddress);
+  // const networkId = await web3.eth.net.getId();
+  // const smartContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
 
   let response;
   await contractSC.methods
@@ -163,20 +200,39 @@ export const UpdateContractStatus = async (account, web3Provider, contract_id, s
 };
 
 export const PayContract = async (account, web3Provider, contractInfo, addressToPay) => {
-  console.log('LOG : PayContract -> contractInfo', contractInfo);
   const { payment_rate } = contractInfo;
   const web3 = web3Provider;
 
-  const networkId = await web3.eth.net.getId();
+  // const networkId = await web3.eth.net.getId();
 
-  const contractSC_ContractAddress = ContractSC.networks[networkId].address;
-  const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  // const contractSC_ContractAddress = ContractSC.networks[networkId].address;
+  // const contractSC = new web3.eth.Contract(ContractSC.abi, contractSC_ContractAddress);
+  const contractSC = new web3.eth.Contract(ContractSC.abi, ContractAddress.ContractSC);
 
-  const transactionSC_ContractAddress = TransactionSC.networks[networkId].address;
-  const transactionSC = new web3.eth.Contract(TransactionSC.abi, transactionSC_ContractAddress);
-  console.log('LOG : PayContract -> contractSC.methods', contractSC.methods);
+  // const transactionSC_ContractAddress = TransactionSC.networks[networkId].address;
+  // const transactionSC = new web3.eth.Contract(TransactionSC.abi, transactionSC_ContractAddress);
+  const transactionSC = new web3.eth.Contract(TransactionSC.abi, ContractAddress.TransactionSC);
+  const payment = parseInt(payment_rate)/10
+  
+  console.log("LOG : PayContract -> payment", payment)
+  await web3.eth.sendTransaction(
+    {
+      from: account,
+      to: contractSC_ContractAddress,
+      value: web3.utils.toWei(payment.toString(), 'ether'),
+    },
+    async function (err, transactionHash) {
+      if (err) {
+        console.log('Error: ', err);
+      } else {
+        console.log('Transaction Hash', transactionHash);
+      }
+    }
+  );
 
-  const value = web3.utils.toWei(payment_rate, 'ether');
+  const value = web3.utils.toWei(payment.toString(), 'ether');
+
+  console.log('LOG : PayContract -> value', value);
   await transactionSC.methods
     .getAddress()
     .call()

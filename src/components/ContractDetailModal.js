@@ -14,7 +14,6 @@ const AddProductOverlay = (props) => {
   const [showForm, setShowForm] = useState(false);
   const showDetail = () => {
     setShowForm(true);
-    console.log('gola');
   };
   return (
     <Box className={classes.modal}>

@@ -43,14 +43,10 @@ export default function LoginForm() {
         id: userData.user_id,
         balance: userBalance,
         address: defaultAccount,
-        web3: web3Environment
+        web3: web3Environment,
       };
       console.log('LOG : LoginForm -> user', user);
-
-      localStorage.setItem('isAuth', true);
-      localStorage.setItem('token', user.token);
-      localStorage.setItem('role', user.role);
-
+      setToLocalStorage(user)
       dispatch(userActions.setUser(user));
       navigate('/dashboard/home', { replace: true });
     }
@@ -60,7 +56,15 @@ export default function LoginForm() {
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
-
+  const setToLocalStorage = (user) => {
+    localStorage.setItem('isAuth', true);
+    localStorage.setItem('token', user.token);
+    localStorage.setItem('role', user.role);
+    localStorage.setItem('user', user.username);
+    localStorage.setItem('address', user.address);
+    localStorage.setItem('balance', user.balance);
+    localStorage.setItem('id', user.id);
+  };
   const formik = useFormik({
     initialValues: {
       email: '',

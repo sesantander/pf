@@ -27,6 +27,8 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 import { TransactionCount, TransactionList } from '../hooks/useTransactionMethod';
+import { ContractCount, ContractList, GetContractById } from '../hooks/useContractMethod';
+import { Roles } from '../utils/constants/role.constants';
 // mock
 //import transactions from '../_mock/user';
 
@@ -86,6 +88,8 @@ function Transactions(props) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [transactions, setTransactions] = useState([]);
+
+  const [contracts, setContracts] = useState([]);
   useEffect(() => {
     async function fetchTransactions() {
       try {
@@ -95,8 +99,28 @@ function Transactions(props) {
         console.error(e);
       }
     }
+    async function fetchContracts() {
+      try {
+        const response = await getContracts();
+        console.log('LOG : fetchContracts -> response', response);
+        setContracts(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchContracts();
     fetchTransactions();
   }, []);
+
+  const getTransactions = async () => {
+    const count = await TransactionCount(props.user.web3);
+    return await TransactionList(count, props.user.web3);
+  };
+
+  const getContracts = async (account) => {
+    const contractCount = await ContractCount(props.user.web3);
+    return await ContractList(contractCount, props.user.web3);
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -141,15 +165,25 @@ function Transactions(props) {
     setFilterName(event.target.value);
   };
 
-  const getTransactions = async () => {
-    console.log('props', props);
-    const count = await TransactionCount(props.user.web3);
-    return await TransactionList(count, props.user.web3);
-  };
-
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - transactions.length) : 0;
 
   const filteredUsers = applySortFilter(transactions, getComparator(order, orderBy), filterName);
+
+  const filteredContracts = contracts.filter(function (contract) {
+    if (props.user.role === Roles.CONTRACTOR) {
+      return contract.contractor_id === props.user.id.toString();
+    } else if (props.user.role === Roles.EMPLOYER) {
+      return contract.employer_id === props.user.id.toString();
+    }
+  });
+
+  const idContractArray = filteredContracts.map((contract) => contract.contract_id);
+
+  const filteredTransactions = transactions.filter((transaction) => {
+    if (idContractArray.includes(transaction.contract_id)) {
+      return true;
+    }
+  });
 
   const isUserNotFound = filteredUsers.length === 0;
 
@@ -177,7 +211,7 @@ function Transactions(props) {
                   showSelectAllCheckbox={false}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {filteredTransactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { transaction_id, amount, method, withdrawal_date, status } = row;
                     const isItemSelected = selected.indexOf(transaction_id) !== -1;
 

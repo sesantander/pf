@@ -31,6 +31,7 @@ import ContractDetailModal from '../components/ContractDetailModal';
 import { ContractCount, ContractList, PayContract } from '../hooks/useContractMethod';
 import { GetUserById } from '../hooks/useUserHandler';
 import { TransactionCount, TransactionList } from '../hooks/useTransactionMethod';
+import { ProposalCount, ProposalList } from '../hooks/useProposalMethod';
 import { ContractStatus } from '../utils/constants/contract.constants';
 import { Roles } from '../utils/constants/role.constants';
 
@@ -98,21 +99,39 @@ function Contracts(props) {
 
   const [contracts, setContratcs] = useState([]);
 
+  const [proposals, setProposals] = useState([]);
+
   useEffect(() => {
     async function fetchContracts() {
       try {
         const response = await getContracts();
+        console.log("LOG : fetchContracts -> response", response)
         setContratcs(response);
       } catch (e) {
         console.error(e);
       }
     }
+    async function fetchProposals() {
+      try {
+        const response = await getProposals();
+        console.log("LOG : fetchProposals -> response", response)
+        setProposals(response);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    fetchProposals();
     fetchContracts();
   }, []);
 
   const getContracts = async (account) => {
     const contractCount = await ContractCount(props.user.web3);
     return await ContractList(contractCount, props.user.web3);
+  };
+
+  const getProposals = async () => {
+    const proposalCount = await ProposalCount(props.user.web3);
+    return await ProposalList(proposalCount, props.user.web3);
   };
 
   const handleRequestSort = (event, property) => {
@@ -128,6 +147,22 @@ function Contracts(props) {
       return;
     }
     setSelected([]);
+  };
+
+  const matchProposalsWithContracts = (contracts, proposals) => {
+    contracts.map((contract) => {
+      for (const index in proposals) {
+        if (contract.proposal_id == proposals[index].proposal_id) {
+          contract.contract_type = proposals[index].contract_type;
+          contract.payment_rate = proposals[index].payment_rate;
+          contract.payment_frequency = proposals[index].payment_frequency;
+          contract.scope_of_work = proposals[index].scope_of_work;
+          contract.start_date = proposals[index].start_date;
+          contract.end_date = proposals[index].end_date;
+        }
+      }
+    });
+    console.log('LOG : matchProposalsWithContracts -> contracts', contracts);
   };
 
   const handleClick = (event, name) => {
@@ -154,35 +189,11 @@ function Contracts(props) {
     setPage(0);
   };
 
-  const handleFilterByName = (event) => {
-    setFilterName(event.target.value);
-  };
   const handlePay = async (row) => {
-    // // Metodo para enviar ether de una cuenta a otra
-    // const web3 = props.user.web3;
-    // console.log("LOG : handlePay -> props", props)
-    // await web3.eth.sendTransaction(
-    //   {
-    //     from: props.user.address,
-    //     to: '0x80035D0D4c48AfAadC68288a8024800dB1fF45Cb',
-    //     value: web3.utils.toWei('50', 'ether'),
-    //   },
-    //   async function (err, transactionHash) {
-    //     if (err) {
-    //       console.log('Error: ', err);
-    //     } else {
-    //       console.log('Transaction Hash', transactionHash);
-    //     }
-    //   }
-    // );
-    const data = await GetUserById(row.contractor_id)
+    const data = await GetUserById(row.contractor_id);
     await PayContract(props.user.address, props.user.web3, row, data.user.wallet_address);
   };
 
-  const transactionList = async () => {
-    const count = await TransactionCount(props.user.web3);
-    await TransactionList(count, props.user.web3);
-  };
   const contractDetailToggler = (event, row) => {
     setRowSelected(row);
     setToggleModal(!toggleModal);
@@ -195,7 +206,7 @@ function Contracts(props) {
     } else if (GREEN_STATUS.includes(status)) {
       return 'success';
     } else if (BLUE_STATUS.includes(status)) {
-      return 'info';
+      return 'warning';
     }
     return 'info';
   };
@@ -223,6 +234,10 @@ function Contracts(props) {
       return contract.employer_id == props.user.id;
     }
   });
+  if (proposals.length > 0) {
+    const filteredContractsWithProposals = matchProposalsWithContracts(filteredContracts, proposals);
+    console.log('LOG : Contracts -> filteredContractsWithProposals', filteredContractsWithProposals);
+  }
 
   const isUserNotFound = filteredInvoices.length === 0;
 
@@ -321,7 +336,7 @@ function Contracts(props) {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={contracts.length}
+            count={filteredContracts.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

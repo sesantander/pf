@@ -97,10 +97,8 @@ function CreateContractForm(props) {
     event.preventDefault();
     const startdate = new Date(startDateInput);
     const enddate = new Date(endDateInput);
-    console.log('LOG : handleSubmit -> startdate', startdate);
     var paymentDue = new Date(startdate.setMonth(startdate.getMonth() + 1)).toLocaleDateString('en-GB');
-    console.log('user: ', props.user);
-    console.log('LOG : handleSubmit -> payment_due', paymentDue);
+    
     const newContract = {
       contract_type: props.type,
       contract_name: contractNameInput,
@@ -110,7 +108,7 @@ function CreateContractForm(props) {
       start_date: startdate.toLocaleDateString('en-GB'),
       end_date: enddate.toLocaleDateString('en-GB'),
       currency: 'ETH',
-      payment_rate: paymentRateInput,
+      payment_rate: +paymentRateInput,
       payment_frequency: paymentFreqInput,
       payment_due: paymentDue,
       employer_id: props.user.id,
@@ -119,6 +117,7 @@ function CreateContractForm(props) {
     };
     setErroMessage(null);
     setIsLoading(true);
+    console.log("LOG : handleSubmit -> newContract", newContract.payment_rate)
     setContractData(newContract);
   };
 

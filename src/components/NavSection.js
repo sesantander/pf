@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
+import { NavLink as RouterLink, matchPath, useLocation, Navigate } from 'react-router-dom';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton, Button } from '@mui/material';
@@ -140,11 +140,13 @@ NavSection.propTypes = {
 };
 
 export default function NavSection({ navConfig, ...other }) {
+  const [loggedOut, setLoggedOut] = useState(false);
   const { pathname } = useLocation();
   const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
-const handleSignOut=()=>{
-  console.log('signout')
-}
+  const handleSignOut = () => {
+    localStorage.setItem('isAuth', false);
+    setLoggedOut(true);
+  };
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
   return (
@@ -153,9 +155,15 @@ const handleSignOut=()=>{
         {navConfig.map((item) => (
           <NavItem key={item.title} item={item} active={match} />
         ))}
-        <Button style={{marginTop:"10px",padding:"10px"}}startIcon={getIcon('fluent:sign-out-24-filled')} variant="contained" onClick={handleSignOut}>
+        <Button
+          style={{ marginTop: '10px', padding: '10px' }}
+          startIcon={getIcon('fluent:sign-out-24-filled')}
+          variant="contained"
+          onClick={handleSignOut}
+        >
           Sign Out
         </Button>
+        {loggedOut ? <Navigate to="/login" /> : null}
       </List>
     </Box>
   );
