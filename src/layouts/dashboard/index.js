@@ -48,7 +48,7 @@ function DashboardLayout(props) {
   const [walletChanged, setWalletChanged] = useState(null);
   const isAuthStorage = localStorage.getItem('isAuth');
   const isAuth = isAuthStorage === 'true';
-  
+
   const accountChangedHandler = async (newAccount) => {
     getAccountBalance(newAccount.toString());
   };
@@ -71,7 +71,9 @@ function DashboardLayout(props) {
   };
 
   // listen for account changes
-  window.ethereum.on('accountsChanged', accountChangedHandler);
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', accountChangedHandler);
+  }
 
   useEffect(() => {
     if (walletChanged) {

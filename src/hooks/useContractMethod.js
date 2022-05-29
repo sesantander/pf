@@ -218,7 +218,7 @@ export const PayContract = async (account, web3Provider, contractInfo, addressTo
   await web3.eth.sendTransaction(
     {
       from: account,
-      to: contractSC_ContractAddress,
+      to: ContractAddress.ContractSC,
       value: web3.utils.toWei(payment.toString(), 'ether'),
     },
     async function (err, transactionHash) {

@@ -35,6 +35,7 @@ export default function LoginForm() {
   const [isWeb3Connect, setisWeb3Connect] = useState(false);
   const [isWalletConnecting, setisWalletConnecting] = useState(false);
   const [web3Environment, setWeb3Environment] = useState(null);
+  const [noMetaMask, setNoMetaMask] = useState(null);
 
   useEffect(() => {
     if (userData && userBalance && web3Environment) {
@@ -46,7 +47,7 @@ export default function LoginForm() {
         web3: web3Environment,
       };
       console.log('LOG : LoginForm -> user', user);
-      setToLocalStorage(user)
+      setToLocalStorage(user);
       dispatch(userActions.setUser(user));
       navigate('/dashboard/home', { replace: true });
     }
@@ -150,9 +151,11 @@ export default function LoginForm() {
   };
 
   // listen for account changes
-  window.ethereum.on('accountsChanged', accountChangedHandler);
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', accountChangedHandler);
 
-  window.ethereum.on('chainChanged', chainChangedHandler);
+    window.ethereum.on('chainChanged', chainChangedHandler);
+  }
 
   return (
     <FormikProvider value={formik}>

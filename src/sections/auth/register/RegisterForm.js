@@ -185,9 +185,11 @@ export default function RegisterForm() {
   };
 
   // listen for account changes
-  window.ethereum.on('accountsChanged', accountChangedHandler);
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', accountChangedHandler);
 
-  window.ethereum.on('chainChanged', chainChangedHandler);
+    window.ethereum.on('chainChanged', chainChangedHandler);
+  }
 
   const { errors, touched, handleSubmit, getFieldProps } = formik;
 
@@ -307,6 +309,7 @@ export default function RegisterForm() {
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
             {isWalletConnecting ? 'Loading..' : 'Connect'}
           </LoadingButton>
+          
         )}
       </Form>
     </FormikProvider>
